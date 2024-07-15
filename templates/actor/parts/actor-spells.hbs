@@ -1,4 +1,17 @@
 <ol class='items-list'>
+  <li class='item flexrow items-header'>
+    <div class='item-name'>{{localize 'Name'}}</div>
+    <div class='item-controls'>
+      <a
+        class='item-control item-create'
+        title='{{localize "DOCUMENT.Create" type='Spell'}}'
+        data-type='spell'
+      >
+        <i class='fas fa-plus'></i>
+        {{localize 'DOCUMENT.New' type='spell'}}
+      </a>
+    </div>
+  </li>
     {{#each spells as |item id|}}
       <li class='item flexrow' data-item-id='{{item._id}}'>
         <div class='item-name flexrow'>
