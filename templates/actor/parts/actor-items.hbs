@@ -26,9 +26,17 @@
             />
           </a>
         </div>
-        <h4>{{item.name}}</h4>
+        {{#if system.weight}}
+          <h4>{{item.name}}</h4>
+        {{else}}
+          <h4><i>{{item.name}}</i></h4>
+        {{/if}} 
       </div>
-      <div class='item-formula item-prop'>{{item.system.formula}}</div>
+      {{#if item.system.roll.diceSize}}
+        <div class='item-formula item-prop'>{{item.system.formula}}</div>
+      {{else}}
+        <div class='item-formula item-prop'></div>
+      {{/if}}
       <div class='item-controls'>
         <a
           class='item-control item-edit'
