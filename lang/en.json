@@ -17,6 +17,7 @@
     },
     "Item": {
       "RollFormula": "Roll Formula",
+      "damage": "Damage",
       "Spell": {
         "SpellLVL": "Level {level} Spells",
         "AddLVL": "Add LVL {level}"

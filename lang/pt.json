@@ -17,12 +17,13 @@
     },
     "Item": {
       "RollFormula": "Fórmula de Rolagem",
+      "damage": "Dano",
       "Spell": {
       }
     },
     "Effect": {
       "Source": "Origem",
-        "TabDuration": "Duração",
+      "TabDuration": "Duração",
       "Toggle": "Alternar Efeito",
       "Temporary": "Efeitos Temporários",
       "Passive": "Efeitos Passivos",
