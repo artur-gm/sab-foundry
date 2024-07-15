@@ -8,7 +8,7 @@
       {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
       use both the "grid" and "grid-Ncol" class where "N" can be any number
       from 1 to 12 and will create that number of columns.  --}}
-      <div class="resources grid grid-3col">
+      <div class="resources grid grid-2col">
 
         {{!-- "flex-group-center" is also defined in the _grid.scss file
         and it will add a small amount of padding, a border, and will
@@ -19,6 +19,13 @@
             <input type="text" name="system.health.value" value="{{system.health.value}}" data-dtype="Number"/>
             <span> / </span>
             <input type="text" name="system.health.max" value="{{system.health.max}}" data-dtype="Number"/>
+          </div>
+        </div>
+
+        <div class="resource flex-group-center">
+          <label for="system.ar.value" class="resource-label">{{localize 'SAB.armor.abbr'}}</label>
+          <div class="resource-content flexrow flex-center flex-between">
+            <input type="text" name="system.ar.value" value="{{system.ar.value}}" data-dtype="Number"/>
           </div>
         </div>
 
@@ -40,12 +47,6 @@
           </div>
         </div>
 
-        <div class="resource flex-group-center">
-          <label for="system.ar.value" class="resource-label">{{localize 'SAB.armor.abbr'}}</label>
-          <div class="resource-content flexrow flex-center flex-between">
-            <input type="text" name="system.ar.value" value="{{system.ar.value}}" data-dtype="Number"/>
-          </div>
-        </div>
       </div>
     </div>
   </header>
@@ -53,9 +54,9 @@
   {{!-- Sheet Tab Navigation --}}
   <nav class="sheet-tabs tabs" data-group="primary">
     {{!-- Default tab is specified in actor-sheet.mjs --}}
-    <a class="item" data-tab="description">Description</a>
-    <a class="item" data-tab="items">Items</a>
-    <a class="item" data-tab="effects">Effects</a>
+    <a class="item" data-tab="description">{{localize 'TYPES.Item.description'}}</a>
+    <a class="item" data-tab="items">{{localize 'TYPES.Item.item'}}</a>
+    <a class="item" data-tab="effects">{{localize 'TYPES.Item.effect'}}</a>
   </nav>
 
   {{!-- Sheet Body --}}

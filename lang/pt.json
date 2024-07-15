@@ -4,6 +4,7 @@
     "gold": { "long": "Peças Douradas", "abbr": "PD" },
     "armor": { "long": "Armadura", "abbr": "AR" },
     "level": { "long": "Nível", "abbr": "NV" },
+    "Name": "Nome",
     "namePlaceholder": "Nome, Origem Arquétipo",
     "Ability": {
       "Body": { "long": "Corpo", "abbr": "CRP" },
@@ -15,11 +16,13 @@
       "Item": "Ficha de Item"
     },
     "Item": {
+      "RollFormula": "Fórmula de Rolagem",
       "Spell": {
       }
     },
     "Effect": {
       "Source": "Origem",
+        "TabDuration": "Duração",
       "Toggle": "Alternar Efeito",
       "Temporary": "Efeitos Temporários",
       "Passive": "Efeitos Passivos",
@@ -33,9 +36,17 @@
       "npc": "PNJ"
     },
     "Item": {
+      "effect": "Efeito",
+      "description": "Descrição",
       "item": "Item",
       "feature": "Recurso",
       "spell": "Feitiço"
     }
+  },
+  "DOCUMENT": {
+    "Create": "Criar",
+    "New": "Novo",
+    "Edit": "Editar",
+    "Delete": "Deletar"
   }
 }

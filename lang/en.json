@@ -5,6 +5,7 @@
     "armor": { "long": "Armor Rating", "abbr": "AR" },
     "level": { "long": "Level", "abbr": "LVL" },
     "namePlaceholder": "Name, Origin Archetype",
+    "Name": "Name",
     "Ability": {
       "Body": { "long": "Body", "abbr": "BDY", "max": "Max BDY" },
       "Mind": { "long": "Mind", "abbr": "MND", "max": "Max MND" },
@@ -15,6 +16,7 @@
       "Item": "Sab Item Sheet"
     },
     "Item": {
+      "RollFormula": "Roll Formula",
       "Spell": {
         "SpellLVL": "Level {level} Spells",
         "AddLVL": "Add LVL {level}"
@@ -22,6 +24,7 @@
     },
     "Effect": {
       "Source": "Source",
+      "TabDuration": "Duration",
       "Toggle": "Toggle Effect",
       "Temporary": "Temporary Effects",
       "Passive": "Passive Effects",
@@ -35,9 +38,17 @@
       "npc": "NPC"
     },
     "Item": {
+      "description": "Description",
+      "effect": "Effect",
       "item": "Item",
       "feature": "Feature",
       "spell": "Spell"
     }
+  },
+  "DOCUMENT":{
+    "Create": "Create",
+    "New": "New",
+    "Delete": "Delete",
+    "Edit": "Edit"
   }
 }
