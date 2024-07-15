@@ -1,0 +1,42 @@
+{
+  "SAB": {
+    "HP": { "long": "Hit Protection", "abbr": "HP" },
+    "gold": { "long": "Gold", "abbr": "GP" },
+    "armor": { "long": "Armor Rating", "abbr": "AR" },
+    "namePlaceholder": "Name, Origin Archetype",
+    "Ability": {
+      "Body": { "long": "Body", "abbr": "BDY", "max": "Max BDY" },
+      "Mind": { "long": "Mind", "abbr": "MND", "max": "Max MND" },
+      "Luck": { "long": "Luck", "abbr": "LCK" }
+    },
+    "SheetLabels": {
+      "Actor": "Sab Actor Sheet",
+      "Item": "Sab Item Sheet"
+    },
+    "Item": {
+      "Spell": {
+        "SpellLVL": "Level {level} Spells",
+        "AddLVL": "Add LVL {level}"
+      }
+    },
+    "Effect": {
+      "Source": "Source",
+      "Toggle": "Toggle Effect",
+      "Temporary": "Temporary Effects",
+      "Passive": "Passive Effects",
+      "Inactive": "Inactive Effects"
+    }
+  },
+
+  "TYPES": {
+    "Actor": {
+      "character": "Character",
+      "npc": "NPC"
+    },
+    "Item": {
+      "item": "Item",
+      "feature": "Feature",
+      "spell": "Spell"
+    }
+  }
+}

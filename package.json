@@ -1,0 +1,18 @@
+{
+  "name": "spellburn-and-battlescars",
+  "version": "0.1.0",
+  "description": "CSS compiler for the Sab system",
+  "scripts": {
+    "build": "sass src/scss/spellburn-and-battlescars.scss css/spellburn-and-battlescars.css --style=expanded --no-source-map",
+    "watch": "sass src/scss/spellburn-and-battlescars.scss css/spellburn-and-battlescars.css --style=expanded --source-map --watch"
+  },
+  "browserslist": [
+    "last 3 versions"
+  ],
+  "author": "Vandrulfr",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "sass": "^1.53.0"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "SAB": {
+    "Ability": {
+      "Body": { "long": "Corpo", "abbr": "CRP" },
+      "Mind": { "long": "Mente", "abbr": "MNT" },
+      "Luck": { "long": "Sorte", "abbr": "SRT" }
+    },
+    "SheetLabels": {
+      "Actor": "Sab Actor Sheet",
+      "Item": "Sab Item Sheet"
+    },
+    "Item": {
+      "Spell": {
+        "SpellLVL": "Level {level} Spells",
+        "AddLVL": "Add LVL {level}"
+      }
+    },
+    "Effect": {
+      "Source": "Source",
+      "Toggle": "Toggle Effect",
+      "Temporary": "Temporary Effects",
+      "Passive": "Passive Effects",
+      "Inactive": "Inactive Effects"
+    }
+  },
+
+  "TYPES": {
+    "Actor": {
+      "character": "Character",
+      "npc": "NPC"
+    },
+    "Item": {
+      "item": "Item",
+      "feature": "Feature",
+      "spell": "Spell"
+    }
+  }
+}
