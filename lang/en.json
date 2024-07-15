@@ -3,6 +3,7 @@
     "HP": { "long": "Hit Protection", "abbr": "HP" },
     "gold": { "long": "Gold", "abbr": "GP" },
     "armor": { "long": "Armor Rating", "abbr": "AR" },
+    "level": { "long": "Level", "abbr": "LVL" },
     "namePlaceholder": "Name, Origin Archetype",
     "Ability": {
       "Body": { "long": "Body", "abbr": "BDY", "max": "Max BDY" },

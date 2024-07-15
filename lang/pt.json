@@ -1,38 +1,41 @@
 {
   "SAB": {
+    "HP": { "long": "Proteção contra Golpe", "abbr": "PG" },
+    "gold": { "long": "Peças Douradas", "abbr": "PD" },
+    "armor": { "long": "Armadura", "abbr": "AR" },
+    "level": { "long": "Nível", "abbr": "NV" },
+    "namePlaceholder": "Nome, Origem Arquétipo",
     "Ability": {
       "Body": { "long": "Corpo", "abbr": "CRP" },
       "Mind": { "long": "Mente", "abbr": "MNT" },
       "Luck": { "long": "Sorte", "abbr": "SRT" }
     },
     "SheetLabels": {
-      "Actor": "Sab Actor Sheet",
-      "Item": "Sab Item Sheet"
+      "Actor": "Ficha de Ator",
+      "Item": "Ficha de Item"
     },
     "Item": {
       "Spell": {
-        "SpellLVL": "Level {level} Spells",
-        "AddLVL": "Add LVL {level}"
       }
     },
     "Effect": {
-      "Source": "Source",
-      "Toggle": "Toggle Effect",
-      "Temporary": "Temporary Effects",
-      "Passive": "Passive Effects",
-      "Inactive": "Inactive Effects"
+      "Source": "Origem",
+      "Toggle": "Alternar Efeito",
+      "Temporary": "Efeitos Temporários",
+      "Passive": "Efeitos Passivos",
+      "Inactive": "Efeitos Inativos"
     }
   },
 
   "TYPES": {
     "Actor": {
-      "character": "Character",
-      "npc": "NPC"
+      "character": "Personagem",
+      "npc": "PNJ"
     },
     "Item": {
       "item": "Item",
-      "feature": "Feature",
-      "spell": "Spell"
+      "feature": "Recurso",
+      "spell": "Feitiço"
     }
   }
 }
