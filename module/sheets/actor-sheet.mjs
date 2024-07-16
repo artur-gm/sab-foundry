@@ -237,6 +237,10 @@ export class SabActorSheet extends ActorSheet {
         flavor: label,
         rollMode: game.settings.get('core', 'rollMode'),
       });
+      if (roll.result == 20){
+        this.actor.update({ 'system.attributes.luck.value': this.actor.system.attributes.luck.value - 1 });
+      }
+
       return roll;
     }
   }
