@@ -6,6 +6,8 @@
     "level": { "long": "Level", "abbr": "LVL" },
     "namePlaceholder": "Name, Origin Archetype",
     "Name": "Name",
+    "critMessage": "Critical Hit! Luck has increased.",
+    "critFailMessage": "Critical Fail! Luck has decreased.",
     "Ability": {
       "Body": { "long": "Body", "abbr": "BDY", "max": "Max BDY" },
       "Mind": { "long": "Mind", "abbr": "MND", "max": "Max MND" },

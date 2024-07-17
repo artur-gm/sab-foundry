@@ -6,6 +6,8 @@
     "level": { "long": "Nível", "abbr": "NV" },
     "Name": "Nome",
     "namePlaceholder": "Nome, Origem Arquétipo",
+    "critMessage": "Acerto Crítico! Sorte aumentou.",
+    "critFailMessage": "Falha Crítica! Sorte diminuiu.",
     "Ability": {
       "Body": { "long": "Corpo", "abbr": "CRP" },
       "Mind": { "long": "Mente", "abbr": "MNT" },

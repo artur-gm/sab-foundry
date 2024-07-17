@@ -238,17 +238,27 @@ export class SabActorSheet extends ActorSheet {
         flavor: label,
         rollMode: game.settings.get("core", "rollMode"),
       });
+
       if (this.actor.type == "character") {
         if (roll.result == 20) {
           this.actor.update({
             "system.attributes.luck.value":
               this.actor.system.attributes.luck.value - 1,
           });
+          ChatMessage.create({
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            content: game.i18n.localize("SAB.critFailMessage"),
+          });
         }
+
         if (roll.result == this.actor.system[atribute].value) {
           this.actor.update({
             "system.attributes.luck.value":
               this.actor.system.attributes.luck.value + 1,
+          });
+          ChatMessage.create({
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            content: game.i18n.localize("SAB.critMessage"),
           });
         }
       }
