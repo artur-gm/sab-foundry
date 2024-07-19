@@ -171,7 +171,11 @@ export class SabActorSheet extends ActorSheet {
     // Rollable abilities.
     html.on("click", ".rollable", this._onRoll.bind(this));
 
+    // Roll new character.
     html.on("click", ".roll-new-character", this.rollNewCharacter.bind(this));
+
+    // Level up.
+    html.on("click", ".level-up", this.levelUp.bind(this));
 
     // Drag events for macros.
     if (this.actor.isOwner) {
@@ -288,7 +292,6 @@ export class SabActorSheet extends ActorSheet {
     console.log(hpRoll);
     this.actor.update({
       "system.attributes.luck.value": luck,
-      "system.attributes.luck.max": luck,
       "system.mind.value": mind,
       "system.mind.max": mind,
       "system.body.value": body,
@@ -300,6 +303,89 @@ export class SabActorSheet extends ActorSheet {
     ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
       content: game.i18n.localize("SAB.charRollMsg"),
+    });
+  }
+
+  async levelUp() {
+    ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      content: game.i18n.localize("SAB.levelUp.msg"),
+    });
+    const messages = [
+      "SAB.Ability.Body.long",
+      "SAB.Ability.Mind.long",
+      "SAB.Ability.Luck.long",
+    ];
+    let body = 0;
+    let mind = 0;
+    let luck = 0;
+    let notLeveled = true;
+    if (this.actor.system.body.max < 18) {
+      let roll = await new Roll("d20").toMessage({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        flavor: game.i18n.localize(messages[0]),
+      });
+      body = roll.rolls[0].total;
+    }
+    if (this.actor.system.mind.max < 18) {
+      let roll = await new Roll("d20").toMessage({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        flavor: game.i18n.localize(messages[1]),
+      });
+      mind = roll.rolls[0].total;
+    }
+    if (this.actor.system.attributes.luck.value < 18) {
+      let roll = await new Roll("d20").toMessage({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        flavor: game.i18n.localize(messages[2]),
+      });
+      luck = roll.rolls[0].total;
+    }
+
+    if (body > this.actor.system.body.value) {
+      notLeveled = false;
+      this.actor.update({
+        "system.body.value": this.actor.system.body.value + 1,
+        "system.body.max": this.actor.system.body.max + 1,
+      });
+      ChatMessage.create({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        content: game.i18n.localize("SAB.levelUp.body"),
+      });
+    }
+    if (mind > this.actor.system.mind.value) {
+      notLeveled = false;
+      this.actor.update({
+        "system.mind.value": this.actor.system.mind.value + 1,
+        "system.mind.max": this.actor.system.mind.max + 1,
+      });
+      ChatMessage.create({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        content: game.i18n.localize("SAB.levelUp.mind"),
+      });
+    }
+    if (luck > this.actor.system.attributes.luck.value) {
+      notLeveled = false;
+      this.actor.update({
+        "system.attributes.luck.value":
+          this.actor.system.attributes.luck.value + 1,
+      });
+      ChatMessage.create({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        content: game.i18n.localize("SAB.levelUp.luck"),
+      });
+    }
+    if (notLeveled) {
+      ChatMessage.create({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        content: game.i18n.localize("SAB.levelUp.nothing"),
+      });
+    }
+    this.actor.update({
+      "system.attributes.level.value":
+        this.actor.system.attributes.level.value + 1,
+      "system.health.value": this.actor.system.health.value + 1,
+      "system.health.max": this.actor.system.health.max + 1,
     });
   }
 }

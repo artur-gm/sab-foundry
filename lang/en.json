@@ -10,7 +10,15 @@
     "critFailMessage": "Critical Fail! Luck has decreased.",
     "rollNewChar": "Roll new Character",
     "charRollMsg": "Character rolled! If you wish, you may swap Body and Mind, or use 10 for all attributes (including luck).",
-    "levelUp": "Advance Level",
+    "levelUp": {
+      "levelUp": "Advance Level",
+      "levelUpMsg": "Leveled Up!",
+      "body": "Body increased",
+      "mind": "Mind increased",
+      "luck": "Luck increased",
+      "msg": "is leveling up",
+      "nothing": "No attribute increased. Choose one to increase by 1."
+    },
     "Ability": {
       "Body": { "long": "Body", "abbr": "BDY", "max": "Max BDY" },
       "Mind": { "long": "Mind", "abbr": "MND", "max": "Max MND" },

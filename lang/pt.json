@@ -10,7 +10,15 @@
     "critFailMessage": "Falha Crítica! Sorte diminuiu.",
     "rollNewChar": "Rolar novo personagem",
     "charRollMsg": "Personagem rolado! Caso deseje, pode trocar os valores de corpo e mente, ou usar 10 em todos atributos (incluindo sorte).",
-    "levelUp": "Avançar Nível",
+    "levelUp": {
+      "levelUp": "Avançar Nível",
+      "levelUpMsg": "Avançou de nível!",
+      "body": "Corpo aprimorado",
+      "mind": "Mente aprimorada",
+      "luck": "Sorte aprimorada",
+      "msg": "está subindo de nível",
+      "nothing": "Nenhum atributo aprimorado. Escolha um para subir em 1."
+    },
     "Ability": {
       "Body": { "long": "Corpo", "abbr": "CRP" },
       "Mind": { "long": "Mente", "abbr": "MNT" },
