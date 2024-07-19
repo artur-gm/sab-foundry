@@ -342,7 +342,7 @@ export class SabActorSheet extends ActorSheet {
       luck = roll.rolls[0].total;
     }
 
-    if (body > this.actor.system.body.value) {
+    if (body > this.actor.system.body.max) {
       notLeveled = false;
       this.actor.update({
         "system.body.value": this.actor.system.body.value + 1,
@@ -353,7 +353,7 @@ export class SabActorSheet extends ActorSheet {
         content: game.i18n.localize("SAB.levelUp.body"),
       });
     }
-    if (mind > this.actor.system.mind.value) {
+    if (mind > this.actor.system.mind.max) {
       notLeveled = false;
       this.actor.update({
         "system.mind.value": this.actor.system.mind.value + 1,
