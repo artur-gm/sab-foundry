@@ -8,6 +8,9 @@
     "namePlaceholder": "Nome, Origem Arquétipo",
     "critMessage": "Acerto Crítico! Sorte aumentou.",
     "critFailMessage": "Falha Crítica! Sorte diminuiu.",
+    "rollNewChar": "Rolar novo personagem",
+    "charRollMsg": "Personagem rolado! Caso deseje, pode trocar os valores de corpo e mente, ou usar 10 em todos atributos (incluindo sorte).",
+    "levelUp": "Avançar Nível",
     "Ability": {
       "Body": { "long": "Corpo", "abbr": "CRP" },
       "Mind": { "long": "Mente", "abbr": "MNT" },

@@ -67,6 +67,15 @@
           <input type="text" name="system.attributes.luck.value" value="{{system.attributes.luck.value}}" data-dtype="Number"/>
           </div>
         </div>
+        {{#if system.attributes.level.value}}
+          <div class="resource flex-group-center">
+            <a class="resource-label" data-action="levelUp">{{localize 'SAB.levelUp'}}</a>
+          </div>
+        {{else}}
+          <div class="resource flex-group-center">
+            <a class="resource-label roll-new-character" data-action="rollNewChar">{{localize 'SAB.rollNewChar'}}</a>
+          </div>
+        {{/if}}
       </div>
     </div>
   </header>

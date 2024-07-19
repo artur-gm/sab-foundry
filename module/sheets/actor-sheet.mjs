@@ -171,6 +171,8 @@ export class SabActorSheet extends ActorSheet {
     // Rollable abilities.
     html.on("click", ".rollable", this._onRoll.bind(this));
 
+    html.on("click", ".roll-new-character", this.rollNewCharacter.bind(this));
+
     // Drag events for macros.
     if (this.actor.isOwner) {
       let handler = (ev) => this._onDragStart(ev);
@@ -264,5 +266,40 @@ export class SabActorSheet extends ActorSheet {
       }
       return roll;
     }
+  }
+
+  async rollNewCharacter() {
+    const rolls = [];
+    for (let i = 0; i < 3; i++) {
+      let roll = await new Roll("2d6+3").toMessage({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        flavor: game.i18n.localize("SAB.rollNewChar"),
+      });
+      rolls.push(roll.rolls[0]);
+    }
+    rolls.sort((a, b) => a.total - b.total);
+    const luck = rolls[0].total;
+    const mind = rolls[1].total;
+    const body = rolls[2].total;
+    const hpRoll = await new Roll("1d6").toMessage({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      flavor: game.i18n.localize("SAB.HP.long"),
+    });
+    console.log(hpRoll);
+    this.actor.update({
+      "system.attributes.luck.value": luck,
+      "system.attributes.luck.max": luck,
+      "system.mind.value": mind,
+      "system.mind.max": mind,
+      "system.body.value": body,
+      "system.body.max": body,
+      "system.health.value": hpRoll.rolls[0].total,
+      "system.health.max": hpRoll.rolls[0].total,
+      "system.attributes.level.value": 1,
+    });
+    ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      content: game.i18n.localize("SAB.charRollMsg"),
+    });
   }
 }
