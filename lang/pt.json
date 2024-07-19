@@ -1,7 +1,7 @@
 {
   "SAB": {
     "HP": { "long": "Proteção contra Golpe", "abbr": "PG" },
-    "gold": { "long": "Peças Douradas", "abbr": "PD" },
+    "gold": { "long": "Ouro", "abbr": "PD" },
     "armor": { "long": "Armadura", "abbr": "AR" },
     "level": { "long": "Nível", "abbr": "NV" },
     "Name": "Nome",
