@@ -35,7 +35,8 @@
       "Spell": {
         "SpellLVL": "Level {level} Spells",
         "AddLVL": "Add LVL {level}"
-      }
+      },
+      "bulky": "Bulky"
     },
     "Effect": {
       "Source": "Source",

@@ -1,6 +1,10 @@
 <ol class='items-list'>
   <li class='item flexrow items-header'>
-    <div class='item-name'>{{localize 'SAB.Name'}}</div>
+    <div class='item-name'>{{localize 'SAB.Name'}}
+      {{localize 'SAB.Encumbrance'}}:
+      {{calculateTotalWeight gear}} / 10
+      </div>
+
     <div class='item-formula'>{{localize 'SAB.Item.damage'}}</div>
     <div class='item-controls'>
       <a
@@ -11,10 +15,6 @@
         <i class='fas fa-plus'></i>
         {{localize 'DOCUMENT.New' type='item'}}
       </a>
-    </div>
-    <div class='encumbrance'>
-      <span class='encumbrance-value'>{{localize 'SAB.Encumbrance'}}</span>
-      {{calculateTotalWeight gear}} / 10
     </div>
   </li>
   {{#each gear as |item id|}}
@@ -31,7 +31,11 @@
           </a>
         </div>
         {{#if system.weight}}
-          <h4>{{item.name}}</h4>
+          <h4>{{item.name}}
+          {{#if (equalsTwo system.weight)}}
+            ({{localize "SAB.Item.bulky"}})
+          {{/if}}
+          </h4>
         {{else}}
           <h4><i>{{item.name}}</i></h4>
         {{/if}} 

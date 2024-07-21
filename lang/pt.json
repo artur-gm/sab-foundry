@@ -32,6 +32,7 @@
     "Item": {
       "RollFormula": "Fórmula de Rolagem",
       "damage": "Dano",
+      "bulky": "Volumoso",
       "Spell": {
       }
     },
