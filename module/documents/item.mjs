@@ -64,7 +64,7 @@ export class SabItem extends Item {
     const label = `[${item.type}] ${item.name}`;
 
     // If there's no roll data, send a chat message.
-    if (!this.system.formula) {
+    if (!this.system.formula || this.system.roll.diceSize ==='') {
       ChatMessage.create({
         speaker: speaker,
         rollMode: rollMode,
