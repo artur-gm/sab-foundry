@@ -82,6 +82,14 @@ Handlebars.registerHelper('toLowerCase', function (str) {
   return str.toLowerCase();
 });
 
+Handlebars.registerHelper('calculateTotalWeight', function(gear) {
+  return gear.reduce((total, item) => total + (item.system.weight || 0), 0);
+});
+
+Handlebars.registerHelper('equalsTwo', function(value) {
+  return value == 2 ? true : false;
+});
+
 /* -------------------------------------------- */
 /*  Ready Hook                                  */
 /* -------------------------------------------- */

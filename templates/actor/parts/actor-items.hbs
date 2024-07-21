@@ -12,6 +12,10 @@
         {{localize 'DOCUMENT.New' type='item'}}
       </a>
     </div>
+    <div class='encumbrance'>
+      <span class='encumbrance-value'>{{localize 'SAB.Encumbrance'}}</span>
+      {{calculateTotalWeight gear}} / 10
+    </div>
   </li>
   {{#each gear as |item id|}}
     <li class='item flexrow' data-item-id='{{item._id}}'>

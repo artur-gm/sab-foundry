@@ -10,6 +10,7 @@
     "critFailMessage": "Falha Crítica! Sorte diminuiu.",
     "rollNewChar": "Rolar novo personagem",
     "charRollMsg": "Personagem rolado! Caso deseje, pode trocar os valores de corpo e mente, ou usar 10 em todos atributos (incluindo sorte).",
+    "Encumbrance": "Carga",
     "levelUp": {
       "levelUp": "Avançar Nível",
       "levelUpMsg": "Avançou de nível!",
