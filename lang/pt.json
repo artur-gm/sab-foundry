@@ -11,6 +11,7 @@
     "rollNewChar": "Rolar novo personagem",
     "charRollMsg": "Personagem rolado! Caso deseje, pode trocar os valores de corpo e mente, ou usar 10 em todos atributos (incluindo sorte).",
     "Encumbrance": "Carga",
+    "Spellburn": "Algo deu muito errado. Descubra o que aconteceu olhando a tabela de Catástrofes Mágicas.",
     "levelUp": {
       "levelUp": "Avançar Nível",
       "levelUpMsg": "Avançou de nível!",
@@ -34,6 +35,12 @@
       "damage": "Dano",
       "bulky": "Volumoso",
       "Spell": {
+        "powerLVL": "Nível de Poder",
+        "pLVLdialog": "Digite o Nível de Poder do Feitiço"
+      },
+      "Fatigue": {
+        "name": "Fadiga",
+        "msg": "Fadiga aumentada por "
       }
     },
     "Effect": {
@@ -63,6 +70,7 @@
     "Create": "Criar",
     "New": "Novo",
     "Edit": "Editar",
-    "Delete": "Deletar"
+    "Delete": "Deletar",
+    "Roll": "Rolar"
   }
 }

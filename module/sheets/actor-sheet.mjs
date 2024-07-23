@@ -232,6 +232,12 @@ export class SabActorSheet extends ActorSheet {
         const item = this.actor.items.get(itemId);
         if (item) return item.roll();
       }
+      if (dataset.rollType == "spell") {
+        console.log("Spell roll");
+        const spellId = element.closest(".item").dataset.itemId;
+        const spell = this.actor.items.get(spellId);
+        if (spell) return this._rollSpell(spell);
+      }
     }
 
     // Handle rolls that supply the formula directly.
@@ -387,5 +393,88 @@ export class SabActorSheet extends ActorSheet {
       "system.health.value": this.actor.system.health.value + 1,
       "system.health.max": this.actor.system.health.max + 1,
     });
+  }
+
+  async _rollSpell(spell) {
+    let powerLevel = 1;
+    const fatigueData = {
+      name: game.i18n.localize("SAB.Item.Fatigue.name"),
+      type: "item",
+      system: {
+        description: game.i18n.localize("SAB.Item.Fatigue.name"),
+        weight: 1,
+      },
+    };
+    powerLevel = await new Promise((resolve) => {
+      const div = document.createElement("div");
+
+      const label = document.createElement("label");
+      label.setAttribute("for", "powerLevel");
+      label.textContent = game.i18n.localize("SAB.Item.Spell.powerLVL") + ": ";
+      div.appendChild(label);
+
+      const input = document.createElement("input");
+      input.type = "number";
+      input.id = "powerLevel";
+      input.name = "powerLevel";
+      input.required = true;
+      div.appendChild(input);
+
+      const divContainer = document.createElement("div");
+      divContainer.appendChild(div);
+      const content = divContainer.innerHTML;
+
+      new Dialog({
+        title: game.i18n.localize("SAB.Item.Spell.pLVLdialog"),
+        content: content,
+        buttons: {
+          ok: {
+            label: "OK",
+            callback: (html) => {
+              const input = html.find("#powerLevel")[0];
+              // treat the input value
+              if (isNaN(parseInt(input.value))) {
+                input.value = 1;
+              }
+              if (parseInt(input.value) > 5) {
+                input.value = 5;
+              }
+              if (parseInt(input.value) < 1) {
+                input.value = 1;
+              }
+              resolve(parseInt(input.value));
+            },
+          },
+        },
+        default: "ok",
+      }).render(true);
+    });
+    let roll = await new Roll(powerLevel + "d6").toMessage({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      flavor: `[${spell.type}] ${spell.name}: ${spell.system.description}`,
+      rollMode: game.settings.get("core", "rollMode"),
+    });
+    console.log(roll);
+    let rollDice = roll.rolls[0].dice[0].results.map((result) => result.result);
+    let uniqueRolls = new Set(rollDice);
+    if (uniqueRolls.size < rollDice.length) {
+      ChatMessage.create({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        content: game.i18n.localize("SAB.Spellburn"),
+      });
+    }
+    for (let i = 0; i < rollDice.length; i++) {
+      let totalFatigue = 0;
+      if (rollDice[i] > 3) {
+        await Item.create(fatigueData, { parent: this.actor });
+        totalFatigue++;
+      }
+      if (totalFatigue > 0) {
+        ChatMessage.create({
+          speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+          content: game.i18n.localize("SAB.Item.Fatigue.msg")+totalFatigue,
+        });
+      }
+    }
   }
 }
