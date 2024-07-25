@@ -177,6 +177,11 @@ export class SabActorSheet extends ActorSheet {
     // Level up.
     html.on("click", ".level-up", this._levelUp.bind(this));
 
+    // Handle gold
+    html.on('change', '#gold', (ev) => {
+        this._onGoldChange(ev);
+    });
+
     // Drag events for macros.
     if (this.actor.isOwner) {
       let handler = (ev) => this._onDragStart(ev);
@@ -393,6 +398,28 @@ export class SabActorSheet extends ActorSheet {
       "system.health.value": this.actor.system.health.value + 1,
       "system.health.max": this.actor.system.health.max + 1,
     });
+  }
+
+  async _onGoldChange(ev) {
+    let currentGold = parseInt(ev.target.value, 10);
+    if (currentGold< 100) return;
+    const goldData = {
+      name: `100 ${game.i18n.localize('SAB.gold.long')}`,
+      type: 'item',
+      system: {
+        weight: 1,
+        description: `100 ${game.i18n.localize('SAB.gold.long')}`,
+      },
+    };
+  
+    const goldItemsToCreate = Math.floor(currentGold / 100);
+    currentGold = currentGold % 100;
+  
+    for (let i = 0; i < goldItemsToCreate; i++) {
+      await Item.create(goldData, { parent: this.actor });
+    }
+  
+    await this.actor.update({ "system.attributes.gold.value": currentGold });
   }
 
   async _rollSpell(spell) {
