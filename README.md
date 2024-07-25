@@ -1,6 +1,8 @@
 # Spellburn and Battlescars
 
-![Spellburn and Battlescars Logo](assets/sab-logo.png)
+<p align="center">
+  <img src="assets/sab-logo.png" alt="Spellburn and Battlescars logo"/>
+</p>
 
 ![Foundry v11](https://img.shields.io/badge/foundry-v11-green)
 ![GitHub Release](https://img.shields.io/github/v/release/artur-gm/sab-foundry)
