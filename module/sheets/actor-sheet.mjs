@@ -172,10 +172,10 @@ export class SabActorSheet extends ActorSheet {
     html.on("click", ".rollable", this._onRoll.bind(this));
 
     // Roll new character.
-    html.on("click", ".roll-new-character", this.rollNewCharacter.bind(this));
+    html.on("click", ".roll-new-character", this._rollNewCharacter.bind(this));
 
     // Level up.
-    html.on("click", ".level-up", this.levelUp.bind(this));
+    html.on("click", ".level-up", this._levelUp.bind(this));
 
     // Drag events for macros.
     if (this.actor.isOwner) {
@@ -278,7 +278,7 @@ export class SabActorSheet extends ActorSheet {
     }
   }
 
-  async rollNewCharacter() {
+  async _rollNewCharacter() {
     const rolls = [];
     for (let i = 0; i < 3; i++) {
       let roll = await new Roll("2d6+3").toMessage({
@@ -312,7 +312,7 @@ export class SabActorSheet extends ActorSheet {
     });
   }
 
-  async levelUp() {
+  async _levelUp() {
     ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
       content: game.i18n.localize("SAB.levelUp.msg"),
@@ -396,16 +396,26 @@ export class SabActorSheet extends ActorSheet {
   }
 
   async _rollSpell(spell) {
-    let powerLevel = 1;
-    const fatigueData = {
-      name: game.i18n.localize("SAB.Item.Fatigue.name"),
-      type: "item",
-      system: {
-        description: game.i18n.localize("SAB.Item.Fatigue.name"),
-        weight: 1,
-      },
-    };
-    powerLevel = await new Promise((resolve) => {
+    let powerLevel = await this._getPowerLevel();
+    let roll = await new Roll(powerLevel + "d6").toMessage({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      flavor: `[${spell.type}] ${spell.name}: ${spell.system.description}`,
+      rollMode: game.settings.get("core", "rollMode"),
+    });
+    console.log(roll);
+    let rollDice = roll.rolls[0].dice[0].results.map((result) => result.result);
+    let uniqueRolls = new Set(rollDice);
+    if (uniqueRolls.size < rollDice.length) {
+      ChatMessage.create({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        content: game.i18n.localize("SAB.Spellburn"),
+      });
+    }
+    await this._checkFatigue(rollDice);
+  }
+
+  async _getPowerLevel() {
+    let powerLevel = await new Promise((resolve) => {
       const div = document.createElement("div");
 
       const label = document.createElement("label");
@@ -449,32 +459,32 @@ export class SabActorSheet extends ActorSheet {
         default: "ok",
       }).render(true);
     });
-    let roll = await new Roll(powerLevel + "d6").toMessage({
-      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-      flavor: `[${spell.type}] ${spell.name}: ${spell.system.description}`,
-      rollMode: game.settings.get("core", "rollMode"),
-    });
-    console.log(roll);
-    let rollDice = roll.rolls[0].dice[0].results.map((result) => result.result);
-    let uniqueRolls = new Set(rollDice);
-    if (uniqueRolls.size < rollDice.length) {
-      ChatMessage.create({
-        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        content: game.i18n.localize("SAB.Spellburn"),
-      });
-    }
+    return powerLevel;
+  }
+
+  async _checkFatigue(rollDice) {
+    let totalFatigue = 0;
+    const fatigueData = {
+      name: game.i18n.localize("SAB.Item.Fatigue.name"),
+      type: "item",
+      system: {
+        description: game.i18n.localize("SAB.Item.Fatigue.name"),
+        weight: 1,
+      },
+    };
+
+    rollDice.sort((a, b) => b - a);
     for (let i = 0; i < rollDice.length; i++) {
-      let totalFatigue = 0;
       if (rollDice[i] > 3) {
         await Item.create(fatigueData, { parent: this.actor });
         totalFatigue++;
-      }
-      if (totalFatigue > 0) {
-        ChatMessage.create({
-          speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-          content: game.i18n.localize("SAB.Item.Fatigue.msg")+totalFatigue,
-        });
-      }
+      } else break;
+    }
+    if (totalFatigue > 0) {
+      ChatMessage.create({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        content: game.i18n.localize("SAB.Item.Fatigue.msg") + totalFatigue,
+      });
     }
   }
 }
