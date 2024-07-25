@@ -86,8 +86,17 @@ Handlebars.registerHelper('calculateTotalWeight', function(gear) {
   return gear.reduce((total, item) => total + (item.system.weight || 0), 0);
 });
 
-Handlebars.registerHelper('equalsTwo', function(value) {
-  return value == 2 ? true : false;
+Handlebars.registerHelper('handleItemWeight', function(item){
+  switch (item.system.weight) {
+    case 1:
+      return item.name;
+    case 2:
+      return `${item.name} ${game.i18n.localize('SAB.Item.bulky')}`;
+    case 0:
+      return new Handlebars.SafeString(`<i>${item.name}</i>`);
+    default: 
+      return `${item.name} (${item.system.weight})`
+  }
 });
 
 /* -------------------------------------------- */

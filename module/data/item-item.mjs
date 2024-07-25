@@ -8,7 +8,7 @@ export default class SabItem extends SabItemBase {
     const schema = super.defineSchema();
 
     schema.quantity = new fields.NumberField({ ...requiredInteger, initial: 1, min: 1 });
-    schema.weight = new fields.NumberField({ ...requiredInteger, initial: 1, min: 0 });
+    schema.weight = new fields.NumberField({ ...requiredInteger, initial: 1});
 
     // Break down roll formula into three independent fields
     schema.roll = new fields.SchemaField({
