@@ -178,8 +178,8 @@ export class SabActorSheet extends ActorSheet {
     html.on("click", ".level-up", this._levelUp.bind(this));
 
     // Handle gold
-    html.on('change', '#gold', (ev) => {
-        this._onGoldChange(ev);
+    html.on("change", "#gold", (ev) => {
+      this._onGoldChange(ev);
     });
 
     // Drag events for macros.
@@ -238,7 +238,6 @@ export class SabActorSheet extends ActorSheet {
         if (item) return item.roll();
       }
       if (dataset.rollType == "spell") {
-        console.log("Spell roll");
         const spellId = element.closest(".item").dataset.itemId;
         const spell = this.actor.items.get(spellId);
         if (spell) return this._rollSpell(spell);
@@ -300,7 +299,6 @@ export class SabActorSheet extends ActorSheet {
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
       flavor: game.i18n.localize("SAB.HP.long"),
     });
-    console.log(hpRoll);
     this.actor.update({
       "system.attributes.luck.value": luck,
       "system.mind.value": mind,
@@ -402,23 +400,23 @@ export class SabActorSheet extends ActorSheet {
 
   async _onGoldChange(ev) {
     let currentGold = parseInt(ev.target.value, 10);
-    if (currentGold< 100) return;
+    if (currentGold < 100) return;
     const goldData = {
-      name: `100 ${game.i18n.localize('SAB.gold.long')}`,
-      type: 'item',
+      name: `100 ${game.i18n.localize("SAB.gold.long")}`,
+      type: "item",
       system: {
         weight: 1,
-        description: `100 ${game.i18n.localize('SAB.gold.long')}`,
+        description: `100 ${game.i18n.localize("SAB.gold.long")}`,
       },
     };
-  
+
     const goldItemsToCreate = Math.floor(currentGold / 100);
     currentGold = currentGold % 100;
-  
+
     for (let i = 0; i < goldItemsToCreate; i++) {
       await Item.create(goldData, { parent: this.actor });
     }
-  
+
     await this.actor.update({ "system.attributes.gold.value": currentGold });
   }
 
@@ -429,7 +427,6 @@ export class SabActorSheet extends ActorSheet {
       flavor: `[${spell.type}] ${spell.name}: ${spell.system.description}`,
       rollMode: game.settings.get("core", "rollMode"),
     });
-    console.log(roll);
     let rollDice = roll.rolls[0].dice[0].results.map((result) => result.result);
     let uniqueRolls = new Set(rollDice);
     if (uniqueRolls.size < rollDice.length) {
@@ -510,7 +507,8 @@ export class SabActorSheet extends ActorSheet {
     if (totalFatigue > 0) {
       ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        content: game.i18n.localize("SAB.Item.Fatigue.msg") + totalFatigue,
+        content:
+          game.i18n.localize("SAB.Item.Fatigue.msg") + " " + totalFatigue,
       });
     }
   }
