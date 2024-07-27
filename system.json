@@ -8,7 +8,7 @@
       "discord": "vandrulfr"
     }
   ],
-  "url": "https://github.com/artur-gm/sab-foundry/tree/main",
+  "url": "#{URL}#",
   "license": "LICENSE.txt",
   "readme": "README.md",
   "bugs": "https://github.com/artur-gm/sab-foundry/issues",
@@ -19,7 +19,7 @@
       "url": "systems/spellburn-and-battlescars/assets/sab-logo.png"
     }
   ],
-  "version": "1.0.1",
+  "version": "#{VERSION}#",
   "compatibility": {
     "minimum": 11,
     "verified": "11.315"
@@ -41,8 +41,8 @@
   "packs": [],
   "packFolders": [],
   "socket": false,
-  "manifest": "https://raw.githubusercontent.com/artur-gm/sab-foundry/main/system.json",
-  "download": "https://github.com/artur-gm/sab-foundry/archive/refs/tags/v1.0.1.zip",
+  "manifest": "#{MANIFEST}#",
+  "download": "#{DOWNLOAD}#",
   "gridDistance": 5,
   "gridUnits": "m",
   "primaryTokenAttribute": "health"
