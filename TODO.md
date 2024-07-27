@@ -12,5 +12,5 @@
   - Scars table
   - Mishaps table
 - Reduce HP if inventory is full
-- Automatically create coins in inventory
+- ~~Automatically create coins in inventory~~
 - V12 compatibility
