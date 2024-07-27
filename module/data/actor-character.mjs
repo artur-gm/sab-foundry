@@ -12,9 +12,12 @@ export default class SabCharacter extends SabActorBase {
         value: new fields.NumberField({ ...requiredInteger, initial: 0 })
       }),
       gold: new fields.SchemaField({
-        value: new fields.NumberField({ ...requiredInteger, initial: 0 })
+        value: new fields.NumberField({ ...requiredInteger, initial: 10 })
       }),
       luck: new fields.SchemaField({
+        value: new fields.NumberField({ ...requiredInteger, initial: 10 })
+      }),
+      invSlots: new fields.SchemaField({
         value: new fields.NumberField({ ...requiredInteger, initial: 10 })
       }),
     });

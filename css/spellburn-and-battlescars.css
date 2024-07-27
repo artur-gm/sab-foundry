@@ -271,6 +271,25 @@
   text-align: left;
   display: flex;
 }
+.spellburn-and-battlescars .items-footer {
+  position: relative;
+  height: 28px;
+  margin: 2px 0;
+  padding: 0;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px groove #eeede0;
+  font-weight: bold;
+}
+.spellburn-and-battlescars .items-footer > * {
+  font-size: 14px;
+  text-align: center;
+}
+.spellburn-and-battlescars .items-footer a {
+  font-size: 12px;
+  text-align: center;
+  margin: 0 6px;
+}
 .spellburn-and-battlescars .items-list {
   list-style: none;
   margin: 0;
@@ -364,3 +383,5 @@
 .spellburn-and-battlescars .effects .item .effect-controls {
   border: none;
 }
+
+/*# sourceMappingURL=spellburn-and-battlescars.css.map */

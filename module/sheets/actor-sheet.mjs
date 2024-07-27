@@ -182,6 +182,9 @@ export class SabActorSheet extends ActorSheet {
       this._onGoldChange(ev);
     });
 
+    // Add and remove inventory slots
+    html.on("click", "#add-slot", this._onAddInventorySlot.bind(this));
+    html.on("click", "#remove-slot", this._onRemoveInventorySlot.bind(this));
     // Drag events for macros.
     if (this.actor.isOwner) {
       let handler = (ev) => this._onDragStart(ev);
@@ -511,5 +514,11 @@ export class SabActorSheet extends ActorSheet {
           game.i18n.localize("SAB.Item.Fatigue.msg") + " " + totalFatigue,
       });
     }
+  }
+  async _onAddInventorySlot() {
+    await this.actor.update({"system.attributes.invSlots.value": this.actor.system.attributes.invSlots.value + 1});
+  }
+  async _onRemoveInventorySlot(){
+    await this.actor.update({"system.attributes.invSlots.value": this.actor.system.attributes.invSlots.value - 1});
   }
 }

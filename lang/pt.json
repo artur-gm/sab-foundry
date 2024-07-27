@@ -10,7 +10,11 @@
     "critFailMessage": "Falha Crítica! Sorte diminuiu.",
     "rollNewChar": "Rolar novo personagem",
     "charRollMsg": "Personagem rolado! Caso deseje, pode trocar os valores de corpo e mente, ou usar 10 em todos atributos (incluindo sorte).",
-    "Encumbrance": "Carga",
+    "Encumbrance": {
+      "name": "Carga",
+      "add": "Adicionar espaço de inventário",
+      "remove": "Remover espaço de inventário"
+    },
     "Spellburn": "Algo deu muito errado. Descubra o que aconteceu olhando a tabela de Catástrofes Mágicas.",
     "levelUp": {
       "levelUp": "Avançar Nível",

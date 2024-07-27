@@ -1,9 +1,6 @@
 <ol class='items-list'>
   <li class='item flexrow items-header'>
-    <div class='item-name'>{{localize 'SAB.Name'}}
-      {{localize 'SAB.Encumbrance'}}:
-      {{calculateTotalWeight gear}} / 10
-      </div>
+    <div class='item-name'>{{localize 'SAB.Name'}}</div>
 
     <div class='item-formula'>{{localize 'SAB.Item.damage'}}</div>
     <div class='item-controls'>
@@ -53,4 +50,12 @@
       </div>
     </li>
   {{/each}}
+  <li class="items-footer flexrow">
+    <div><a title="{{localize 'SAB.Encumbrance.remove'}}"><i class="fas fa-minus item-control" id="remove-slot"></i></a></div>
+    <div>
+      {{localize "SAB.Encumbrance.name"}}:
+      {{calculateTotalWeight gear}} / {{system.attributes.invSlots.value}}
+    </div>
+    <div><a title="{{localize 'SAB.Encumbrance.add'}}"><i class="fas fa-plus item-control" id="add-slot"></i></a></div>
+  </li>
 </ol>

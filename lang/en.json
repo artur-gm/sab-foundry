@@ -10,7 +10,11 @@
     "critFailMessage": "Critical Fail! Luck has decreased.",
     "rollNewChar": "Roll new Character",
     "charRollMsg": "Character rolled! If you wish, you may swap Body and Mind, or use 10 for all attributes (including luck).",
-    "Encumbrance": "Encumbrance",
+    "Encumbrance": {
+      "name": "Encumbrance",
+      "add": "Add inventory slot",
+      "remove": "Remove inventory slot"
+    },
     "Spellburn": "Something has gone very wrong. Find out what happened looking at the Mishaps Table.",
     "levelUp": {
       "levelUp": "Advance Level",
