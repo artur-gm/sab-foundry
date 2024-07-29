@@ -1,7 +1,7 @@
 # Spellburn and Battlescars
 
 <p align="center">
-  <img src="assets/sab-logo.png" alt="Spellburn and Battlescars logo"/>
+  <img src="assets/readme-logo.png" alt="Spellburn and Battlescars for Foundry VTT"/>
 </p>
 
 
