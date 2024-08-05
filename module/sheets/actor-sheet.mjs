@@ -441,9 +441,12 @@ export class SabActorSheet extends ActorSheet {
     let rollDice = roll.rolls[0].dice[0].results.map((result) => result.result);
     let uniqueRolls = new Set(rollDice);
     if (uniqueRolls.size < rollDice.length) {
+      let total=roll.rolls[0].total;
+      if(total>21){total=21;}
       ChatMessage.create({
+        flavor: game.i18n.localize("SAB.Spellburn.flavor"),
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        content: game.i18n.localize("SAB.Spellburn"),
+        content: game.i18n.localize("SAB.Spellburn."+total),
       });
     }
     await this._checkFatigue(rollDice);

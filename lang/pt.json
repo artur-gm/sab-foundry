@@ -15,8 +15,30 @@
       "add": "Adicionar espaço de inventário",
       "remove": "Remover espaço de inventário"
     },
-    "Spellburn": "Algo deu muito errado. Descubra o que aconteceu olhando a tabela de Catástrofes Mágicas.",
-    "levelUp": {
+    "Spellburn": {
+      "flavor": "Catástrofe: Algo deu muito errado.",
+      "2": "Você não pode conjurar magias por [DADO] horas, qualquer tentativa de manipular magia falha.",
+      "3": "Durante as próximas 24 horas, ao conjurar magias você sofre Fadiga em rolagens de 3-6.",
+      "4": "A magia causa uma reação em cadeia; o MJ lhe dirá como. Receba uma Fadiga adicional.",
+      "5": "O efeito da magia é revertido; o MJ lhe dirá como. Receba uma Fadiga adicional.",
+      "6": "Qualquer objeto inflamável no seu inventário queima instantaneamente. A partir de agora você é imune a fogo em pequenas exposições. ",
+      "7": "Você está Privado. Após se recuperar, role [[/r 1d6]]. Se o total for maior do que seu PG máximo, ele se torna o novo resultado.",
+      "8": "Você sofre [DADO] de Dano a sua MENTE ao conjurar magias pelas próximas 24 horas. Após isso, role [[/r 3d6]]. Se o total for maior que sua MENTE máxima, ele se torna o novo resultado",
+      "9": "A magia deixa sua pele em um tom escuro de roxo, que te deixa invisível sob o luar. Porém seus olhos brilham amarelo durante a noite",
+      "10": "Você se torna incorpóreo por [DADO] horas enquanto seu espírito deixa seu corpo, que permanece inconsciente. Você pode voar e atravessar paredes, mas não pode tocar nada. Ninguém pode te ouvir ou ver através de meios mundanos",
+      "11": "Você sofre queimaduras arcanas horríveis; perca [DADO] MENTE. Daqui adiante você pode adicionar +1 Poder a uma magia (use um dado de cor diferente). Se ele resultar em 4-6 você perde 1 MENTE.",
+      "12": "A magia sai pela culatra; você perde 1 Espaço de Inventário (remova-o de sua ficha). Você agora é cercado por uma essência mágica que provém +1 Armadura (limites ainda se aplicam).",
+      "13": "Seu Grimório é danificado e inutilizado. Criar um novo Grimório de seus restos também restaura as magias originais",
+      "14": "Ao invés de Fadiga, a magia causa tumores que preenchem os espaços respectivos. Só podem ser removidos por um curandeiro especializado.",
+      "15": "Energias arcanas danificam seu corpo e uma parte de sua alma é transferida para seu Grimório. Você perde metade de sua MENTE (arredondado para baixo). Seu Grimório a partir de agora aparece em qualquer forma que você desejar e não ocupa nenhum espaço. Ele só pode ser destruído exceto com sua morte, e vice-versa.",
+      "16": "Você permanentemente perde [DADO] CORPO enquanto a magia interage com plantas próximas, que são arrancadas do chão e se fundem a sua pele. Você tem +1 Armadura, porém, Dano de fogo causa +d12 contra você. Você só pode se alimentar por fotossíntese.",
+      "17": "Asas grandes e feias surgem nas costas, rasgando qualquer coisa que você estiver trajando. Você recebe [DADO] CORPO e pode voar. Você não pode mais trajar armadura ou uma mochila, e só tem 5 Espaços de Inventário",
+      "18": "Uma de suas mãos é fundida ao seu Grimório. Você não pode mais soltá-lo, porém ele só ocupa 1 espaço agora. Você pode disparar um raio de energia arcana daquela mão que causa 1d6 dano. Se sua mão for arrancada, você não poderá mais conjurar magias.",
+      "19": "Uma entidade extra-planar sente seu poder arcano. Vocês agora estão conectados, e você pode chamá-la por ajuda. Ela também pode pedir sua ajuda, e te punir por não ajudar. Boa sorte.",
+      "20": "Você cria uma cópia exata de si mesmo. Um envelhece enquanto o outro rejuvenesce. Ambos a um ritmo de 1 ano por dia. Seus pensamentos são ligados, e se um morre o outro também. Apenas ajuda mágica pode lhe restaurar; após isso adicione +1d6 para cada um de seus Atributos.",
+      "21": "Você se transforma em um Elemental. Crie um Nome Verdadeiro para você. Energias mágicas te cercam o tempo todo, e ataques mundanos contra você são prejudicados. Se alguém descobrir seu Nome Verdadeiro, ele pode te controlar. Outros Elementais virão atrás de você."
+    },
+      "levelUp": {
       "levelUp": "Avançar Nível",
       "levelUpMsg": "Avançou de nível!",
       "body": "Corpo aprimorado",
