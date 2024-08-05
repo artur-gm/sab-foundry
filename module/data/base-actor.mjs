@@ -9,7 +9,8 @@ export default class SabActorBase extends SabDataModel {
 
     schema.health = new fields.SchemaField({
       value: new fields.NumberField({ ...requiredInteger, initial: 1 }),
-      max: new fields.NumberField({ ...requiredInteger, initial: 1 })
+      max: new fields.NumberField({ ...requiredInteger, initial: 1 }),
+      old: new fields.NumberField({ ...requiredInteger, initial: 1 })
     });
     schema.body = new fields.SchemaField({
       value: new fields.NumberField({ ...requiredInteger, initial: 10 }),

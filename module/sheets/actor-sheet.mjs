@@ -182,6 +182,14 @@ export class SabActorSheet extends ActorSheet {
       this._onGoldChange(ev);
     });
 
+    // Battlescars handling
+    html.on("click", "#current_hp", (ev) => {
+      this.actor.update({"system.health.old": ev.target.value}); // Save the current health value
+    });
+    html.on("change", "#current_hp", (ev) => {
+      this._onHealthChange(ev);
+    });
+
     // Add and remove inventory slots
     html.on("click", "#add-slot", this._onAddInventorySlot.bind(this));
     html.on("click", "#remove-slot", this._onRemoveInventorySlot.bind(this));
@@ -520,5 +528,17 @@ export class SabActorSheet extends ActorSheet {
   }
   async _onRemoveInventorySlot(){
     await this.actor.update({"system.attributes.invSlots.value": this.actor.system.attributes.invSlots.value - 1});
+  }
+
+  _onHealthChange(ev) {
+    let currentHealth = parseInt(ev.target.value, 10);
+    if (currentHealth == 0) {
+      let oldHealth = this.actor.system.health.old;
+      ChatMessage.create({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        content: game.i18n.localize("SAB.Battlescar." + oldHealth + ".message"),
+        flavor: game.i18n.localize("SAB.Battlescar." + oldHealth + ".flavor"),
+      });
+    }
   }
 }

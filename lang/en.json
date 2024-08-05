@@ -54,6 +54,20 @@
       "Temporary": "Temporary Effects",
       "Passive": "Passive Effects",
       "Inactive": "Inactive Effects"
+    },
+    "Battlescar": {
+      "1": {"flavor": "Lasting Scar", "message": "Roll [[/r d6]] | 1: Neck, 2: Hands, 3: Eye, 4: Chest, 5: Legs, 6: Ear."},
+      "2": {"flavor": "Disoriented and shaken", "message": "Describe how you refocus. Increase your max HP by 1."},
+      "3": {"flavor": "You’re sent flying and land flat on your face, winded", "message": "Deprived until a Long Rest. Then, increase your max HP by 1"},
+      "4": {"flavor": "Broken Limb", "message": "Roll [[/r d6]] | 1-2: Leg, 3-4: Arm, 5: Rib, 6: Skull. Once mended, increase your max HP by 1"},
+      "5": {"flavor": "You’re afflicted with a gross, uncomfortable infection", "message": "When you get over it, increase your max HP by 1."},
+      "6": {"flavor": "You’ve changed somehow", "message": "Roll [[/r d6]] | 1-2: BODY, 3-4: MIND, 5-6: LUCK. Roll [[/r 3d6]], if the result is higher than your current Score, swap it"},
+      "7": {"flavor": "Can barely move until you get serious help and rest", "message": "On recovery, Roll [[/r 3d6]], if the result is higher than your BODY, swap it."},
+      "8": {"flavor": "Can’t hear anything until you find extraordinary aid", "message": "Regardless, make a MIND save. If you pass, increase your max MIND by [[/r 1d4]]."},
+      "9": {"flavor": "Some hidden part of your psyche is knocked loose", "message": "Roll [[/r 3d6]], if the result is higher than your MIND, swap it."},
+      "10": {"flavor": "An appendage is torn off, crippled or useless", "message":  "If you pass a MIND Save, increase it by [[/r 1d6]]"},
+      "11": {"flavor": "Out of action", "message":  "You’re Deprived and will die in one hour unless healed. Upon recovery, roll [[/r 2d6]]. Take the new result as your max HP"},
+      "12": {"flavor": "One last chance", "message":  "If your next Save against Critical Damage is a fail, you die horribly. If you pass, roll [[/r 3d6]]. If the result is higher than your LUCK Score, swap it."}
     }
   },
 
