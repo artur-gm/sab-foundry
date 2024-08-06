@@ -433,7 +433,14 @@ export class SabActorSheet extends ActorSheet {
   }
 
   async _rollSpell(spell) {
-    let powerLevel = await this._getPowerLevel();
+    let maxBasePower = this._checkInvSlots();
+    let powerLevel = await this._getPowerLevel(maxBasePower);
+    if (powerLevel <= 0) {
+      return ChatMessage.create({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        content: game.i18n.localize("SAB.Item.Spell.noSlots")
+      });
+    }
     let roll = await new Roll(powerLevel + "d6").toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
       flavor: `[${spell.type}] ${spell.name}: ${spell.system.description}`,
@@ -453,7 +460,7 @@ export class SabActorSheet extends ActorSheet {
     await this._checkFatigue(rollDice);
   }
 
-  async _getPowerLevel() {
+  async _getPowerLevel(maxBasePower) {
     let powerLevel = await new Promise((resolve) => {
       const div = document.createElement("div");
 
@@ -469,6 +476,17 @@ export class SabActorSheet extends ActorSheet {
       input.required = true;
       div.appendChild(input);
 
+      const rollModifierLabel = document.createElement("label");
+      rollModifierLabel.setAttribute("for", "rollModifier");
+      rollModifierLabel.textContent = game.i18n.localize("SAB.Item.Spell.rollModifier") + ": ";
+      div.appendChild(rollModifierLabel);
+
+      const rollModifierInput = document.createElement("input");
+      rollModifierInput.type = "number";
+      rollModifierInput.id = "rollModifier";
+      rollModifierInput.name = "rollModifier";
+      div.appendChild(rollModifierInput);
+
       const divContainer = document.createElement("div");
       divContainer.appendChild(div);
       const content = divContainer.innerHTML;
@@ -481,17 +499,28 @@ export class SabActorSheet extends ActorSheet {
             label: "OK",
             callback: (html) => {
               const input = html.find("#powerLevel")[0];
+              const modifier = html.find("#rollModifier")[0];
               // treat the input value
               if (isNaN(parseInt(input.value))) {
                 input.value = 1;
               }
-              if (parseInt(input.value) > 5) {
-                input.value = 5;
-              }
               if (parseInt(input.value) < 1) {
                 input.value = 1;
               }
-              resolve(parseInt(input.value));
+              if (parseInt(input.value) > maxBasePower) {
+                input.value = maxBasePower;
+              }
+              if (isNaN(parseInt(modifier.value))) {
+                modifier.value = 0;
+              }
+              if (parseInt(modifier.value) < 0) {
+                modifier.value = 0;
+              }
+              let power = parseInt(input.value) + parseInt(modifier.value);
+              if (power > 5){
+                power = 5;
+              }
+              resolve(power);
             },
           },
         },

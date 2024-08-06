@@ -62,7 +62,9 @@
       "damage": "Damage",
       "Spell": {
         "powerLVL": "Power Level",
-        "pLVLdialog": "Enter Spell Power Level"
+        "pLVLdialog": "Enter Spell Power Level",
+        "noSlots": "Can’t cast spells: No inventory slots available",
+        "rollModifier": "Modifier"
       },
       "Fatigue": {
         "name": "Fatigue",

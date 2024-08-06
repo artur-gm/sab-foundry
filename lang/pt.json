@@ -63,7 +63,9 @@
       "bulky": "Volumoso",
       "Spell": {
         "powerLVL": "Nível de Poder",
-        "pLVLdialog": "Digite o Nível de Poder do Feitiço"
+        "pLVLdialog": "Digite o Nível de Poder do Feitiço",
+        "noSlots": "Não pode conjurar magias: Não há espaços de inventário disponíveis",
+        "rollModifier": "Modificador"
       },
       "Fatigue": {
         "name": "Fadiga",
