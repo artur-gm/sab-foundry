@@ -84,11 +84,11 @@
       "4": {"flavor": "Osso quebrado", "message": "Role [[/r 1d6]] | 1-2: Perna, 3-4: Braço, 5: Costela, 6: Crânio. Depois de consertado, aumente seu PG máximo em 1"},
       "5": {"flavor": "Você é afligido com uma infecção desagradáve", "message": "Quando você se recuperar, aumente seu PG máximo em 1."},
       "6": {"flavor": "Algo mudou em você", "message": "Role [[/r 1d6]] |  1-2: CORPO , 3-4: MENTE, 5-6: SORTE. Role [[/r 3d6]], se o resultado for maior do que seu valor de atributo máximo, ele se torna o novo resultado."},
-      "7": {"flavor": "Você mal consegue se mover até conseguir ajuda e descanso", "message": "• Após a recuperação, role [[/r 3d6]]. Se o total for maior do que seu CORPO, ele se torna o novo resultado."},
+      "7": {"flavor": "Você mal consegue se mover até conseguir ajuda e descanso", "message": "Após a recuperação, role [[/r 3d6]]. Se o total for maior do que seu CORPO, ele se torna o novo resultado."},
       "8": {"flavor": "Você não consegue ouvir até encontrar ajuda extraordinária", "message": "Independentemente disso, faça um salvamento de MENTE. Se você passar, aumente sua MENTE máxima em [[/r 1d4]]"},
       "9": {"flavor": "Alguma parte oculta de sua psique é liberada", "message": "Role [[/r 3d6]], se o total for maior do que sua MENTE, ele se torna o novo resultado"},
-      "10": {"flavor": "Um apêndice foi arrancado, danificado ou inutilizado", "message": "• O MJ irá lhe dizer qual. Então, faça um salvamento de MENTE. Se você passar, aumente sua MENTE em [[/r 1d6]]."},
-      "11": {"flavor": "Fora de ação", "message": "• Você está privado e morre em uma hora, a menos que seja curado. Após a recuperação, role [[/r 2d6]]. Considere o novo resultado como seu PG máximo."},
+      "10": {"flavor": "Um apêndice foi arrancado, danificado ou inutilizado", "message": "O MJ irá lhe dizer qual. Então, faça um salvamento de MENTE. Se você passar, aumente sua MENTE em [[/r 1d6]]."},
+      "11": {"flavor": "Fora de ação", "message": "Você está privado e morre em uma hora, a menos que seja curado. Após a recuperação, role [[/r 2d6]]. Considere o novo resultado como seu PG máximo."},
       "12": {"flavor": "Última chance", "message": "Se seu próximo Salvamento contra Dano Crítico for uma falha, você morrerá horrivelmente. Se você passar, jogue [[/r 3d6]]. Se o resultado for maior do que sua SORTE, ele se torna o novo resultado."}
     }
   },
