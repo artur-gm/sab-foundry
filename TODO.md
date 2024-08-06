@@ -9,6 +9,6 @@
 - Refactor character sheet JS
 - ~~Scars message~~
 - ~~Detailed mishaps message~~
-- Reduce HP if inventory is full
+- ~~Reduce HP if inventory is full~~
 - ~~Automatically create coins in inventory~~
 - V12 compatibility

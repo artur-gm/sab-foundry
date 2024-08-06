@@ -228,7 +228,8 @@ export class SabActorSheet extends ActorSheet {
     delete itemData.system["type"];
 
     // Finally, create the item!
-    return await Item.create(itemData, { parent: this.actor });
+    await Item.create(itemData, { parent: this.actor });
+    this._checkInvSlots();
   }
 
   /**
@@ -524,6 +525,7 @@ export class SabActorSheet extends ActorSheet {
         content:
           game.i18n.localize("SAB.Item.Fatigue.msg") + " " + totalFatigue,
       });
+      this._checkInvSlots();
     }
   }
   async _onAddInventorySlot() {
@@ -543,5 +545,18 @@ export class SabActorSheet extends ActorSheet {
         flavor: game.i18n.localize("SAB.Battlescar." + oldHealth + ".flavor"),
       });
     }
+  }
+  _checkInvSlots() {
+    let currentSlots = this.actor.system.attributes.invSlots.value;
+    let items = this.actor.items.filter((item) => item.type == "item");
+    let totalWeight = items.reduce((sum, item) => sum + (item.system.weight || 0), 0);
+    if (totalWeight >= currentSlots) {
+      ChatMessage.create({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        content: game.i18n.localize("SAB.Encumbrance.overburdened"),
+      });
+      this.actor.update({"system.health.value": 0 });
+    }
+    return currentSlots-totalWeight;
   }
 }
