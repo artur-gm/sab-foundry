@@ -21,7 +21,7 @@
           <a class='rollable' data-roll-type='item'>
             <img
               src='{{item.img}}'
-              title='{{item.name}}'
+              title='{{item.name}}{{#if item.system.description}}: {{stripTags item.system.description}}{{/if}}'
               width='24'
               height='24'
             />

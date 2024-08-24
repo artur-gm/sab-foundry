@@ -98,6 +98,9 @@ Handlebars.registerHelper('handleItemWeight', function(item){
       return `${item.name} (${item.system.weight})`
   }
 });
+Handlebars.registerHelper('stripTags', function(input) {
+  return input.replace(/<\/?[^>]+(>|$)/g, "");
+});
 
 /* -------------------------------------------- */
 /*  Ready Hook                                  */
