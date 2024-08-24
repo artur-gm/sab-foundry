@@ -50,6 +50,7 @@
       </div>
     </li>
   {{/each}}
+  {{#if system.attributes.invSlots}}
   <li class="items-footer flexrow">
     <div><a title="{{localize 'SAB.Encumbrance.remove'}}"><i class="fas fa-minus item-control" id="remove-slot"></i></a></div>
     <div>
@@ -58,4 +59,5 @@
     </div>
     <div><a title="{{localize 'SAB.Encumbrance.add'}}"><i class="fas fa-plus item-control" id="add-slot"></i></a></div>
   </li>
+  {{/if}}
 </ol>
