@@ -1,5 +1,14 @@
 {
   "SAB": {
+    "character": {
+      "background": "Background",
+      "archetype": "Archetype",
+      "origin": "Origin",
+      "deprived": "Deprived"
+    },
+    "actions": {
+      "save": "Save"
+    },
     "HP": { "long": "Hit Protection", "abbr": "HP" },
     "gold": { "long": "Gold", "abbr": "GP" },
     "armor": { "long": "Armor Rating", "abbr": "AR" },

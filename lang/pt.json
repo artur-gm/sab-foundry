@@ -1,5 +1,14 @@
 {
   "SAB": {
+    "character": {
+      "background": "Antecedente",
+      "archetype": "Arquétipo",
+      "origin": "Origem",
+      "deprived": "Privado"
+    },
+    "actions": {
+      "save": "Salvar"
+    },
     "HP": { "long": "Proteção contra Golpe", "abbr": "PG" },
     "gold": { "long": "Ouro", "abbr": "PD" },
     "armor": { "long": "Armadura", "abbr": "AR" },

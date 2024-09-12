@@ -179,6 +179,10 @@ export class SabActorSheet extends ActorSheet {
       this._onGoldChange(ev);
     });
 
+    // Archetype and origin config
+    html.find(".character-archetype").click(this._onArchetypeConfig.bind(this));
+    html.find(".character-origin").click(this._onOriginConfig.bind(this));
+
     // Battlescars handling
     html.on("click", "#current_hp", ev => {
       this.actor.update({"system.health.old": ev.target.value}); // Save the current health value
@@ -190,6 +194,7 @@ export class SabActorSheet extends ActorSheet {
     // Add and remove inventory slots
     html.on("click", "#add-slot", this._onAddInventorySlot.bind(this));
     html.on("click", "#remove-slot", this._onRemoveInventorySlot.bind(this));
+
     // Drag events for macros.
     if (this.actor.isOwner) {
       let handler = ev => this._onDragStart(ev);
@@ -390,20 +395,21 @@ export class SabActorSheet extends ActorSheet {
     if (luck > this.actor.system.attributes.luck.value) {
       notLeveled = false;
       this.actor.update({
-        "system.attributes.luck.value":
-          this.actor.system.attributes.luck.value + 1
+        "system.attributes.luck.value": Math.floor(this.actor.system.attributes.luck.value + 1)
       });
       ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
         content: game.i18n.localize("SAB.levelUp.luck")
       });
     }
+
     if (notLeveled) {
       ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
         content: game.i18n.localize("SAB.levelUp.nothing")
       });
     }
+
     this.actor.update({
       "system.health.value": this.actor.system.health.value + 1,
       "system.health.max": this.actor.system.health.max + 1
@@ -412,7 +418,11 @@ export class SabActorSheet extends ActorSheet {
 
   // TODO: Fix gold change bug
   async _onGoldChange(ev) {
-    let currentGold = Number(ev.target.value);
+    let currentGold = parseInt(ev.target.value, 10);
+
+    if (isNaN(currentGold)) {
+      currentGold = 0;
+    }
 
     await this.actor.update({ "system.attributes.gold.value": currentGold });
   }
@@ -576,4 +586,80 @@ export class SabActorSheet extends ActorSheet {
     }
     return currentSlots-totalWeight;
   }
+
+  _onArchetypeConfig(event) {
+    event.preventDefault();
+    const archetype = this.actor.system.attributes.archetype;
+
+    new Dialog({
+      title: game.i18n.localize("SAB.character.archetype"),
+      content: `
+        <form>
+          <div class="form-group">
+            <label>Name:</label>
+            <input type="text" name="name" value="${archetype.name}">
+          </div>
+          <div class="form-group">
+            <label>Trigger:</label>
+            <input type="text" name="trigger" value="${archetype.trigger}">
+          </div>
+        </form>
+      `,
+      buttons: {
+        save: {
+          icon: '<i class="fas fa-save"></i>',
+          label: game.i18n.localize("SAB.actions.save"),
+          callback: html => {
+            const form = html.find("form")[0];
+            this.actor.update({
+              "system.attributes.archetype.name": form.name.value,
+              "system.attributes.archetype.trigger": form.trigger.value
+            });
+          }
+        }
+      },
+      default: "save"
+    }).render(true);
+  }
+
+  _onOriginConfig(event) {
+    event.preventDefault();
+    const origin = this.actor.system.attributes.origin;
+
+    new Dialog({
+      title: game.i18n.localize("SAB.character.origin"),
+      content: `
+        <form>
+          <div class="form-group">
+            <label>Question:</label>
+            <input type="text" name="question" value="${origin.question}">
+          </div>
+          <div class="form-group">
+            <label>Answer Title:</label>
+            <input type="text" name="answerTitle" value="${origin.answer.title}">
+          </div>
+          <div class="form-group">
+            <label>Answer Description:</label>
+            <textarea name="answerDescription">${origin.answer.description}</textarea>
+          </div>
+        </form>
+      `,
+      buttons: {
+        save: {
+          icon: '<i class="fas fa-save"></i>',
+          label: game.i18n.localize("SAB.actions.save"),
+          callback: html => {
+            const form = html.find("form")[0];
+            this.actor.update({
+              "system.attributes.origin.question": form.question.value,
+              "system.attributes.origin.answer.title": form.answerTitle.value,
+              "system.attributes.origin.answer.description": form.answerDescription.value
+            });
+          }
+        }
+      },
+      default: "save"
+    }).render(true);
+  }
 }
+

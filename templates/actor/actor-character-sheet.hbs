@@ -53,16 +53,42 @@
             <input type="text" name="system.mind.max" value="{{system.mind.max}}" data-dtype="Number"/>
           </div>
         </div>
+
         <div class="resource flex-group-center">
           <label for="system.attributes.luck.value" class="resource-label rollable" data-roll="d20<={{system.attributes.luck.value}}"
           data-attribute="attributes.luck" data-label={{localize 'SAB.Ability.Luck.long'}}>{{localize 'SAB.Ability.Luck.long'}}</label>
           <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" name="system.attributes.luck.value" value="{{system.attributes.luck.value}}" data-dtype="Number"/>
+            <input type="text" name="system.attributes.luck.value" value="{{system.attributes.luck.value}}" data-dtype="Number"/>
           </div>
         </div>
-          <div class="resource flex-group-center">
+
+        <section class="new-attributes">
+            <div class="attribute flexrow flex-group-center">
+                <label for="system.attributes.background">{{localize "SAB.character.background"}}</label>
+                <input type="text" name="system.attributes.background" value="{{system.attributes.background}}"/>
+            </div>
+
+            <div class="attribute flexrow flex-group-center archetype">
+                <label for="system.attributes.archetype.name">{{localize "SAB.character.archetype"}}</label>
+                <input type="text" name="system.attributes.archetype.name" value="{{system.attributes.archetype.name}}" readonly/>
+                <button class="character-archetype"><i class="fas fa-cog"></i></button>
+            </div>
+
+            <div class="attribute flexrow flex-group-center origin">
+                <label for="system.attributes.origin.question">{{localize "SAB.character.origin"}}</label>
+                <input type="text" name="system.attributes.origin.question" value="{{system.attributes.origin.question}}" readonly/>
+                <button class="character-origin"><i class="fas fa-cog"></i></button>
+            </div>
+
+            <div class="attribute flexrow flex-group-center">
+                <label for="system.attributes.isDeprived">{{localize "SAB.character.deprived"}}</label>
+                <input type="checkbox" name="system.attributes.isDeprived" {{checked system.attributes.isDeprived}}/>
+            </div>
+        </section>
+
+        <div class="resource flex-group-center">
             <a class="resource-label roll-new-character" data-action="rollNewChar">{{localize 'SAB.rollNewChar'}}</a>
-          </div>
+        </div>
       </div>
     </div>
   </header>

@@ -1,10 +1,10 @@
 import SabActorBase from "./base-actor.mjs";
 
 export default class SabCharacter extends SabActorBase {
-
   static defineSchema() {
     const fields = foundry.data.fields;
     const requiredInteger = { required: true, nullable: false, integer: true };
+    const requiredString = { required: true, blank: true };
     const schema = super.defineSchema();
 
     schema.attributes = new fields.SchemaField({
@@ -16,7 +16,20 @@ export default class SabCharacter extends SabActorBase {
       }),
       invSlots: new fields.SchemaField({
         value: new fields.NumberField({ ...requiredInteger, initial: 10 })
-      })
+      }),
+      background: new fields.StringField({ ...requiredString }),
+      archetype: new fields.SchemaField({
+        name: new fields.StringField({ ...requiredString }),
+        trigger: new fields.StringField({ ...requiredString })
+      }),
+      origin: new fields.SchemaField({
+        question: new fields.StringField({ ...requiredString }),
+        answer: new fields.SchemaField({
+          title: new fields.StringField({ ...requiredString }),
+          description: new fields.StringField({ ...requiredString })
+        })
+      }),
+      isDeprived: new fields.BooleanField({ required: true, initial: false })
     });
 
     // Iterate over ability names and create a new SchemaField for each.
