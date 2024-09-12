@@ -9,3 +9,9 @@ SAB.abilities = {
 
 SAB.abilityAbbreviations = {
 };
+
+SAB.actorAttributes = {
+  gold: "SAB.Gold",
+  luck: "SAB.Luck",
+  invSlots: "SAB.InventorySlots"
+};

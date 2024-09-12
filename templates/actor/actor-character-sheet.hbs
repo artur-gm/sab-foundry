@@ -23,13 +23,6 @@
         </div>
 
         <div class="resource flex-group-center">
-          <label for="system.attributes.level.value" class="resource-label">{{localize 'SAB.level.long'}}</label>
-          <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" name="system.attributes.level.value" value="{{system.attributes.level.value}}" data-dtype="Number"/>
-          </div>
-        </div>
-
-        <div class="resource flex-group-center">
           <label for="system.attributes.gold.value" class="resource-label">{{localize 'SAB.gold.long'}}</label>
           <div class="resource-content flexrow flex-center flex-between">
           <input type="text" name="system.attributes.gold.value" id="gold" value="{{system.attributes.gold.value}}" data-dtype="Number"/>
@@ -67,15 +60,9 @@
           <input type="text" name="system.attributes.luck.value" value="{{system.attributes.luck.value}}" data-dtype="Number"/>
           </div>
         </div>
-        {{#if system.attributes.level.value}}
-          <div class="resource flex-group-center">
-            <a class="resource-label level-up" data-action="levelUp">{{localize 'SAB.levelUp.levelUp'}}</a>
-          </div>
-        {{else}}
           <div class="resource flex-group-center">
             <a class="resource-label roll-new-character" data-action="rollNewChar">{{localize 'SAB.rollNewChar'}}</a>
           </div>
-        {{/if}}
       </div>
     </div>
   </header>

@@ -316,8 +316,7 @@ export class SabActorSheet extends ActorSheet {
       "system.body.value": body,
       "system.body.max": body,
       "system.health.value": hpRoll.rolls[0].total,
-      "system.health.max": hpRoll.rolls[0].total,
-      "system.attributes.level.value": 1
+      "system.health.max": hpRoll.rolls[0].total
     });
     ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
@@ -339,6 +338,7 @@ export class SabActorSheet extends ActorSheet {
     let mind = 0;
     let luck = 0;
     let notLeveled = true;
+
     if (this.actor.system.body.max < 18) {
       let roll = await new Roll("d20").toMessage({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
@@ -346,6 +346,7 @@ export class SabActorSheet extends ActorSheet {
       });
       body = roll.rolls[0].total;
     }
+
     if (this.actor.system.mind.max < 18) {
       let roll = await new Roll("d20").toMessage({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
@@ -353,6 +354,7 @@ export class SabActorSheet extends ActorSheet {
       });
       mind = roll.rolls[0].total;
     }
+
     if (this.actor.system.attributes.luck.value < 18) {
       let roll = await new Roll("d20").toMessage({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
@@ -372,6 +374,7 @@ export class SabActorSheet extends ActorSheet {
         content: game.i18n.localize("SAB.levelUp.body")
       });
     }
+
     if (mind > this.actor.system.mind.max) {
       notLeveled = false;
       this.actor.update({
@@ -383,6 +386,7 @@ export class SabActorSheet extends ActorSheet {
         content: game.i18n.localize("SAB.levelUp.mind")
       });
     }
+
     if (luck > this.actor.system.attributes.luck.value) {
       notLeveled = false;
       this.actor.update({
@@ -401,8 +405,6 @@ export class SabActorSheet extends ActorSheet {
       });
     }
     this.actor.update({
-      "system.attributes.level.value":
-        this.actor.system.attributes.level.value + 1,
       "system.health.value": this.actor.system.health.value + 1,
       "system.health.max": this.actor.system.health.max + 1
     });

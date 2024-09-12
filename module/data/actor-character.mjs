@@ -8,9 +8,6 @@ export default class SabCharacter extends SabActorBase {
     const schema = super.defineSchema();
 
     schema.attributes = new fields.SchemaField({
-      level: new fields.SchemaField({
-        value: new fields.NumberField({ ...requiredInteger, initial: 0 })
-      }),
       gold: new fields.SchemaField({
         value: new fields.NumberField({ ...requiredInteger, initial: 10 })
       }),
@@ -51,8 +48,6 @@ export default class SabCharacter extends SabActorBase {
         data[k] = foundry.utils.deepClone(v);
       }
     }
-
-    data.lvl = this.attributes.level.value;
 
     return data;
   }
