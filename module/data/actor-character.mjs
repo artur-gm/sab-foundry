@@ -19,13 +19,13 @@ export default class SabCharacter extends SabActorBase {
       }),
       invSlots: new fields.SchemaField({
         value: new fields.NumberField({ ...requiredInteger, initial: 10 })
-      }),
+      })
     });
 
     // Iterate over ability names and create a new SchemaField for each.
     schema.abilities = new fields.SchemaField(Object.keys(CONFIG.SAB.abilities).reduce((obj, ability) => {
       obj[ability] = new fields.SchemaField({
-        value: new fields.NumberField({ ...requiredInteger, initial: 10, min: 0 }),
+        value: new fields.NumberField({ ...requiredInteger, initial: 10, min: 0 })
       });
       return obj;
     }, {}));
@@ -47,13 +47,13 @@ export default class SabCharacter extends SabActorBase {
     // Copy the ability scores to the top level, so that rolls can use
     // formulas like `@str.mod + 4`.
     if (this.abilities) {
-      for (let [k,v] of Object.entries(this.abilities)) {
+      for (let [k, v] of Object.entries(this.abilities)) {
         data[k] = foundry.utils.deepClone(v);
       }
     }
 
     data.lvl = this.attributes.level.value;
 
-    return data
+    return data;
   }
 }

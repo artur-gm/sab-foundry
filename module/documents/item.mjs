@@ -52,7 +52,7 @@ export class SabItem extends Item {
 
   /**
    * Handle clickable rolls.
-   * @param {Event} event   The originating click event
+   * @returns {Promise<Roll|void>} The created Roll instance if a roll was performed, otherwise void.
    * @private
    */
   async roll() {
@@ -60,16 +60,16 @@ export class SabItem extends Item {
 
     // Initialize chat data.
     const speaker = ChatMessage.getSpeaker({ actor: this.actor });
-    const rollMode = game.settings.get('core', 'rollMode');
+    const rollMode = game.settings.get("core", "rollMode");
     const label = `[${item.type}] ${item.name}`;
 
     // If there's no roll data, send a chat message.
-    if (!this.system.formula || this.system.roll.diceSize ==='') {
+    if (!this.system.formula || this.system.roll.diceSize ==="") {
       ChatMessage.create({
         speaker: speaker,
         rollMode: rollMode,
         flavor: label,
-        content: item.system.description ?? '',
+        content: item.system.description ?? ""
       });
     }
     // Otherwise, create a roll and send a chat message from it.
@@ -84,7 +84,7 @@ export class SabItem extends Item {
       roll.toMessage({
         speaker: speaker,
         rollMode: rollMode,
-        flavor: label,
+        flavor: label
       });
       return roll;
     }

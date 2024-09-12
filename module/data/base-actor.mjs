@@ -12,18 +12,22 @@ export default class SabActorBase extends SabDataModel {
       max: new fields.NumberField({ ...requiredInteger, initial: 1 }),
       old: new fields.NumberField({ ...requiredInteger, initial: 1 })
     });
+
     schema.body = new fields.SchemaField({
       value: new fields.NumberField({ ...requiredInteger, initial: 10 }),
       max: new fields.NumberField({ ...requiredInteger, initial: 10 })
-    }),
+    });
+
     schema.mind = new fields.SchemaField({
       value: new fields.NumberField({ ...requiredInteger, initial: 10 }),
       max: new fields.NumberField({ ...requiredInteger, initial: 10 })
-    }),
+    });
+
     schema.ar = new fields.SchemaField({
-      value: new fields.NumberField({ ...requiredInteger, initial: 0 }),
-    }),
-    schema.biography = new fields.StringField({ required: true, blank: true }); // equivalent to passing ({initial: ""}) for StringFields
+      value: new fields.NumberField({ ...requiredInteger, initial: 0 })
+    });
+
+    schema.biography = new fields.StringField({ required: true, blank: true }); // Equivalent to passing ({initial: ""}) for StringFields
 
     return schema;
   }
