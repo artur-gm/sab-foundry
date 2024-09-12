@@ -18,7 +18,7 @@ export class SabActorSheet extends ActorSheet {
         {
           navSelector: ".sheet-tabs",
           contentSelector: ".sheet-body",
-          initial: "features"
+          initial: "items"
         }
       ]
     });
@@ -212,7 +212,7 @@ export class SabActorSheet extends ActorSheet {
     // Get the type of item to create.
     const type = header.dataset.type;
     // Grab any data associated with this control.
-    const data = duplicate(header.dataset);
+    const data = foundry.utils.duplicate(header.dataset);
     // Initialize a default name.
     const name = `New ${type.capitalize()}`;
     // Prepare the item object.
