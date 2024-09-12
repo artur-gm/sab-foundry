@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Suez+One&display=swap");
 /* Global styles */
 .window-app {
   font-family: "Roboto", sans-serif;
@@ -203,6 +204,10 @@
   text-align: center;
 }
 
+.brand-font {
+  font-family: "Suez One", serif;
+}
+
 /* Styles limited to spellburn-and-battlescars sheets */
 .spellburn-and-battlescars .item-form {
   font-family: "Roboto", sans-serif;
@@ -383,5 +388,3 @@
 .spellburn-and-battlescars .effects .item .effect-controls {
   border: none;
 }
-
-/*# sourceMappingURL=spellburn-and-battlescars.css.map */

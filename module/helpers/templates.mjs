@@ -11,3 +11,11 @@ export const preloadHandlebarsTemplates = async function() {
     "systems/spellburn-and-battlescars/templates/actor/parts/actor-spells.hbs"
   ]);
 };
+
+export const prefetchFonts = async function() {
+  const link = document.createElement("link");
+  link.rel = "prefetch";
+  link.href = "https://fonts.googleapis.com/css2?family=Suez+One&display=swap";
+  link.as = "style";
+  document.head.appendChild(link);
+};

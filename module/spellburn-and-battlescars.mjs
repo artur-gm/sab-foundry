@@ -5,7 +5,7 @@ import { SabItem } from "./documents/item.mjs";
 import { SabActorSheet } from "./sheets/actor-sheet.mjs";
 import { SabItemSheet } from "./sheets/item-sheet.mjs";
 // Import helper/utility classes and constants.
-import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
+import { preloadHandlebarsTemplates, prefetchFonts } from "./helpers/templates.mjs";
 import { SAB } from "./helpers/config.mjs";
 // Import DataModel classes
 import * as models from "./data/_module.mjs";
@@ -68,6 +68,9 @@ Hooks.once("init", function() {
     makeDefault: true,
     label: "SAB.SheetLabels.Item"
   });
+
+  // Preload fonts.
+  prefetchFonts();
 
   // Preload Handlebars templates.
   return preloadHandlebarsTemplates();
