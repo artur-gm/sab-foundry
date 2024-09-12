@@ -410,24 +410,9 @@ export class SabActorSheet extends ActorSheet {
     });
   }
 
+  // TODO: Fix gold change bug
   async _onGoldChange(ev) {
-    let currentGold = parseInt(ev.target.value, 10);
-    if (currentGold < 100) return;
-    const goldData = {
-      name: `100 ${game.i18n.localize("SAB.gold.long")}`,
-      type: "item",
-      system: {
-        weight: 1,
-        description: `100 ${game.i18n.localize("SAB.gold.long")}`
-      }
-    };
-
-    const goldItemsToCreate = Math.floor(currentGold / 100);
-    currentGold = currentGold % 100;
-
-    for (let i = 0; i < goldItemsToCreate; i++) {
-      await Item.create(goldData, { parent: this.actor });
-    }
+    let currentGold = Number(ev.target.value);
 
     await this.actor.update({ "system.attributes.gold.value": currentGold });
   }
