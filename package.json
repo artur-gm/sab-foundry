@@ -4,7 +4,9 @@
   "description": "CSS compiler for the Sab system",
   "scripts": {
     "build": "sass src/scss/spellburn-and-battlescars.scss css/spellburn-and-battlescars.css --style=expanded --no-source-map",
-    "watch": "sass src/scss/spellburn-and-battlescars.scss css/spellburn-and-battlescars.css --style=expanded --source-map --watch"
+    "watch": "sass src/scss/spellburn-and-battlescars.scss css/spellburn-and-battlescars.css --style=expanded --source-map --watch",
+    "lint": "eslint --ext .mjs --ignore-path .gitignore ./",
+    "lint:fix": "eslint --ext .mjs --ignore-path .gitignore ./ --fix"
   },
   "browserslist": [
     "last 3 versions"
@@ -13,8 +15,10 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
+    "@babel/eslint-parser": "^7.25.1",
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
+    "eslint-plugin-jsdoc": "^50.2.2",
     "sass": "^1.53.0"
   }
 }
