@@ -1,5 +1,5 @@
 // Add custom fonts by visiting and search https://fonts.google.com
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya:wght@500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Suez+One&display=swap');
 
 // Import utilities.
@@ -14,10 +14,17 @@
 @import 'global/flex';
 @import 'global/utility';
 
+@import 'components/chat';
+
 /* Styles limited to spellburn-and-battlescars sheets */
 .spellburn-and-battlescars {
   @import 'components/forms';
   @import 'components/resource';
   @import 'components/items';
   @import 'components/effects';
+}
+
+.spellburn-and-battlescars.sheet {
+  min-width: 600px;
+  max-width: 800px;
 }

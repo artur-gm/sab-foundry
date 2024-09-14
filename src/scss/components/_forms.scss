@@ -1,55 +1,219 @@
-.item-form {
-  font-family: $font-primary;
+.section-label {
+  border-top: $border-main;
+  display: block;
+  margin: 0;
+  padding: 4px 0;
+  width: 100%;
 }
 
-.sheet-header {
-  flex: 0 auto;
+.section-input {
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  font-family: $font-serif;
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
   overflow: hidden;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  margin-bottom: 10px;
 
-  .profile-img {
-    flex: 0 0 100px;
-    height: 100px;
-    margin-right: 10px;
+  &:hover,
+  &:focus {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
   }
+}
 
-  .header-fields {
-    flex: 1;
-  }
+.vertical-divider {
+  border-right: $border-groove;
+  align-self: stretch;
+  margin: 0;
+  padding: 4px;
+}
 
-  h1.charname {
-    height: 50px;
-    padding: 0px;
-    margin: 5px 0;
-    border-bottom: 0;
-    input {
-      width: 100%;
-      height: 100%;
-      margin: 0;
+.deprived-active {
+  animation: pulsate 5s ease-in-out infinite;
+  background-color: rgba(255, 0, 0, 0.1);
+
+  @keyframes pulsate {
+    0% {
+      background-color: rgba(255, 0, 0, 0.1);
+    }
+    50% {
+      background-color: rgba(255, 0, 0, 0.3);
+    }
+    100% {
+      background-color: rgba(255, 0, 0, 0.1);
     }
   }
 }
 
-.sheet-tabs {
-  flex: 0;
+.attribute.deprived-active .vertical-divider {
+  border-right: 2px groove rgba(255, 192, 192, 0.78);
 }
 
-.sheet-body,
-.sheet-body .tab,
-.sheet-body .tab .editor {
-  height: 100%;
-}
-
-.tox {
-  .tox-editor-container {
-    background: $c-white;
+.sheet-header {
+  > section {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 16px;
   }
 
-  .tox-edit-area {
-    padding: 0 8px;
+  button {
+    height: 100%;
+    width: 100%;
+    line-height: 1rem;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    i {
+      margin-right: 4px;
+      font-size: $font-size-16;
+    }
+  }
+
+  .image {
+    align-self: start;
+    border: $border-groove;
+    height: 100%;
+    line-height: 0;
+    padding: 2px;
+
+    img {
+      width: 100%;
+      height: 100%;
+
+      border: none;
+      display: block;
+      min-height: 200px;
+      max-height: 100%;
+      margin: 0;
+      object-fit: cover;
+    }
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    main {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+
+      .name-section {
+        display: flex;
+        flex-direction: column;
+
+        input {
+          font-size: $font-size-24;
+        }
+      }
+
+      .details-section {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+
+        > div {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+        }
+      }
+
+      .attributes-section {
+        display: flex;
+        flex-direction: row;
+        align-items: start;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        text-align: center;
+
+        > article {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          height: 100%;
+        }
+
+        > article, article > * {
+          flex: 1;
+        }
+
+        .attribute {
+          height: 92px;
+          max-height: 92px;
+          width: 100%;
+          min-width: 100px;
+          border: $border-groove;
+          padding: 4px;
+
+          .attribute-header {
+            h3 {
+              border-bottom: $border-main;
+              font-family: $font-serif;
+              font-size: $font-size-16;
+              text-transform: uppercase;
+            }
+          }
+
+          .attribute-content {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+
+            input {
+              font-size: $font-size-24;
+            }
+
+            label {
+              font-size: $font-size-10;
+              padding-top: 4px;
+            }
+          }
+        }
+
+        .character-armor {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+
+          border: $border-groove;
+          padding: 4px;
+          width: 100%;
+
+          label {
+            border-bottom: $border-main;
+            width: 100%;
+          }
+
+          > span {
+            flex: 1;
+          }
+
+          input {
+            font-size: $font-size-24;
+            min-width: 50px;
+            padding-bottom: 6px;
+          }
+        }
+      }
+    }
+
+    .character-actions {
+      display: flex;
+      flex-direction: row;
+      gap: 8px;
+    }
   }
 }

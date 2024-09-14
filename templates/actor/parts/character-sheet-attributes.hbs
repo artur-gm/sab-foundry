@@ -1,0 +1,193 @@
+<!-- HP -->
+<article>
+    <div class="attribute {{#if system.attributes.isDeprived}}deprived-active{{/if}}">
+        <header class="attribute-header">
+            <h3>{{localize "SAB.character.hp.short"}}</h3>
+        </header>
+
+        <div class="attribute-content">
+            <span>
+                <input
+                    id="current_hp"
+                    type="text"
+                    name="system.health.value"
+                    class="section-input"
+                    value="{{system.health.value}}"
+                    data-dtype="Number"
+                    min="0"
+                    max="18"
+                />
+                <label for="current_hp">{{localize "SAB.character.sheet.attribute.current"}}</label>
+            </span>
+            <span class="vertical-divider"></span>
+            <span>
+                <input
+                    id="max_hp"
+                    type="text"
+                    name="system.health.max"
+                    class="section-input"
+                    value="{{system.health.max}}"
+                    data-dtype="Number"
+                    min="0"
+                    max="18"
+                />
+                <label for="max_hp">{{localize "SAB.character.sheet.attribute.max"}}</label>
+            </span>
+        </div>
+    </div>
+
+    <!--Armor -->
+    <div class="character-armor">
+        <label for="system.ar.value" class="resource-label">{{localize "SAB.character.armor.short"}}</label>
+        <span>
+            <input class="section-input " type="text" name="system.ar.value" value="{{system.ar.value}}" data-dtype="Number"/>
+        </span>
+    </div>
+</article>
+
+<!-- Body -->
+<article>
+    <div class="attribute {{#if system.attributes.isDeprived}}deprived-active{{/if}}">
+        <header
+            class="attribute-header attribute-save-roll"
+            data-roll="d20"
+            data-attribute="body"
+            data-label={{localize "SAB.character.body.long"}}
+        >
+            <h3>{{localize "SAB.character.body.long"}}</h3>
+        </header>
+
+        <div class="attribute-content">
+            <span>
+                <input
+                id="current_body"
+                type="text"
+                name="system.body.value"
+                class="section-input"
+                value="{{system.body.value}}"
+                data-dtype="Number"
+                min="0"
+                max="18"
+            />
+                <label for="current_body">{{localize "SAB.character.sheet.attribute.current"}}</label>
+            </span>
+            <span class="vertical-divider"></span>
+            <span>
+                <input
+                    id="max_body"
+                    type="text"
+                    name="system.body.max"
+                    class="section-input"
+                    value="{{system.body.max}}"
+                    data-dtype="Number"
+                    min="0"
+                    max="18"
+                />
+                <label for="max_body">{{localize "SAB.character.sheet.attribute.max"}}</label>
+            </span>
+        </div>
+    </div>
+
+    <!-- Short Rest -->
+    <button type="button" class="short-rest-roll" data-roll="1d6+1" {{#if (eq system.health.value system.health.max)}}disabled{{/if}}>
+        <i class="fa-regular fa-face-tongue-sweat"></i>
+        {{localize "SAB.character.sheet.short-rest"}}
+    </button>
+</article>
+
+<!-- Mind -->
+<article>
+    <div class="attribute {{#if system.attributes.isDeprived}}deprived-active{{/if}}">
+        <header
+            class="attribute-header attribute-save-roll"
+            data-roll="d20"
+            data-attribute="mind"
+            data-label={{localize "SAB.character.mind.long"}}
+        >
+            <h3>{{localize "SAB.character.mind.long"}}</h3>
+        </header>
+
+        <div class="attribute-content">
+            <span>
+                <input
+                    id="current_mind"
+                    type="text"
+                    name="system.mind.value"
+                    class="section-input"
+                    value="{{system.mind.value}}"
+                    data-dtype="Number"
+                    min="0"
+                    max="18"
+                />
+                <label for="current_mind">{{localize "SAB.character.sheet.attribute.current"}}</label>
+            </span>
+            <span class="vertical-divider"></span>
+            <span>
+                <input
+                    id="max_mind"
+                    type="text"
+                    name="system.mind.max"
+                    class="section-input"
+                    value="{{system.mind.max}}"
+                    data-dtype="Number"
+                    min="0"
+                    max="18"
+                />
+                <label for="max_mind">{{localize "SAB.character.sheet.attribute.max"}}</label>
+            </span>
+        </div>
+    </div>
+
+    <!-- Deprived -->
+    <button id="toggle-deprived" type="button" name="system.attributes.isDeprived" {{#if system.attributes.isDeprived}}class="deprived-active"{{/if}}>
+        <i class="fa-regular fa-face-dizzy"></i>
+        {{localize "SAB.character.sheet.deprived"}}
+    </button>
+
+</article>
+
+<!-- Luck -->
+<article>
+    <div class="attribute">
+        <header
+            class="attribute-header attribute-save-roll"
+            data-roll="d20"
+            data-attribute="luck"
+            data-label={{localize "SAB.character.luck.long"}}
+        >
+            <h3>{{localize "SAB.character.luck.long"}}</h3>
+        </header>
+
+        <div class="attribute-content">
+            <span>
+                <input
+                    id="current_luck"
+                    type="text"
+                    name="system.attributes.luck.value"
+                    class="section-input"
+                    value="{{system.attributes.luck.value}}"
+                    data-dtype="Number"
+                    min="0"
+                    max="18"
+                />
+                <label for="max_luck">{{localize "SAB.character.sheet.attribute.max"}}</label>
+            </span>
+        </div>
+    </div>
+
+    <div class="character-actions">
+        <!-- Long Rest -->
+        <button
+            type="button"
+            title="{{localize "SAB.character.sheet.long-rest"}}"
+            {{#if (and (eq system.health.value system.health.max) (eq system.mind.value system.mind.max) (eq system.body.value system.body.max))}}disabled{{/if}}
+        >
+            <i class="fa-regular fa-bed"></i>
+        </button>
+
+        <!-- Advance -->
+        <button type="button" title="{{localize "SAB.character.sheet.advance"}}">
+            <i class="fa-regular fa-star"></i>
+        </button>
+    </div>
+</article>

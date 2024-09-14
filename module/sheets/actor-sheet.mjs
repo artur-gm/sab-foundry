@@ -3,6 +3,9 @@ import {
   prepareActiveEffectCategories
 } from "../helpers/effects.mjs";
 
+import { clampAttribute, clampValue } from "../helpers/sheet.mjs";
+import * as SABRolls from "../helpers/rolls.mjs";
+
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
@@ -12,7 +15,7 @@ export class SabActorSheet extends ActorSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["spellburn-and-battlescars", "sheet", "actor"],
-      width: 600,
+      width: 800,
       height: 600,
       tabs: [
         {
@@ -90,8 +93,21 @@ export class SabActorSheet extends ActorSheet {
    * @param {object} context The context object to mutate
    */
   _prepareCharacterData(context) {
-    // This is where you can enrich character-specific editor fields
-    // or setup anything else that's specific to this type
+    context.system.health = clampAttribute(
+      context.system.health.value,
+      context.system.health.max
+    );
+    context.system.body = clampAttribute(
+      context.system.body.value,
+      context.system.body.max
+    );
+    context.system.mind = clampAttribute(
+      context.system.mind.value,
+      context.system.mind.max
+    );
+
+    context.system.attributes.luck.value = clampValue(context.system.attributes.luck.value);
+    context.system.ar.value = clampValue(context.system.ar.value, 0, 3);
   }
 
   /**
@@ -143,6 +159,12 @@ export class SabActorSheet extends ActorSheet {
     // -------------------------------------------------------------
     // Everything below here is only needed if the sheet is editable
     if (!this.isEditable) return;
+
+    // Handle sheet rolls
+    if (this.actor.isOwner) {
+      html.on("click", ".attribute-save-roll", this._onAttributeSaveRoll.bind(this));
+      html.on("click", ".short-rest-roll", this._onShortRestRoll.bind(this));
+    }
 
     // Add Inventory Item
     html.on("click", ".item-create", this._onItemCreate.bind(this));
@@ -204,6 +226,29 @@ export class SabActorSheet extends ActorSheet {
         li.addEventListener("dragstart", handler, false);
       });
     }
+
+    // Toggle character's isDeprived status
+    html.on("click", "#toggle-deprived", ev => this._onToggleDeprived(ev));
+  }
+
+  async _onAttributeSaveRoll(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+    const dataset = element.dataset;
+
+    if (dataset) {
+      SABRolls.AttributeSaveRoll(dataset, this.actor);
+    }
+  }
+
+  async _onShortRestRoll(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+    const dataset = element.dataset;
+
+    if (dataset) {
+      SABRolls.ShortRestRoll(dataset, this.actor);
+    }
   }
 
   /**
@@ -240,7 +285,7 @@ export class SabActorSheet extends ActorSheet {
    * @private
    * @returns {Roll|void} The resulting roll, if any
    */
-  _onRoll(event) {
+  async _onRoll(event) {
     event.preventDefault();
     const element = event.currentTarget;
     const dataset = element.dataset;
@@ -261,38 +306,17 @@ export class SabActorSheet extends ActorSheet {
 
     // Handle rolls that supply the formula directly.
     if (dataset.roll) {
-      let label = dataset.label ? `[ability] ${dataset.label}` : "";
-      let atribute = dataset.attribute ? dataset.attribute : "";
+      let label = dataset.label ? `${dataset.label}`.toUpperCase() : "";
       let roll = new Roll(dataset.roll, this.actor.getRollData());
+
+      await roll.evaluate();
+
       roll.toMessage({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
         flavor: label,
         rollMode: game.settings.get("core", "rollMode")
       });
 
-      if (this.actor.type === "character") {
-        if (roll.result === 20) {
-          this.actor.update({
-            "system.attributes.luck.value":
-              this.actor.system.attributes.luck.value - 1
-          });
-          ChatMessage.create({
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-            content: game.i18n.localize("SAB.critFailMessage")
-          });
-        }
-
-        if (roll.result === this.actor.system[atribute].value) {
-          this.actor.update({
-            "system.attributes.luck.value":
-              this.actor.system.attributes.luck.value + 1
-          });
-          ChatMessage.create({
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-            content: game.i18n.localize("SAB.critMessage")
-          });
-        }
-      }
       return roll;
     }
   }
@@ -594,14 +618,14 @@ export class SabActorSheet extends ActorSheet {
     new Dialog({
       title: game.i18n.localize("SAB.character.archetype"),
       content: `
-        <form>
-          <div class="form-group">
-            <label>Name:</label>
-            <input type="text" name="name" value="${archetype.name}">
+        <form class="sheet-modal">
+          <div>
+            <label>${game.i18n.localize("SAB.character.sheet.archetype.label")}</label>
+            <input type="text" name="name" value="${archetype.name}" placeholder="${game.i18n.localize("SAB.character.sheet.archetype-name-placeholder")}">
           </div>
-          <div class="form-group">
-            <label>Trigger:</label>
-            <input type="text" name="trigger" value="${archetype.trigger}">
+          <div>
+            <label>${game.i18n.localize("SAB.character.sheet.trigger.label")}</label>
+            <input type="text" name="trigger" value="${archetype.trigger}" placeholder="${game.i18n.localize("SAB.character.sheet.trigger.placeholder")}">
           </div>
         </form>
       `,
@@ -660,6 +684,19 @@ export class SabActorSheet extends ActorSheet {
       },
       default: "save"
     }).render(true);
+  }
+
+  /**
+   * Toggles the deprived status of the character.
+   * @param {Event} event The triggering click event.
+   * @returns {Promise} A promise that resolves when the actor update is complete.
+   * @private
+   */
+  _onToggleDeprived(event) {
+    event.preventDefault();
+
+    const isCurrentlyDeprived = this.actor.system.attributes.isDeprived;
+    return this.actor.update({ "system.attributes.isDeprived": !isCurrentlyDeprived });
   }
 }
 

@@ -6,6 +6,8 @@
 export const preloadHandlebarsTemplates = async function() {
   return loadTemplates([
     // Actor partials.
+    "systems/spellburn-and-battlescars/templates/actor/parts/character-sheet-attributes.hbs",
+    "systems/spellburn-and-battlescars/templates/actor/parts/character-sheet-header.hbs",
     "systems/spellburn-and-battlescars/templates/actor/parts/actor-features.hbs",
     "systems/spellburn-and-battlescars/templates/actor/parts/actor-items.hbs",
     "systems/spellburn-and-battlescars/templates/actor/parts/actor-spells.hbs"
@@ -18,4 +20,10 @@ export const prefetchFonts = async function() {
   link.href = "https://fonts.googleapis.com/css2?family=Suez+One&display=swap";
   link.as = "style";
   document.head.appendChild(link);
+
+  const link2 = document.createElement("link");
+  link2.rel = "prefetch";
+  link2.href = "https://fonts.googleapis.com/css2?family=Alegreya:wght@500;700&display=swap";
+  link2.as = "style";
+  document.head.appendChild(link2);
 };

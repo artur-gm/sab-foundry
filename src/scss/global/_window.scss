@@ -1,12 +1,34 @@
 .window-app {
   font-family: $font-primary;
+  font-weight: 500;
+  font-size: $font-size-16;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.rollable {
+.rollable, .attribute-save-roll {
   &:hover,
   &:focus {
     color: #000;
     text-shadow: 0 0 10px red;
     cursor: pointer;
+  }
+}
+
+.sheet-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 0 32px;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    label {
+      font-family: $font-serif;
+    }
   }
 }

@@ -4,18 +4,62 @@
       "background": "Antecedente",
       "archetype": "Arquétipo",
       "origin": "Origem",
-      "deprived": "Privado"
+      "hp": {
+        "long": "Proteção contra Golpes",
+        "short": "PG"
+      },
+      "body": {
+        "long": "Corpo",
+        "short": "BDY"
+      },
+      "mind": {
+        "long": "Mente",
+        "short": "MND"
+      },
+      "luck": {
+        "long": "Sorte",
+        "short": "SRT"
+      },
+      "armor": {
+        "long": "Armadura",
+        "short": "AR"
+      },
+      "sheet": {
+        "name": {
+          "label": "Nome",
+          "placeholder": "Nome do personagem"
+        },
+        "archetype": {
+          "label": "Nome",
+          "placeholder": "Nome do Arquétipo"
+        },
+        "trigger": {
+          "label": "Gatilho",
+          "placeholder": "O Gatilho do seu Arquétipo para Avançar"
+        },
+        "short-rest": "Descanso Curto",
+        "long-rest": "Descanso Longo",
+        "advance": "Avançar",
+        "attribute": {
+          "label": "Atributo",
+          "current": "Atual",
+          "max": "Máximo"
+        },
+        "deprived": "Privado"
+      }
     },
     "actions": {
       "save": "Salvar"
     },
-    "HP": { "long": "Proteção contra Golpe", "abbr": "PG" },
+    "chat": {
+      "critical-failure": "Falha Crítica! SORTE diminuiu.",
+      "critical-success": "Sucesso Crítico! SORTE aumentou.",
+      "save-success": "Sucesso!",
+      "save-failure": "Falha!",
+      "short-rest": "Você ganhou {value} de PG com um Descanso Curto.",
+      "deprived": "Um personagem Privado não pode recuperar PG ou Atributos."
+    },
     "gold": { "long": "Ouro", "abbr": "PD" },
-    "armor": { "long": "Armadura", "abbr": "AR" },
-    "Name": "Nome",
-    "namePlaceholder": "Nome, Origem Arquétipo",
-    "critMessage": "Acerto Crítico! Sorte aumentou.",
-    "critFailMessage": "Falha Crítica! Sorte diminuiu.",
     "rollNewChar": "Rolar novo personagem",
     "charRollMsg": "Personagem rolado! Caso deseje, pode trocar os valores de corpo e mente, ou usar 10 em todos atributos (incluindo sorte).",
     "Encumbrance": {
@@ -55,11 +99,6 @@
       "luck": "Sorte aprimorada",
       "msg": "está subindo de nível",
       "nothing": "Nenhum atributo aprimorado. Escolha um para subir em 1."
-    },
-    "Ability": {
-      "Body": { "long": "Corpo", "abbr": "CRP" },
-      "Mind": { "long": "Mente", "abbr": "MNT" },
-      "Luck": { "long": "Sorte", "abbr": "SRT" }
     },
     "SheetLabels": {
       "Actor": "Ficha de Ator",

@@ -4,18 +4,62 @@
       "background": "Background",
       "archetype": "Archetype",
       "origin": "Origin",
-      "deprived": "Deprived"
+      "hp": {
+        "long": "Hit Protection",
+        "short": "HP"
+      },
+      "body": {
+        "long": "Body",
+        "short": "BDY"
+      },
+      "mind": {
+        "long": "Mind",
+        "short": "MND"
+      },
+      "luck": {
+        "long": "Luck",
+        "short": "LCK"
+      },
+      "armor": {
+        "long": "Armor",
+        "short": "AR"
+      },
+      "sheet": {
+        "name": {
+          "label": "Name",
+          "placeholder": "Character's name"
+        },
+        "archetype": {
+          "label": "Name",
+          "placeholder": "Archetype's name"
+        },
+        "trigger": {
+          "label": "Trigger",
+          "placeholder": "Your Archetype's Advancement Trigger"
+        },
+        "short-rest": "Short Rest",
+        "long-rest": "Long Rest",
+        "advance": "Advance",
+        "attribute": {
+          "label": "Attribute",
+          "current": "Current",
+          "max": "Max"
+        },
+        "deprived": "Deprived"
+      }
     },
     "actions": {
       "save": "Save"
     },
-    "HP": { "long": "Hit Protection", "abbr": "HP" },
+    "chat": {
+      "critical-failure": "Critical Failure! LUCK has decreased.",
+      "critical-success": "Critical Success! LUCK has increased.",
+      "save-success": "Success!",
+      "save-failure": "Failure!",
+      "short-rest": "You have gained <strong>{value}</strong> HP from a Short Rest.",
+      "deprived": "A Deprived character cannot recover HP or Attributes."
+    },
     "gold": { "long": "Gold", "abbr": "GP" },
-    "armor": { "long": "Armor Rating", "abbr": "AR" },
-    "namePlaceholder": "Name, Origin Archetype",
-    "Name": "Name",
-    "critMessage": "Critical Hit! Luck has increased.",
-    "critFailMessage": "Critical Fail! Luck has decreased.",
     "rollNewChar": "Roll new Character",
     "charRollMsg": "Character rolled! If you wish, you may swap Body and Mind, or use 10 for all attributes (including luck).",
     "Encumbrance": {
@@ -55,11 +99,6 @@
       "luck": "Luck increased",
       "msg": "is leveling up",
       "nothing": "No attribute increased. Choose one to increase by 1."
-    },
-    "Ability": {
-      "Body": { "long": "Body", "abbr": "BDY", "max": "Max BDY" },
-      "Mind": { "long": "Mind", "abbr": "MND", "max": "Max MND" },
-      "Luck": { "long": "Luck", "abbr": "LCK" }
     },
     "SheetLabels": {
       "Actor": "Sab Actor Sheet",
@@ -117,6 +156,7 @@
       "spell": "Spell"
     }
   },
+
   "DOCUMENT":{
     "Create": "Create",
     "New": "New",

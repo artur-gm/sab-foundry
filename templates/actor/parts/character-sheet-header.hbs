@@ -1,0 +1,57 @@
+<section>
+    <div class="image">
+        <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
+    </div>
+
+    <div class="container">
+        <main>
+            <!-- Name -->
+            <div class="name-section">
+                <input
+                    name="name"
+                    type="text"
+                    class="section-input"
+                    value="{{actor.name}}"
+                    placeholder="{{localize 'SAB.character.sheet.name.placeholder'}}"
+                />
+                <label for="name" class="section-label">
+                    {{localize "SAB.character.sheet.name.label"}}
+                </label>
+            </div>
+
+            <!-- Details -->
+            <div class="details-section">
+                <div>
+                    <input
+                        type="text"
+                        name="system.attributes.background"
+                        value="{{system.attributes.background}}"
+                        class="section-input"
+                    />
+                    <label for="system.attributes.background" class="section-label">
+                        {{localize "SAB.character.background"}}
+                    </label>
+                </div>
+
+                <div>
+                    <input
+                        type="text"
+                        name="system.attributes.archetype.name"
+                        value="{{system.attributes.archetype.name}}"
+                        class="section-input character-archetype"
+                        readonly
+                    />
+                    <label for="system.attributes.archetype.name" class="section-label">
+                        {{localize "SAB.character.archetype"}}
+                    </label>
+                </div>
+
+            </div>
+
+            <!-- Attributes -->
+            <div class="attributes-section">
+                {{> "systems/spellburn-and-battlescars/templates/actor/parts/character-sheet-attributes.hbs"}}
+            </div>
+        </main>
+    </div>
+</section>

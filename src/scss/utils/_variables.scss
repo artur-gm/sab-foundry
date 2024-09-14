@@ -2,6 +2,8 @@ $padding-sm: 5px;
 $padding-md: 10px;
 $padding-lg: 20px;
 
-$border-groove: 2px groove #eeede0;
+$color-accent: #5d142b;
 
-$font-serif: 'Suez One', serif;
+$border-groove: 2px groove #eeede0;
+$border-main: 2px solid $color-accent;
+
