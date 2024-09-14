@@ -14,3 +14,6 @@ node_modules/
 
 # OTHERS
 .tool-versions
+
+# CSS Source Map
+css/spellburn-and-battlescars.css.map

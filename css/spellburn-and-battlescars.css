@@ -260,6 +260,23 @@
 }
 
 /* Styles limited to spellburn-and-battlescars sheets */
+.spellburn-and-battlescars nav.sheet-tabs {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  font-family: "Suez One", serif;
+  font-size: 1rem;
+  flex: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  padding: 0;
+  margin: 16px 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-top: 2px groove #eeede0;
+  border-bottom: 2px groove #eeede0;
+}
 .spellburn-and-battlescars .section-label {
   border-top: 2px solid #5d142b;
   display: block;
@@ -306,6 +323,10 @@
 }
 .spellburn-and-battlescars .attribute.deprived-active .vertical-divider {
   border-right: 2px groove rgba(255, 192, 192, 0.78);
+}
+.spellburn-and-battlescars .sheet-header {
+  flex-grow: 0;
+  flex-shrink: 0;
 }
 .spellburn-and-battlescars .sheet-header > section {
   display: grid;

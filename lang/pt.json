@@ -45,7 +45,13 @@
           "current": "Atual",
           "max": "Máximo"
         },
-        "deprived": "Privado"
+        "deprived": "Privado",
+        "tabs": {
+          "abilities": "Habilidades",
+          "inventory": "Inventário",
+          "spells": "Magias",
+          "notes": "Notas"
+        }
       }
     },
     "actions": {

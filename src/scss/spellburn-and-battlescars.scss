@@ -18,6 +18,7 @@
 
 /* Styles limited to spellburn-and-battlescars sheets */
 .spellburn-and-battlescars {
+  @import 'components/tabs';
   @import 'components/forms';
   @import 'components/resource';
   @import 'components/items';

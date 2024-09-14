@@ -1,0 +1,20 @@
+nav.sheet-tabs {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+
+  font-family: $font-serif;
+  font-size: $font-size-16;
+
+  flex: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  padding: 0;
+  margin: 16px 0;
+
+  background-color: $c-sheet-background;
+  border-top: $border-groove;
+  border-bottom: $border-groove;
+}

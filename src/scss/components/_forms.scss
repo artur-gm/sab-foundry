@@ -54,6 +54,9 @@
 }
 
 .sheet-header {
+  flex-grow: 0;
+  flex-shrink: 0;
+
   > section {
     display: grid;
     grid-template-columns: 1fr 3fr;

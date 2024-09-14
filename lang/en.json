@@ -45,7 +45,13 @@
           "current": "Current",
           "max": "Max"
         },
-        "deprived": "Deprived"
+        "deprived": "Deprived",
+        "tabs": {
+          "abilities": "Abilities",
+          "inventory": "Inventory",
+          "spells": "Spells",
+          "notes": "Notes"
+        }
       }
     },
     "actions": {
