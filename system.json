@@ -22,7 +22,7 @@
   "version": "#{VERSION}#",
   "compatibility": {
     "minimum": 11,
-    "verified": "11.315"
+    "verified": 12
   },
   "esmodules": ["module/spellburn-and-battlescars.mjs"],
   "styles": ["css/spellburn-and-battlescars.css"],
@@ -43,7 +43,7 @@
   "socket": false,
   "manifest": "#{MANIFEST}#",
   "download": "#{DOWNLOAD}#",
-  "gridDistance": 5,
-  "gridUnits": "m",
+  "grid.distance": 5,
+  "grid.units": "m",
   "primaryTokenAttribute": "health"
 }

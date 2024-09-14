@@ -237,7 +237,7 @@ export class SabActorSheet extends ActorSheet {
    * @param {Event} event   The originating click event
    * @private
    */
-  _onRoll(event) {
+  async _onRoll(event) {
     event.preventDefault();
     const element = event.currentTarget;
     const dataset = element.dataset;
@@ -260,15 +260,13 @@ export class SabActorSheet extends ActorSheet {
     if (dataset.roll) {
       let label = dataset.label ? `[ability] ${dataset.label}` : "";
       let atribute = dataset.attribute ? dataset.attribute : "";
-      let roll = new Roll(dataset.roll, this.actor.getRollData());
-      roll.toMessage({
+      let roll = await new Roll(dataset.roll, this.actor.getRollData()).toMessage({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
         flavor: label,
         rollMode: game.settings.get("core", "rollMode"),
       });
-
       if (this.actor.type == "character") {
-        if (roll.result == 20) {
+        if (roll.rolls[0].result == 20) {
           this.actor.update({
             "system.attributes.luck.value":
               this.actor.system.attributes.luck.value - 1,
@@ -279,7 +277,7 @@ export class SabActorSheet extends ActorSheet {
           });
         }
 
-        if (roll.result == this.actor.system[atribute].value) {
+        if (roll.rolls[0].result == this.actor.system[atribute].value) {
           this.actor.update({
             "system.attributes.luck.value":
               this.actor.system.attributes.luck.value + 1,
@@ -290,7 +288,6 @@ export class SabActorSheet extends ActorSheet {
           });
         }
       }
-      return roll;
     }
   }
 
