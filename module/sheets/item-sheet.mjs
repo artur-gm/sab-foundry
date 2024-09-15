@@ -12,8 +12,9 @@ export class SabItemSheet extends ItemSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["spellburn-and-battlescars", "sheet", "item"],
-      width: 520,
-      height: 480,
+      width: 400,
+      height: 300,
+      resizable: true,
       tabs: [
         {
           navSelector: ".sheet-tabs",

@@ -8,9 +8,10 @@ export const preloadHandlebarsTemplates = async function() {
     // Actor partials.
     "systems/spellburn-and-battlescars/templates/actor/parts/character-sheet-attributes.hbs",
     "systems/spellburn-and-battlescars/templates/actor/parts/character-sheet-header.hbs",
-    "systems/spellburn-and-battlescars/templates/actor/parts/actor-features.hbs",
-    "systems/spellburn-and-battlescars/templates/actor/parts/actor-items.hbs",
-    "systems/spellburn-and-battlescars/templates/actor/parts/actor-spells.hbs"
+    "systems/spellburn-and-battlescars/templates/actor/parts/character-sheet-abilities.hbs",
+    "systems/spellburn-and-battlescars/templates/actor/parts/actor-features.hbs", // TODO: Remove this after updating the sheet.
+    "systems/spellburn-and-battlescars/templates/actor/parts/actor-items.hbs", // TODO: Remove this after updating the sheet.
+    "systems/spellburn-and-battlescars/templates/actor/parts/actor-spells.hbs" // TODO: Remove this after updating the sheet.
   ]);
 };
 

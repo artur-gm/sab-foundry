@@ -18,3 +18,11 @@ nav.sheet-tabs {
   border-top: $border-groove;
   border-bottom: $border-groove;
 }
+
+.tab {
+  height: 100%;
+
+  .editor {
+    height: 100%;
+  }
+}

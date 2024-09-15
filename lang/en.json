@@ -37,6 +37,14 @@
           "label": "Trigger",
           "placeholder": "Your Archetype's Advancement Trigger"
         },
+        "origin": {
+          "label": "Origin",
+          "question-placeholder": "Insert your Archetype's Origin question here.",
+          "answer-title": "Answer",
+          "answer-title-placeholder": "Insert the title of the answer here.",
+          "answer-description": "Ability",
+          "answer-description-placeholder": "Insert the description of the Ability here."
+        },
         "short-rest": "Short Rest",
         "long-rest": "Long Rest",
         "advance": "Advance",
@@ -55,7 +63,8 @@
       }
     },
     "actions": {
-      "save": "Save"
+      "save": "Save",
+      "new-ability": "New Ability"
     },
     "chat": {
       "critical-failure": "Critical Failure! LUCK has decreased.",

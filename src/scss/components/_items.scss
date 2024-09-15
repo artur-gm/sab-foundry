@@ -61,17 +61,34 @@
 
   // Item Name
   .item-name {
-    flex: 2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
     margin: 0;
     overflow: hidden;
-    font-size: 13px;
+    font-size: $font-size-14;
+    font-family: $font-serif;
     text-align: left;
-    align-items: center;
-    display: flex;
+
+    width: 20%;
+
     h3, h4 {
       margin: 0;
-      white-space: nowrap;
       overflow-x: hidden;
+    }
+
+    .item-info {
+      padding: 8px;
+    }
+  }
+
+  .item-description {
+    flex: 1;
+    width: 70%;
+
+    p {
+      margin: 0;
     }
   }
 
@@ -80,6 +97,8 @@
     display: flex;
     flex: 0 0 100px;
     justify-content: flex-end;
+    width: 10%;
+
     a {
       font-size: 12px;
       text-align: center;
@@ -89,9 +108,15 @@
 
   // Individual Item
   .item {
-    align-items: center;
-    padding: 0 2px; // to align with the header border
-    border-bottom: 1px solid $c-faint;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+    gap: 8px;
+
+    padding: 8px 2px; // to align with the header border
+    border-bottom: $border-groove;
+
     &:last-child { border-bottom: none; }
     .item-name {
       color: $c-dark;
@@ -135,7 +160,6 @@
 
 // Example style for Sab (can be removed if not needed).
 .item-formula {
-  
   flex: 0 0 200px;
   padding: 0 8px;
 }

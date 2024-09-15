@@ -16,7 +16,7 @@ export class SabActorSheet extends ActorSheet {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["spellburn-and-battlescars", "sheet", "actor"],
       width: 800,
-      height: 600,
+      height: 800,
       tabs: [
         {
           navSelector: ".sheet-tabs",
@@ -653,18 +653,18 @@ export class SabActorSheet extends ActorSheet {
     new Dialog({
       title: game.i18n.localize("SAB.character.origin"),
       content: `
-        <form>
-          <div class="form-group">
-            <label>Question:</label>
-            <input type="text" name="question" value="${origin.question}">
+        <form class="sheet-modal">
+          <div>
+            <label>${game.i18n.localize("SAB.character.sheet.origin.label")}</label>
+            <input type="text" name="question" value="${origin.question}" placeholder="${game.i18n.localize("SAB.character.sheet.origin.question-placeholder")}">
           </div>
-          <div class="form-group">
-            <label>Answer Title:</label>
-            <input type="text" name="answerTitle" value="${origin.answer.title}">
+          <div>
+            <label>${game.i18n.localize("SAB.character.sheet.origin.answer-title")}</label>
+            <input type="text" name="answerTitle" value="${origin.answer.title}" placeholder="${game.i18n.localize("SAB.character.sheet.origin.answer-title-placeholder")}">
           </div>
-          <div class="form-group">
-            <label>Answer Description:</label>
-            <textarea name="answerDescription">${origin.answer.description}</textarea>
+          <div>
+            <label>${game.i18n.localize("SAB.character.sheet.origin.answer-description")}</label>
+            <textarea name="answerDescription" placeholder="${game.i18n.localize("SAB.character.sheet.origin.answer-description-placeholder")}">${origin.answer.description}</textarea>
           </div>
         </form>
       `,

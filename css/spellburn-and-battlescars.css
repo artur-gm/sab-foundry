@@ -29,6 +29,23 @@
 .sheet-modal div label {
   font-family: "Suez One", serif;
 }
+.sheet-modal div input, .sheet-modal div textarea {
+  width: 100%;
+  height: 32px;
+  padding: 8px;
+  border: 2px groove #eeede0;
+  box-sizing: border-box;
+  color: #191813;
+  font-family: "Alegreya", serif;
+  font-size: 1rem;
+}
+.sheet-modal div input::placeholder, .sheet-modal div textarea::placeholder {
+  color: #6a6a6a;
+}
+.sheet-modal div textarea {
+  resize: none;
+  height: 100px;
+}
 
 .grid,
 .grid-2col {
@@ -277,6 +294,12 @@
   border-top: 2px groove #eeede0;
   border-bottom: 2px groove #eeede0;
 }
+.spellburn-and-battlescars .tab {
+  height: 100%;
+}
+.spellburn-and-battlescars .tab .editor {
+  height: 100%;
+}
 .spellburn-and-battlescars .section-label {
   border-top: 2px solid #5d142b;
   display: block;
@@ -462,6 +485,42 @@
   flex-direction: row;
   gap: 8px;
 }
+.spellburn-and-battlescars .sheet-body {
+  margin: 8px 2%;
+  width: 96%;
+}
+.spellburn-and-battlescars .sheet-body textarea {
+  width: 100%;
+  min-height: 150px;
+  resize: none;
+  border: 2px groove #eeede0;
+}
+.spellburn-and-battlescars .character-origin {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  cursor: pointer;
+}
+.spellburn-and-battlescars .character-origin > span {
+  flex: 1;
+}
+.spellburn-and-battlescars .character-origin .origin-answer-title {
+  max-width: 35%;
+}
+.spellburn-and-battlescars .character-origin .origin-answer-description {
+  flex: 0 1 100%;
+  padding: 8px;
+  text-align: center;
+  background-color: #eae9e3;
+  border-radius: 4px;
+}
+.spellburn-and-battlescars .abilities-container {
+  padding: 16px 0px;
+}
+.spellburn-and-battlescars .new-ability-container {
+  margin-top: 32px;
+}
 .spellburn-and-battlescars .resource-label {
   font-weight: bold;
 }
@@ -517,23 +576,35 @@
   padding: 0;
 }
 .spellburn-and-battlescars .items-list .item-name {
-  flex: 2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin: 0;
   overflow: hidden;
-  font-size: 13px;
+  font-size: 0.875rem;
+  font-family: "Suez One", serif;
   text-align: left;
-  align-items: center;
-  display: flex;
+  width: 20%;
 }
 .spellburn-and-battlescars .items-list .item-name h3, .spellburn-and-battlescars .items-list .item-name h4 {
   margin: 0;
-  white-space: nowrap;
   overflow-x: hidden;
+}
+.spellburn-and-battlescars .items-list .item-name .item-info {
+  padding: 8px;
+}
+.spellburn-and-battlescars .items-list .item-description {
+  flex: 1;
+  width: 70%;
+}
+.spellburn-and-battlescars .items-list .item-description p {
+  margin: 0;
 }
 .spellburn-and-battlescars .items-list .item-controls {
   display: flex;
   flex: 0 0 100px;
   justify-content: flex-end;
+  width: 10%;
 }
 .spellburn-and-battlescars .items-list .item-controls a {
   font-size: 12px;
@@ -541,9 +612,13 @@
   margin: 0 6px;
 }
 .spellburn-and-battlescars .items-list .item {
-  align-items: center;
-  padding: 0 2px;
-  border-bottom: 1px solid #c9c7b8;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: start;
+  gap: 8px;
+  padding: 8px 2px;
+  border-bottom: 2px groove #eeede0;
 }
 .spellburn-and-battlescars .items-list .item:last-child {
   border-bottom: none;
@@ -600,6 +675,13 @@
 .spellburn-and-battlescars.sheet {
   min-width: 600px;
   max-width: 800px;
+  min-height: 400px;
+}
+
+.spellburn-and-battlescars.sheet.item {
+  min-width: 300px;
+  max-width: 400px;
+  min-height: 200px;
 }
 
 /*# sourceMappingURL=spellburn-and-battlescars.css.map */

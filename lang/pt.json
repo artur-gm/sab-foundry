@@ -37,6 +37,14 @@
           "label": "Gatilho",
           "placeholder": "O Gatilho do seu Arquétipo para Avançar"
         },
+        "origin": {
+          "label": "Origem",
+          "question-placeholder": "Insira a pergunta da Origem do seu Arquétipo aqui.",
+          "answer-title": "Resposta",
+          "answer-title-placeholder": "Insira o título da resposta.",
+          "answer-description": "Habilidade",
+          "answer-description-placeholder": "Insira a Habilidade da Origem do seu Arquétipo aqui."
+        },
         "short-rest": "Descanso Curto",
         "long-rest": "Descanso Longo",
         "advance": "Avançar",
@@ -55,7 +63,8 @@
       }
     },
     "actions": {
-      "save": "Salvar"
+      "save": "Salvar",
+      "new-ability": "Nova Habilidade"
     },
     "chat": {
       "critical-failure": "Falha Crítica! SORTE diminuiu.",

@@ -220,3 +220,48 @@
     }
   }
 }
+
+.sheet-body {
+  margin: 8px 2%;
+  width: 96%;
+
+  textarea {
+    width: 100%;
+    min-height: 150px;
+    resize: none;
+    border: $border-groove;
+  }
+}
+
+.character-origin {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  cursor: pointer;
+
+  > span {
+    flex: 1;
+  }
+
+  .origin-answer-title {
+    max-width: 35%;
+  }
+
+  .origin-answer-description {
+    flex: 0 1 100%;
+    padding: 8px;
+    text-align: center;
+
+    background-color: $c-light-gray;
+    border-radius: 4px;
+  }
+}
+
+.abilities-container {
+  padding: 16px 0px;
+}
+
+.new-ability-container {
+  margin-top: 32px;
+}
