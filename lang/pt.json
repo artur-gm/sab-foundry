@@ -69,7 +69,9 @@
     "actions": {
       "save": "Salvar",
       "new-ability": "Nova Habilidade",
-      "new-item": "Novo Item"
+      "new-item": "Novo Item",
+      "new-spell": "Nova Magia",
+      "cast-spell": "Conjurar Magia"
     },
     "encumbrance": {
       "name": "Carga",
@@ -127,6 +129,7 @@
       "sheet": {
         "name": "Nome",
         "name-placeholder": "Nome do Item",
+        "name-spell-placeholder": "Nome da Magia",
         "quantity": "Quantidade",
         "weight": "Espaços",
         "description-placeholder": "Descrição do Item",
@@ -134,16 +137,16 @@
         "die-size-placeholder": "Selecione o Dado",
         "roll-modifier": "Modificador"
       },
-      "RollFormula": "Fórmula de Rolagem",
+      "roll-formula": "Fórmula de Rolagem",
       "damage": "Dano",
       "bulky": "(volumoso)",
-      "Spell": {
-        "powerLVL": "Nível de Poder",
-        "pLVLdialog": "Digite o Nível de Poder do Feitiço",
-        "noSlots": "Não pode conjurar magias: Não há espaços de inventário disponíveis",
-        "rollModifier": "Modificador"
+      "spell": {
+        "power-level": "Nível de Poder",
+        "pl-dialog": "Conjurar Magia",
+        "no-slots": "Inventário cheio",
+        "roll-modifier": "Modificador"
       },
-      "Fatigue": {
+      "fatigue": {
         "name": "Fadiga",
         "msg": "Fadiga aumentada por"
       }

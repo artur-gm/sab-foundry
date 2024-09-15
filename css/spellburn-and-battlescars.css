@@ -540,6 +540,9 @@
 .spellburn-and-battlescars .inventory-container {
   padding: 16px 0px;
 }
+.spellburn-and-battlescars .spells-container {
+  padding-bottom: 16px;
+}
 .spellburn-and-battlescars .new-ability-container, .spellburn-and-battlescars .new-item-container {
   margin-top: 32px;
 }

@@ -69,7 +69,9 @@
     "actions": {
       "save": "Save",
       "new-ability": "New Ability",
-      "new-item": "New Item"
+      "new-item": "New Item",
+      "new-spell": "New Spell",
+      "cast-spell": "Cast Spell"
     },
     "encumbrance": {
       "name": "Encumbrance",
@@ -127,6 +129,7 @@
       "sheet": {
         "name": "Name",
         "name-placeholder": "Item's name",
+        "name-spell-placeholder": "Spell name",
         "quantity": "Quantity",
         "weight": "Slots",
         "description-placeholder": "Item's description",
@@ -134,16 +137,16 @@
         "die-size-placeholder": "Select Die Size",
         "roll-modifier": "Roll Modifier"
       },
-      "RollFormula": "Roll Formula",
+      "roll-formula": "Roll Formula",
       "damage": "Damage",
       "bulky": "(bulky)",
-      "Spell": {
-        "powerLVL": "Power Level",
-        "pLVLdialog": "Enter Spell Power Level",
-        "noSlots": "Can’t cast spells: No inventory slots available",
-        "rollModifier": "Modifier"
+      "spell": {
+        "power-level": "Power Level",
+        "pl-dialog": "Cast Spell",
+        "no-slots": "Inventory is full",
+        "roll-modifier": "Modifier"
       },
-      "Fatigue": {
+      "fatigue": {
         "name": "Fatigue",
         "msg": "Fatigue increased by"
       }

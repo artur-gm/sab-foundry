@@ -42,7 +42,7 @@
 
         <div class="resource item-info">
             <div>
-                <label class="resource-label">{{localize "SAB.item.sheet.die-size"}}</label>
+                <label>{{localize "SAB.item.sheet.die-size"}}</label>
                 <select name="system.roll.diceSize" data-dtype="String">
                     <option value="" {{#if (eq system.roll.diceSize "")}}selected{{/if}}>
                         {{localize "SAB.item.sheet.die-size-placeholder"}}
@@ -56,7 +56,7 @@
             </div>
 
             <div>
-                <label class="resource-label">{{localize "SAB.item.sheet.roll-modifier"}}</label>
+                <label>{{localize "SAB.item.sheet.roll-modifier"}}</label>
                 <input
                     type="text"
                     name="system.roll.diceBonus"

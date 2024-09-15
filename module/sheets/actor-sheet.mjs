@@ -457,7 +457,7 @@ export class SabActorSheet extends ActorSheet {
     if (powerLevel <= 0) {
       return ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        content: game.i18n.localize("SAB.Item.Spell.noSlots")
+        content: game.i18n.localize("SAB.item.spell.no-slots")
       });
     }
     let roll = await new Roll(`${powerLevel}d6`).toMessage({
@@ -482,63 +482,58 @@ export class SabActorSheet extends ActorSheet {
   async _getPowerLevel(maxBasePower) {
     let powerLevel = await new Promise(resolve => {
       const div = document.createElement("div");
+      div.classList.add("sheet-modal");
+
+      const powerLevelContainer = document.createElement("div");
+      powerLevelContainer.classList.add("power-level-container");
 
       const label = document.createElement("label");
       label.setAttribute("for", "powerLevel");
-      label.textContent = `${game.i18n.localize("SAB.Item.Spell.powerLVL")}: `;
-      div.appendChild(label);
+      label.textContent = `${game.i18n.localize("SAB.item.spell.power-level")}: `;
+      powerLevelContainer.appendChild(label);
 
-      const input = document.createElement("input");
-      input.type = "number";
-      input.id = "powerLevel";
-      input.name = "powerLevel";
-      input.required = true;
-      div.appendChild(input);
+      const select = document.createElement("select");
+      select.id = "powerLevel";
+      select.name = "powerLevel";
+      select.required = true;
 
-      const rollModifierLabel = document.createElement("label");
-      rollModifierLabel.setAttribute("for", "rollModifier");
-      rollModifierLabel.textContent = `${game.i18n.localize("SAB.Item.Spell.rollModifier")}: `;
-      div.appendChild(rollModifierLabel);
+      const items = this.actor.items.filter(item => item.type === "item");
+      const totalWeight = items.reduce((sum, item) => sum + (item.system.weight || 0), 0);
+      let availableSlots = this.actor.system.attributes.invSlots.value - totalWeight;
+      availableSlots = Math.min(availableSlots, 5);
 
-      const rollModifierInput = document.createElement("input");
-      rollModifierInput.type = "number";
-      rollModifierInput.id = "rollModifier";
-      rollModifierInput.name = "rollModifier";
-      div.appendChild(rollModifierInput);
+      if (availableSlots === 0) {
+        select.disabled = true;
+        const option = document.createElement("option");
+        option.value = 0;
+        option.textContent = game.i18n.localize("SAB.item.spell.no-slots");
+        select.appendChild(option);
+      } else {
+        for (let i = 1; i <= availableSlots; i++) {
+          const option = document.createElement("option");
+          option.value = i;
+          option.textContent = i;
+          select.appendChild(option);
+        }
+      }
+
+      powerLevelContainer.appendChild(select);
+      div.appendChild(powerLevelContainer);
 
       const divContainer = document.createElement("div");
       divContainer.appendChild(div);
       const content = divContainer.innerHTML;
 
       new Dialog({
-        title: game.i18n.localize("SAB.Item.Spell.pLVLdialog"),
+        title: game.i18n.localize("SAB.item.spell.pl-dialog"),
         content: content,
         buttons: {
           ok: {
-            label: "OK",
+            label: game.i18n.localize("SAB.actions.cast-spell"),
             callback: html => {
-              const input = html.find("#powerLevel")[0];
-              const modifier = html.find("#rollModifier")[0];
-              // Treat the input value
-              if (isNaN(parseInt(input.value))) {
-                input.value = 1;
-              }
-              if (parseInt(input.value) < 1) {
-                input.value = 1;
-              }
-              if (parseInt(input.value) > maxBasePower) {
-                input.value = maxBasePower;
-              }
-              if (isNaN(parseInt(modifier.value))) {
-                modifier.value = 0;
-              }
-              if (parseInt(modifier.value) < 0) {
-                modifier.value = 0;
-              }
-              let power = parseInt(input.value) + parseInt(modifier.value);
-              if (power > 5) {
-                power = 5;
-              }
+              const select = html.find("#powerLevel")[0];
+              const power = parseInt(select.value);
+
               resolve(power);
             }
           }
@@ -552,10 +547,10 @@ export class SabActorSheet extends ActorSheet {
   async _checkFatigue(rollDice) {
     let totalFatigue = 0;
     const fatigueData = {
-      name: game.i18n.localize("SAB.Item.Fatigue.name"),
+      name: game.i18n.localize("SAB.item.fatigue.name"),
       type: "item",
       system: {
-        description: game.i18n.localize("SAB.Item.Fatigue.name"),
+        description: game.i18n.localize("SAB.item.fatigue.name"),
         weight: 1
       }
     };
@@ -571,7 +566,7 @@ export class SabActorSheet extends ActorSheet {
       ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
         content:
-          `${game.i18n.localize("SAB.Item.Fatigue.msg")} ${totalFatigue}`
+          `${game.i18n.localize("SAB.item.fatigue.msg")} ${totalFatigue}`
       });
       this._checkInvSlots();
     }
@@ -604,7 +599,7 @@ export class SabActorSheet extends ActorSheet {
     if (totalWeight >= currentSlots) {
       ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        content: game.i18n.localize("SAB.Encumbrance.overburdened")
+        content: game.i18n.localize("SAB.encumbrance.overburdened")
       });
       this.actor.update({"system.health.value": 0 });
     }
