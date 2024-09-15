@@ -24,6 +24,10 @@
         "long": "Armadura",
         "short": "AR"
       },
+      "gold": {
+        "long": "Ouro",
+        "short": "PD"
+      },
       "sheet": {
         "name": {
           "label": "Nome",
@@ -64,7 +68,14 @@
     },
     "actions": {
       "save": "Salvar",
-      "new-ability": "Nova Habilidade"
+      "new-ability": "Nova Habilidade",
+      "new-item": "Novo Item"
+    },
+    "encumbrance": {
+      "name": "Carga",
+      "add": "Adicionar Espaço de Inventário",
+      "remove": "Remover Espaço de Inventário",
+      "overburdened": "Sobrecarregado: PG reduzido a 0"
     },
     "chat": {
       "critical-failure": "Falha Crítica! SORTE diminuiu.",
@@ -74,15 +85,8 @@
       "short-rest": "Você ganhou {value} de PG com um Descanso Curto.",
       "deprived": "Um personagem Privado não pode recuperar PG ou Atributos."
     },
-    "gold": { "long": "Ouro", "abbr": "PD" },
     "rollNewChar": "Rolar novo personagem",
     "charRollMsg": "Personagem rolado! Caso deseje, pode trocar os valores de corpo e mente, ou usar 10 em todos atributos (incluindo sorte).",
-    "Encumbrance": {
-      "name": "Carga",
-      "add": "Adicionar espaço de inventário",
-      "remove": "Remover espaço de inventário",
-      "overburdened": "Sobrecarregado: PG reduzido a 0"
-    },
     "Spellburn": {
       "flavor": "Catástrofe: Algo deu muito errado.",
       "2": "Você não pode conjurar magias por [DADO] horas, qualquer tentativa de manipular magia falha.",
@@ -119,10 +123,20 @@
       "Actor": "Ficha de Ator",
       "Item": "Ficha de Item"
     },
-    "Item": {
+    "item": {
+      "sheet": {
+        "name": "Nome",
+        "name-placeholder": "Nome do Item",
+        "quantity": "Quantidade",
+        "weight": "Espaços",
+        "description-placeholder": "Descrição do Item",
+        "die-size": "Dado",
+        "die-size-placeholder": "Selecione o Dado",
+        "roll-modifier": "Modificador"
+      },
       "RollFormula": "Fórmula de Rolagem",
       "damage": "Dano",
-      "bulky": "Volumoso",
+      "bulky": "(volumoso)",
       "Spell": {
         "powerLVL": "Nível de Poder",
         "pLVLdialog": "Digite o Nível de Poder do Feitiço",

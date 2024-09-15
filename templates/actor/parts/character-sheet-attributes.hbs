@@ -1,6 +1,6 @@
 <!-- HP -->
 <article>
-    <div class="attribute {{#if system.attributes.isDeprived}}deprived-active{{/if}}">
+    <div class="attribute {{#if system.attributes.isDeprived}}deprived-active{{/if}} {{#if (eq (calculateTotalWeight gear) system.attributes.invSlots.value)}}deprived-active{{/if}}">
         <header class="attribute-header">
             <h3>{{localize "SAB.character.hp.short"}}</h3>
         </header>
@@ -12,7 +12,12 @@
                     type="text"
                     name="system.health.value"
                     class="section-input"
-                    value="{{system.health.value}}"
+                    {{#if (eq (calculateTotalWeight gear) system.attributes.invSlots.value)}}
+                        value="0"
+                        disabled
+                    {{else}}
+                        value="{{system.health.value}}"
+                    {{/if}}
                     data-dtype="Number"
                     min="0"
                     max="18"

@@ -329,7 +329,7 @@
   margin: 0;
   padding: 4px;
 }
-.spellburn-and-battlescars .deprived-active {
+.spellburn-and-battlescars .deprived-active, .spellburn-and-battlescars .danger-active {
   animation: pulsate 5s ease-in-out infinite;
   background-color: rgba(255, 0, 0, 0.1);
 }
@@ -491,9 +491,28 @@
 }
 .spellburn-and-battlescars .sheet-body textarea {
   width: 100%;
-  min-height: 150px;
+  min-height: 90px;
   resize: none;
   border: 2px groove #eeede0;
+}
+.spellburn-and-battlescars .resource {
+  margin: 8px 2%;
+  width: 96%;
+}
+.spellburn-and-battlescars .resource.item-info {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+.spellburn-and-battlescars .resource.item-info > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+.spellburn-and-battlescars .resource.item-info > div label {
+  font-family: "Suez One", serif;
+  font-size: 1rem;
 }
 .spellburn-and-battlescars .character-origin {
   display: flex;
@@ -518,8 +537,60 @@
 .spellburn-and-battlescars .abilities-container {
   padding: 16px 0px;
 }
-.spellburn-and-battlescars .new-ability-container {
+.spellburn-and-battlescars .inventory-container {
+  padding: 16px 0px;
+}
+.spellburn-and-battlescars .new-ability-container, .spellburn-and-battlescars .new-item-container {
   margin-top: 32px;
+}
+.spellburn-and-battlescars .gold-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.spellburn-and-battlescars .character-encumbrance {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+.spellburn-and-battlescars .character-gold, .spellburn-and-battlescars .character-encumbrance {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 4px;
+  border: 2px groove #eeede0;
+  padding: 4px;
+  text-align: center;
+}
+.spellburn-and-battlescars .character-gold label, .spellburn-and-battlescars .character-encumbrance label {
+  border-bottom: 2px solid #5d142b;
+  width: 100%;
+  flex: 1;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.spellburn-and-battlescars .character-gold label span, .spellburn-and-battlescars .character-encumbrance label span {
+  min-width: 12px;
+}
+.spellburn-and-battlescars .character-gold label a, .spellburn-and-battlescars .character-encumbrance label a {
+  font-size: 0.75rem;
+}
+.spellburn-and-battlescars .character-gold > span, .spellburn-and-battlescars .character-encumbrance > span {
+  flex-shrink: 0;
+}
+.spellburn-and-battlescars .character-gold input, .spellburn-and-battlescars .character-encumbrance input {
+  font-size: 1.5rem;
+  width: 100%;
+  max-width: 100px;
+  padding-bottom: 6px;
+}
+.spellburn-and-battlescars .item-create:disabled {
+  cursor: not-allowed;
 }
 .spellburn-and-battlescars .resource-label {
   font-weight: bold;
@@ -579,6 +650,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  height: 100%;
   margin: 0;
   overflow: hidden;
   font-size: 0.875rem;
@@ -588,10 +660,11 @@
 }
 .spellburn-and-battlescars .items-list .item-name h3, .spellburn-and-battlescars .items-list .item-name h4 {
   margin: 0;
+  padding-right: 8px;
   overflow-x: hidden;
 }
-.spellburn-and-battlescars .items-list .item-name .item-info {
-  padding: 8px;
+.spellburn-and-battlescars .items-list .item-name h3 span, .spellburn-and-battlescars .items-list .item-name h4 span {
+  font-family: "Alegreya", serif;
 }
 .spellburn-and-battlescars .items-list .item-description {
   flex: 1;
@@ -637,7 +710,7 @@
   text-align: center;
   border-left: 1px solid #c9c7b8;
   border-right: 1px solid #c9c7b8;
-  font-size: 12px;
+  font-size: 1rem;
 }
 .spellburn-and-battlescars .items-list .items-header {
   height: 28px;
@@ -657,8 +730,11 @@
   text-align: left;
 }
 .spellburn-and-battlescars .item-formula {
-  flex: 0 0 200px;
+  flex: 0 1 auto;
   padding: 0 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .spellburn-and-battlescars .effects .item .effect-source,
 .spellburn-and-battlescars .effects .item .effect-duration,
@@ -679,8 +755,8 @@
 }
 
 .spellburn-and-battlescars.sheet.item {
-  min-width: 300px;
-  max-width: 400px;
+  min-width: 400px;
+  max-width: 600px;
   min-height: 200px;
 }
 

@@ -32,7 +32,7 @@
   padding: 4px;
 }
 
-.deprived-active {
+.deprived-active, .danger-active {
   animation: pulsate 5s ease-in-out infinite;
   background-color: rgba(255, 0, 0, 0.1);
 
@@ -227,9 +227,32 @@
 
   textarea {
     width: 100%;
-    min-height: 150px;
+    min-height: 90px;
     resize: none;
     border: $border-groove;
+  }
+}
+
+.resource {
+  margin: 8px 2%;
+  width: 96%;
+
+  &.item-info {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+
+      label {
+        font-family: $font-serif;
+        font-size: $font-size-16;
+      }
+    }
   }
 }
 
@@ -262,6 +285,72 @@
   padding: 16px 0px;
 }
 
-.new-ability-container {
+.inventory-container {
+  padding: 16px 0px;
+}
+
+.new-ability-container, .new-item-container {
   margin-top: 32px;
+}
+
+.gold-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.character-encumbrance {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+.character-gold, .character-encumbrance {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 4px;
+
+  border: $border-groove;
+  padding: 4px;
+  text-align: center;
+
+  label {
+    border-bottom: $border-main;
+    width: 100%;
+    flex: 1;
+    padding: 0 16px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    span {
+      min-width: 12px;
+    }
+
+    a {
+      font-size: $font-size-12;
+    }
+  }
+
+  > span {
+    flex-shrink: 0;
+  }
+
+  input {
+    font-size: $font-size-24;
+    width: 100%;
+    max-width: 100px;
+    padding-bottom: 6px;
+  }
+}
+
+.item-create {
+  &:disabled {
+    cursor: not-allowed;
+  }
 }

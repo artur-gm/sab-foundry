@@ -13,7 +13,7 @@ export class SabItemSheet extends ItemSheet {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["spellburn-and-battlescars", "sheet", "item"],
       width: 400,
-      height: 300,
+      height: 450,
       resizable: true,
       tabs: [
         {

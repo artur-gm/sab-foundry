@@ -24,6 +24,10 @@
         "long": "Armor",
         "short": "AR"
       },
+      "gold": {
+        "long": "Gold",
+        "short": "GP"
+      },
       "sheet": {
         "name": {
           "label": "Name",
@@ -64,7 +68,14 @@
     },
     "actions": {
       "save": "Save",
-      "new-ability": "New Ability"
+      "new-ability": "New Ability",
+      "new-item": "New Item"
+    },
+    "encumbrance": {
+      "name": "Encumbrance",
+      "add": "Add Inventory Slot",
+      "remove": "Remove Inventory Slot",
+      "overburdened": "Overburdened: HP reduced to 0"
     },
     "chat": {
       "critical-failure": "Critical Failure! LUCK has decreased.",
@@ -74,15 +85,8 @@
       "short-rest": "You have gained <strong>{value}</strong> HP from a Short Rest.",
       "deprived": "A Deprived character cannot recover HP or Attributes."
     },
-    "gold": { "long": "Gold", "abbr": "GP" },
     "rollNewChar": "Roll new Character",
     "charRollMsg": "Character rolled! If you wish, you may swap Body and Mind, or use 10 for all attributes (including luck).",
-    "Encumbrance": {
-      "name": "Encumbrance",
-      "add": "Add inventory slot",
-      "remove": "Remove inventory slot",
-      "overburdened": "Overburdened: HP reduced to 0"
-    },
     "Spellburn": {
       "flavor": "Mishap: Something has gone very wrong.",
       "2": "You cannot Cast Spells for [DICE] hours, and any attempts to manipulate magic will fail.",
@@ -119,9 +123,20 @@
       "Actor": "Sab Actor Sheet",
       "Item": "Sab Item Sheet"
     },
-    "Item": {
+    "item": {
+      "sheet": {
+        "name": "Name",
+        "name-placeholder": "Item's name",
+        "quantity": "Quantity",
+        "weight": "Slots",
+        "description-placeholder": "Item's description",
+        "die-size": "Die Size",
+        "die-size-placeholder": "Select Die Size",
+        "roll-modifier": "Roll Modifier"
+      },
       "RollFormula": "Roll Formula",
       "damage": "Damage",
+      "bulky": "(bulky)",
       "Spell": {
         "powerLVL": "Power Level",
         "pLVLdialog": "Enter Spell Power Level",
@@ -131,8 +146,7 @@
       "Fatigue": {
         "name": "Fatigue",
         "msg": "Fatigue increased by"
-      },
-      "bulky": "Bulky"
+      }
     },
     "Effect": {
       "Source": "Source",

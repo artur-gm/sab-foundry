@@ -94,7 +94,7 @@ Handlebars.registerHelper("handleItemWeight", function(item) {
     case 1:
       return item.name;
     case 2:
-      return `${item.name} ${game.i18n.localize("SAB.Item.bulky")}`;
+      return new Handlebars.SafeString(`${item.name} <span>${game.i18n.localize("SAB.item.bulky")}</span>`);
     case 0:
       return new Handlebars.SafeString(`<i>${item.name}</i>`);
     default:

@@ -64,6 +64,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    height: 100%;
 
     margin: 0;
     overflow: hidden;
@@ -75,11 +76,12 @@
 
     h3, h4 {
       margin: 0;
+      padding-right: 8px;
       overflow-x: hidden;
-    }
 
-    .item-info {
-      padding: 8px;
+      span {
+        font-family: $font-primary;
+      }
     }
   }
 
@@ -134,7 +136,7 @@
     text-align: center;
     border-left: 1px solid #c9c7b8;
     border-right: 1px solid #c9c7b8;
-    font-size: 12px;
+    font-size: $font-size-16;
   }
 
   // Section Header
@@ -160,6 +162,9 @@
 
 // Example style for Sab (can be removed if not needed).
 .item-formula {
-  flex: 0 0 200px;
+  flex: 0 1 auto;
   padding: 0 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
