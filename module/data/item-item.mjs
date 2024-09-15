@@ -23,9 +23,9 @@ export default class SabItem extends SabItemBase {
   }
 
   prepareDerivedData() {
-    // Build the formula dynamically using string interpolation
+    // Build the formula dynamically using string interpolation and max function
     const roll = this.roll;
 
-    this.formula = `${roll.diceNum}${roll.diceSize}${roll.diceBonus}`;
+    this.formula = `{${roll.diceSize}, ${roll.diceBonus}}kh`;
   }
 }
