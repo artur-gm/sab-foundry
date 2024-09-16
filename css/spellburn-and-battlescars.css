@@ -675,6 +675,8 @@
   display: flex;
   flex-direction: row;
   gap: 8px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 .spellburn-and-battlescars .items-list .item-description p {
   margin: 0;

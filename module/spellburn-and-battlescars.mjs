@@ -105,6 +105,12 @@ Handlebars.registerHelper("stripTags", function(input) {
   return input.replace(/<\/?[^>]+(>|$)/g, "");
 });
 
+Handlebars.registerHelper("handleLineBreaks", function(text) {
+  text = Handlebars.Utils.escapeExpression(text);
+  text = text.replace(/(\r\n|\n|\r)/gm, "<br>");
+  return new Handlebars.SafeString(text);
+});
+
 /* -------------------------------------------- */
 /*  Ready Hook                                  */
 /* -------------------------------------------- */
