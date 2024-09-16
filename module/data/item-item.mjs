@@ -26,6 +26,6 @@ export default class SabItem extends SabItemBase {
     // Build the formula dynamically using string interpolation and max function
     const roll = this.roll;
 
-    this.formula = `{${roll.diceSize}, ${roll.diceBonus}}kh`;
+    this.formula = `{${roll.diceSize}${roll.diceBonus}}kh`;
   }
 }

@@ -616,7 +616,7 @@ export class SabActorSheet extends ActorSheet {
         <form class="sheet-modal">
           <div>
             <label>${game.i18n.localize("SAB.character.sheet.archetype.label")}</label>
-            <input type="text" name="name" value="${archetype.name}" placeholder="${game.i18n.localize("SAB.character.sheet.archetype-name-placeholder")}">
+            <input type="text" name="name" value="${archetype.name}" placeholder="${game.i18n.localize("SAB.character.sheet.archetype.placeholder")}">
           </div>
           <div>
             <label>${game.i18n.localize("SAB.character.sheet.trigger.label")}</label>
