@@ -1,5 +1,5 @@
 <div class="gold-container">
-    <div class="character-encumbrance {{#if (eq (calculateTotalWeight gear) system.attributes.invSlots.value)}}deprived-active{{/if}}">
+    <div class="character-encumbrance {{#if (eq (calculateTotalWeight gear) system.attributes.invSlots.value)}}danger-active{{/if}}">
         <label for="system.attributes.gold.value" class="resource-label">
             <span>
                 {{#if (lt (calculateTotalWeight gear) system.attributes.invSlots.value)}}

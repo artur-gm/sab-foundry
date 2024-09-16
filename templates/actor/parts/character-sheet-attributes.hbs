@@ -1,6 +1,6 @@
 <!-- HP -->
 <article>
-    <div class="attribute {{#if system.attributes.isDeprived}}deprived-active{{/if}} {{#if (eq (calculateTotalWeight gear) system.attributes.invSlots.value)}}deprived-active{{/if}}">
+    <div class="attribute {{#if system.attributes.isDeprived}}deprived-active{{else if (eq (calculateTotalWeight gear) system.attributes.invSlots.value)}}danger-active{{else if (eq system.health.value 0)}}danger-active{{/if}}">
         <header class="attribute-header">
             <h3>{{localize "SAB.character.hp.short"}}</h3>
         </header>
