@@ -22,7 +22,7 @@
   "version": "#{VERSION}#",
   "compatibility": {
     "minimum": 11,
-    "verified": 12
+    "verified": "12.331"
   },
   "esmodules": ["module/spellburn-and-battlescars.mjs"],
   "styles": ["css/spellburn-and-battlescars.css"],

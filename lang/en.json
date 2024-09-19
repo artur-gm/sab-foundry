@@ -1,21 +1,94 @@
 {
   "SAB": {
-    "HP": { "long": "Hit Protection", "abbr": "HP" },
-    "gold": { "long": "Gold", "abbr": "GP" },
-    "armor": { "long": "Armor Rating", "abbr": "AR" },
-    "level": { "long": "Level", "abbr": "LVL" },
-    "namePlaceholder": "Name, Origin Archetype",
-    "Name": "Name",
-    "critMessage": "Critical Hit! Luck has increased.",
-    "critFailMessage": "Critical Fail! Luck has decreased.",
-    "rollNewChar": "Roll new Character",
-    "charRollMsg": "Character rolled! If you wish, you may swap Body and Mind, or use 10 for all attributes (including luck).",
-    "Encumbrance": {
+    "character": {
+      "background": "Background",
+      "archetype": "Archetype",
+      "origin": "Origin",
+      "hp": {
+        "long": "Hit Protection",
+        "short": "HP"
+      },
+      "body": {
+        "long": "Body",
+        "short": "BDY"
+      },
+      "mind": {
+        "long": "Mind",
+        "short": "MND"
+      },
+      "luck": {
+        "long": "Luck",
+        "short": "LCK"
+      },
+      "armor": {
+        "long": "Armor",
+        "short": "AR"
+      },
+      "gold": {
+        "long": "Gold",
+        "short": "GP"
+      },
+      "sheet": {
+        "name": {
+          "label": "Name",
+          "placeholder": "Character's name"
+        },
+        "archetype": {
+          "label": "Name",
+          "placeholder": "Archetype's name"
+        },
+        "trigger": {
+          "label": "Trigger",
+          "placeholder": "Your Archetype's Advancement Trigger"
+        },
+        "origin": {
+          "label": "Origin",
+          "question-placeholder": "Insert your Archetype's Origin question here.",
+          "answer-title": "Answer",
+          "answer-title-placeholder": "Insert the title of the answer here.",
+          "answer-description": "Ability",
+          "answer-description-placeholder": "Insert the description of the Ability here."
+        },
+        "short-rest": "Short Rest",
+        "long-rest": "Long Rest",
+        "advance": "Advance",
+        "attribute": {
+          "label": "Attribute",
+          "current": "Current",
+          "max": "Max"
+        },
+        "deprived": "Deprived",
+        "tabs": {
+          "abilities": "Abilities",
+          "inventory": "Inventory",
+          "spells": "Spells",
+          "notes": "Notes"
+        }
+      }
+    },
+    "actions": {
+      "save": "Save",
+      "new-ability": "New Ability",
+      "new-item": "New Item",
+      "new-spell": "New Spell",
+      "cast-spell": "Cast Spell"
+    },
+    "encumbrance": {
       "name": "Encumbrance",
-      "add": "Add inventory slot",
-      "remove": "Remove inventory slot",
+      "add": "Add Inventory Slot",
+      "remove": "Remove Inventory Slot",
       "overburdened": "Overburdened: HP reduced to 0"
     },
+    "chat": {
+      "critical-failure": "Critical Failure! LUCK has decreased.",
+      "critical-success": "Critical Success! LUCK has increased.",
+      "save-success": "Success!",
+      "save-failure": "Failure!",
+      "short-rest": "You have gained <strong>{value}</strong> HP from a Short Rest.",
+      "deprived": "A Deprived character cannot recover HP or Attributes."
+    },
+    "rollNewChar": "Roll new Character",
+    "charRollMsg": "Character rolled! If you wish, you may swap Body and Mind, or use 10 for all attributes (including luck).",
     "Spellburn": {
       "flavor": "Mishap: Something has gone very wrong.",
       "2": "You cannot Cast Spells for [DICE] hours, and any attempts to manipulate magic will fail.",
@@ -48,29 +121,35 @@
       "msg": "is leveling up",
       "nothing": "No attribute increased. Choose one to increase by 1."
     },
-    "Ability": {
-      "Body": { "long": "Body", "abbr": "BDY", "max": "Max BDY" },
-      "Mind": { "long": "Mind", "abbr": "MND", "max": "Max MND" },
-      "Luck": { "long": "Luck", "abbr": "LCK" }
-    },
     "SheetLabels": {
       "Actor": "Sab Actor Sheet",
       "Item": "Sab Item Sheet"
     },
-    "Item": {
-      "RollFormula": "Roll Formula",
-      "damage": "Damage",
-      "Spell": {
-        "powerLVL": "Power Level",
-        "pLVLdialog": "Enter Spell Power Level",
-        "noSlots": "Can’t cast spells: No inventory slots available",
-        "rollModifier": "Modifier"
+    "item": {
+      "sheet": {
+        "name": "Name",
+        "name-placeholder": "Item's name",
+        "name-spell-placeholder": "Spell name",
+        "quantity": "Quantity",
+        "weight": "Slots",
+        "description-placeholder": "Item's description",
+        "die-size": "Die Size",
+        "die-size-placeholder": "Select Die Size",
+        "roll-modifier": "Roll Modifier"
       },
-      "Fatigue": {
+      "roll-formula": "Roll Formula",
+      "damage": "Damage",
+      "bulky": "(bulky)",
+      "spell": {
+        "power-level": "Power Level",
+        "pl-dialog": "Cast Spell",
+        "no-slots": "Inventory is full",
+        "roll-modifier": "Modifier"
+      },
+      "fatigue": {
         "name": "Fatigue",
         "msg": "Fatigue increased by"
-      },
-      "bulky": "Bulky"
+      }
     },
     "Effect": {
       "Source": "Source",
@@ -109,6 +188,7 @@
       "spell": "Spell"
     }
   },
+
   "DOCUMENT":{
     "Create": "Create",
     "New": "New",

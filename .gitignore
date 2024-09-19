@@ -1,3 +1,19 @@
+# IDE
+.idea/
+.nova/
+.vs/
+.vscode/
+*.code-workspace
+*.iml
+
+# Node Modules
 node_modules/
+
+# OS Specific
+.DS_Store
+
+# OTHERS
 .tool-versions
-package-lock.json
+
+# CSS Source Map
+css/spellburn-and-battlescars.css.map

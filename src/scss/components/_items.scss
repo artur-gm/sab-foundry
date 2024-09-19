@@ -61,17 +61,43 @@
 
   // Item Name
   .item-name {
-    flex: 2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 100%;
+
     margin: 0;
     overflow: hidden;
-    font-size: 13px;
+    font-size: $font-size-14;
+    font-family: $font-serif;
     text-align: left;
-    align-items: center;
-    display: flex;
+
+    width: 20%;
+
     h3, h4 {
       margin: 0;
-      white-space: nowrap;
+      padding-right: 8px;
       overflow-x: hidden;
+
+      span {
+        font-family: $font-primary;
+      }
+    }
+  }
+
+  .item-description {
+    flex: 1;
+    width: 70%;
+
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+
+    white-space: pre-wrap;
+    word-wrap: break-word;
+
+    p {
+      margin: 0;
     }
   }
 
@@ -80,6 +106,8 @@
     display: flex;
     flex: 0 0 100px;
     justify-content: flex-end;
+    width: 10%;
+
     a {
       font-size: 12px;
       text-align: center;
@@ -89,9 +117,15 @@
 
   // Individual Item
   .item {
-    align-items: center;
-    padding: 0 2px; // to align with the header border
-    border-bottom: 1px solid $c-faint;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+    gap: 8px;
+
+    padding: 8px 2px; // to align with the header border
+    border-bottom: $border-groove;
+
     &:last-child { border-bottom: none; }
     .item-name {
       color: $c-dark;
@@ -106,10 +140,12 @@
   }
 
   .item-prop {
-    text-align: center;
-    border-left: 1px solid #c9c7b8;
-    border-right: 1px solid #c9c7b8;
-    font-size: 12px;
+    text-align: left;
+    border-right: $border-groove;
+    font-size: $font-size-16;
+    width: fit-content;
+    padding-right: 8px;
+    flex-shrink: 0;
   }
 
   // Section Header
@@ -133,9 +169,3 @@
   }
 }
 
-// Example style for Sab (can be removed if not needed).
-.item-formula {
-  
-  flex: 0 0 200px;
-  padding: 0 8px;
-}

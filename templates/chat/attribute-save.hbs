@@ -1,0 +1,12 @@
+<div class="sab-chat-attribute-save {{type}}">
+  {{#if (eq type "critical-failure")}}
+    <i class="fas fa-skull"></i>
+  {{else if (eq type "critical-success")}}
+    <i class="fas fa-sparkles"></i>
+  {{else if (eq type "success")}}
+    <i class="fas fa-check"></i>
+  {{else if (eq type "failure")}}
+    <i class="fas fa-times"></i>
+  {{/if}}
+  <span>{{message}}</span>
+</div>

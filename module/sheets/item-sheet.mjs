@@ -1,7 +1,7 @@
 import {
   onManageActiveEffect,
-  prepareActiveEffectCategories,
-} from '../helpers/effects.mjs';
+  prepareActiveEffectCategories
+} from "../helpers/effects.mjs";
 
 /**
  * Extend the basic ItemSheet with some very simple modifications
@@ -11,22 +11,23 @@ export class SabItemSheet extends ItemSheet {
   /** @override */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ['spellburn-and-battlescars', 'sheet', 'item'],
-      width: 520,
-      height: 480,
+      classes: ["spellburn-and-battlescars", "sheet", "item"],
+      width: 400,
+      height: 450,
+      resizable: true,
       tabs: [
         {
-          navSelector: '.sheet-tabs',
-          contentSelector: '.sheet-body',
-          initial: 'description',
-        },
-      ],
+          navSelector: ".sheet-tabs",
+          contentSelector: ".sheet-body",
+          initial: "description"
+        }
+      ]
     });
   }
 
   /** @override */
   get template() {
-    const path = 'systems/spellburn-and-battlescars/templates/item';
+    const path = "systems/spellburn-and-battlescars/templates/item";
     // Return a single sheet for all item types.
     // return `${path}/item-sheet.hbs`;
 
@@ -57,7 +58,7 @@ export class SabItemSheet extends ItemSheet {
         // Data to fill in for inline rolls
         rollData: this.item.getRollData(),
         // Relative UUID resolution
-        relativeTo: this.item,
+        relativeTo: this.item
       }
     );
 
@@ -86,7 +87,7 @@ export class SabItemSheet extends ItemSheet {
     // Roll handlers, click handlers, etc. would go here.
 
     // Active Effect management
-    html.on('click', '.effect-control', (ev) =>
+    html.on("click", ".effect-control", ev =>
       onManageActiveEffect(ev, this.item)
     );
   }

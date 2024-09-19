@@ -1,21 +1,94 @@
 {
   "SAB": {
-    "HP": { "long": "Proteção contra Golpe", "abbr": "PG" },
-    "gold": { "long": "Ouro", "abbr": "PD" },
-    "armor": { "long": "Armadura", "abbr": "AR" },
-    "level": { "long": "Nível", "abbr": "NV" },
-    "Name": "Nome",
-    "namePlaceholder": "Nome, Origem Arquétipo",
-    "critMessage": "Acerto Crítico! Sorte aumentou.",
-    "critFailMessage": "Falha Crítica! Sorte diminuiu.",
-    "rollNewChar": "Rolar novo personagem",
-    "charRollMsg": "Personagem rolado! Caso deseje, pode trocar os valores de corpo e mente, ou usar 10 em todos atributos (incluindo sorte).",
-    "Encumbrance": {
+    "character": {
+      "background": "Antecedente",
+      "archetype": "Arquétipo",
+      "origin": "Origem",
+      "hp": {
+        "long": "Proteção contra Golpes",
+        "short": "PG"
+      },
+      "body": {
+        "long": "Corpo",
+        "short": "BDY"
+      },
+      "mind": {
+        "long": "Mente",
+        "short": "MND"
+      },
+      "luck": {
+        "long": "Sorte",
+        "short": "SRT"
+      },
+      "armor": {
+        "long": "Armadura",
+        "short": "AR"
+      },
+      "gold": {
+        "long": "Ouro",
+        "short": "PD"
+      },
+      "sheet": {
+        "name": {
+          "label": "Nome",
+          "placeholder": "Nome do personagem"
+        },
+        "archetype": {
+          "label": "Nome",
+          "placeholder": "Nome do Arquétipo"
+        },
+        "trigger": {
+          "label": "Gatilho",
+          "placeholder": "O Gatilho do seu Arquétipo para Avançar"
+        },
+        "origin": {
+          "label": "Origem",
+          "question-placeholder": "Insira a pergunta da Origem do seu Arquétipo aqui.",
+          "answer-title": "Resposta",
+          "answer-title-placeholder": "Insira o título da resposta.",
+          "answer-description": "Habilidade",
+          "answer-description-placeholder": "Insira a Habilidade da Origem do seu Arquétipo aqui."
+        },
+        "short-rest": "Descanso Curto",
+        "long-rest": "Descanso Longo",
+        "advance": "Avançar",
+        "attribute": {
+          "label": "Atributo",
+          "current": "Atual",
+          "max": "Máximo"
+        },
+        "deprived": "Privado",
+        "tabs": {
+          "abilities": "Habilidades",
+          "inventory": "Inventário",
+          "spells": "Magias",
+          "notes": "Notas"
+        }
+      }
+    },
+    "actions": {
+      "save": "Salvar",
+      "new-ability": "Nova Habilidade",
+      "new-item": "Novo Item",
+      "new-spell": "Nova Magia",
+      "cast-spell": "Conjurar Magia"
+    },
+    "encumbrance": {
       "name": "Carga",
-      "add": "Adicionar espaço de inventário",
-      "remove": "Remover espaço de inventário",
+      "add": "Adicionar Espaço de Inventário",
+      "remove": "Remover Espaço de Inventário",
       "overburdened": "Sobrecarregado: PG reduzido a 0"
     },
+    "chat": {
+      "critical-failure": "Falha Crítica! SORTE diminuiu.",
+      "critical-success": "Sucesso Crítico! SORTE aumentou.",
+      "save-success": "Sucesso!",
+      "save-failure": "Falha!",
+      "short-rest": "Você ganhou {value} de PG com um Descanso Curto.",
+      "deprived": "Um personagem Privado não pode recuperar PG ou Atributos."
+    },
+    "rollNewChar": "Rolar novo personagem",
+    "charRollMsg": "Personagem rolado! Caso deseje, pode trocar os valores de corpo e mente, ou usar 10 em todos atributos (incluindo sorte).",
     "Spellburn": {
       "flavor": "Catástrofe: Algo deu muito errado.",
       "2": "Você não pode conjurar magias por [DADO] horas, qualquer tentativa de manipular magia falha.",
@@ -48,26 +121,32 @@
       "msg": "está subindo de nível",
       "nothing": "Nenhum atributo aprimorado. Escolha um para subir em 1."
     },
-    "Ability": {
-      "Body": { "long": "Corpo", "abbr": "CRP" },
-      "Mind": { "long": "Mente", "abbr": "MNT" },
-      "Luck": { "long": "Sorte", "abbr": "SRT" }
-    },
     "SheetLabels": {
       "Actor": "Ficha de Ator",
       "Item": "Ficha de Item"
     },
-    "Item": {
-      "RollFormula": "Fórmula de Rolagem",
-      "damage": "Dano",
-      "bulky": "Volumoso",
-      "Spell": {
-        "powerLVL": "Nível de Poder",
-        "pLVLdialog": "Digite o Nível de Poder do Feitiço",
-        "noSlots": "Não pode conjurar magias: Não há espaços de inventário disponíveis",
-        "rollModifier": "Modificador"
+    "item": {
+      "sheet": {
+        "name": "Nome",
+        "name-placeholder": "Nome do Item",
+        "name-spell-placeholder": "Nome da Magia",
+        "quantity": "Quantidade",
+        "weight": "Espaços",
+        "description-placeholder": "Descrição do Item",
+        "die-size": "Dado",
+        "die-size-placeholder": "Selecione o Dado",
+        "roll-modifier": "Modificador"
       },
-      "Fatigue": {
+      "roll-formula": "Fórmula de Rolagem",
+      "damage": "Dano",
+      "bulky": "(volumoso)",
+      "spell": {
+        "power-level": "Nível de Poder",
+        "pl-dialog": "Conjurar Magia",
+        "no-slots": "Inventário cheio",
+        "roll-modifier": "Modificador"
+      },
+      "fatigue": {
         "name": "Fadiga",
         "msg": "Fadiga aumentada por"
       }

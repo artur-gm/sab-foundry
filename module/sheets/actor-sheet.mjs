@@ -1,7 +1,10 @@
 import {
   onManageActiveEffect,
-  prepareActiveEffectCategories,
+  prepareActiveEffectCategories
 } from "../helpers/effects.mjs";
+
+import { clampAttribute, clampValue } from "../helpers/sheet.mjs";
+import * as SABRolls from "../helpers/rolls.mjs";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -12,15 +15,15 @@ export class SabActorSheet extends ActorSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["spellburn-and-battlescars", "sheet", "actor"],
-      width: 600,
-      height: 600,
+      width: 800,
+      height: 800,
       tabs: [
         {
           navSelector: ".sheet-tabs",
           contentSelector: ".sheet-body",
-          initial: "features",
-        },
-      ],
+          initial: "items"
+        }
+      ]
     });
   }
 
@@ -50,13 +53,13 @@ export class SabActorSheet extends ActorSheet {
     context.config = CONFIG.SAB;
 
     // Prepare character data and items.
-    if (actorData.type == "character") {
+    if (actorData.type === "character") {
       this._prepareItems(context);
       this._prepareCharacterData(context);
     }
 
     // Prepare NPC data and items.
-    if (actorData.type == "npc") {
+    if (actorData.type === "npc") {
       this._prepareItems(context);
     }
 
@@ -67,12 +70,10 @@ export class SabActorSheet extends ActorSheet {
       {
         // Whether to show secret blocks in the finished html
         secrets: this.document.isOwner,
-        // Necessary in v11, can be removed in v12
-        async: true,
         // Data to fill in for inline rolls
         rollData: this.actor.getRollData(),
         // Relative UUID resolution
-        relativeTo: this.actor,
+        relativeTo: this.actor
       }
     );
 
@@ -92,8 +93,21 @@ export class SabActorSheet extends ActorSheet {
    * @param {object} context The context object to mutate
    */
   _prepareCharacterData(context) {
-    // This is where you can enrich character-specific editor fields
-    // or setup anything else that's specific to this type
+    context.system.health = clampAttribute(
+      context.system.health.value,
+      context.system.health.max
+    );
+    context.system.body = clampAttribute(
+      context.system.body.value,
+      context.system.body.max
+    );
+    context.system.mind = clampAttribute(
+      context.system.mind.value,
+      context.system.mind.max
+    );
+
+    context.system.attributes.luck.value = clampValue(context.system.attributes.luck.value);
+    context.system.ar.value = clampValue(context.system.ar.value, 0, 3);
   }
 
   /**
@@ -114,7 +128,6 @@ export class SabActorSheet extends ActorSheet {
       if (i.type === "item") {
         gear.push(i);
       }
-      // Append to features.
       else if (i.type === "feature") {
         features.push(i);
       }
@@ -137,7 +150,7 @@ export class SabActorSheet extends ActorSheet {
     super.activateListeners(html);
 
     // Render the item sheet for viewing/editing prior to the editable check.
-    html.on("click", ".item-edit", (ev) => {
+    html.on("click", ".item-edit", ev => {
       const li = $(ev.currentTarget).parents(".item");
       const item = this.actor.items.get(li.data("itemId"));
       item.sheet.render(true);
@@ -147,11 +160,17 @@ export class SabActorSheet extends ActorSheet {
     // Everything below here is only needed if the sheet is editable
     if (!this.isEditable) return;
 
+    // Handle sheet rolls
+    if (this.actor.isOwner) {
+      html.on("click", ".attribute-save-roll", this._onAttributeSaveRoll.bind(this));
+      html.on("click", ".short-rest-roll", this._onShortRestRoll.bind(this));
+    }
+
     // Add Inventory Item
     html.on("click", ".item-create", this._onItemCreate.bind(this));
 
     // Delete Inventory Item
-    html.on("click", ".item-delete", (ev) => {
+    html.on("click", ".item-delete", ev => {
       const li = $(ev.currentTarget).parents(".item");
       const item = this.actor.items.get(li.data("itemId"));
       item.delete();
@@ -159,7 +178,7 @@ export class SabActorSheet extends ActorSheet {
     });
 
     // Active Effect management
-    html.on("click", ".effect-control", (ev) => {
+    html.on("click", ".effect-control", ev => {
       const row = ev.currentTarget.closest("li");
       const document =
         row.dataset.parentId === this.actor.id
@@ -178,29 +197,57 @@ export class SabActorSheet extends ActorSheet {
     html.on("click", ".level-up", this._levelUp.bind(this));
 
     // Handle gold
-    html.on("change", "#gold", (ev) => {
+    html.on("change", "#gold", ev => {
       this._onGoldChange(ev);
     });
 
+    // Archetype and origin config
+    html.find(".character-archetype").click(this._onArchetypeConfig.bind(this));
+    html.find(".character-origin").click(this._onOriginConfig.bind(this));
+
     // Battlescars handling
-    html.on("click", "#current_hp", (ev) => {
+    html.on("click", "#current_hp", ev => {
       this.actor.update({"system.health.old": ev.target.value}); // Save the current health value
     });
-    html.on("change", "#current_hp", (ev) => {
+    html.on("change", "#current_hp", ev => {
       this._onHealthChange(ev);
     });
 
     // Add and remove inventory slots
     html.on("click", "#add-slot", this._onAddInventorySlot.bind(this));
     html.on("click", "#remove-slot", this._onRemoveInventorySlot.bind(this));
+
     // Drag events for macros.
     if (this.actor.isOwner) {
-      let handler = (ev) => this._onDragStart(ev);
+      let handler = ev => this._onDragStart(ev);
       html.find("li.item").each((i, li) => {
         if (li.classList.contains("inventory-header")) return;
         li.setAttribute("draggable", true);
         li.addEventListener("dragstart", handler, false);
       });
+    }
+
+    // Toggle character's isDeprived status
+    html.on("click", "#toggle-deprived", ev => this._onToggleDeprived(ev));
+  }
+
+  async _onAttributeSaveRoll(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+    const dataset = element.dataset;
+
+    if (dataset) {
+      SABRolls.AttributeSaveRoll(dataset, this.actor);
+    }
+  }
+
+  async _onShortRestRoll(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+    const dataset = element.dataset;
+
+    if (dataset) {
+      SABRolls.ShortRestRoll(dataset, this.actor);
     }
   }
 
@@ -215,17 +262,17 @@ export class SabActorSheet extends ActorSheet {
     // Get the type of item to create.
     const type = header.dataset.type;
     // Grab any data associated with this control.
-    const data = duplicate(header.dataset);
+    const data = foundry.utils.duplicate(header.dataset);
     // Initialize a default name.
     const name = `New ${type.capitalize()}`;
     // Prepare the item object.
     const itemData = {
       name: name,
       type: type,
-      system: data,
+      system: data
     };
     // Remove the type from the dataset since it's in the itemData.type prop.
-    delete itemData.system["type"];
+    delete itemData.system.type;
 
     // Finally, create the item!
     await Item.create(itemData, { parent: this.actor });
@@ -236,6 +283,7 @@ export class SabActorSheet extends ActorSheet {
    * Handle clickable rolls.
    * @param {Event} event   The originating click event
    * @private
+   * @returns {Roll|void} The resulting roll, if any
    */
   async _onRoll(event) {
     event.preventDefault();
@@ -244,12 +292,12 @@ export class SabActorSheet extends ActorSheet {
 
     // Handle item rolls.
     if (dataset.rollType) {
-      if (dataset.rollType == "item") {
+      if (dataset.rollType === "item") {
         const itemId = element.closest(".item").dataset.itemId;
         const item = this.actor.items.get(itemId);
         if (item) return item.roll();
       }
-      if (dataset.rollType == "spell") {
+      if (dataset.rollType === "spell") {
         const spellId = element.closest(".item").dataset.itemId;
         const spell = this.actor.items.get(spellId);
         if (spell) return this._rollSpell(spell);
@@ -258,36 +306,18 @@ export class SabActorSheet extends ActorSheet {
 
     // Handle rolls that supply the formula directly.
     if (dataset.roll) {
-      let label = dataset.label ? `[ability] ${dataset.label}` : "";
-      let atribute = dataset.attribute ? dataset.attribute : "";
-      let roll = await new Roll(dataset.roll, this.actor.getRollData()).toMessage({
+      let label = dataset.label ? `${dataset.label}`.toUpperCase() : "";
+      let roll = new Roll(dataset.roll, this.actor.getRollData());
+
+      await roll.evaluate();
+
+      roll.toMessage({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
         flavor: label,
-        rollMode: game.settings.get("core", "rollMode"),
+        rollMode: game.settings.get("core", "rollMode")
       });
-      if (this.actor.type == "character") {
-        if (roll.rolls[0].result == 20) {
-          this.actor.update({
-            "system.attributes.luck.value":
-              this.actor.system.attributes.luck.value - 1,
-          });
-          ChatMessage.create({
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-            content: game.i18n.localize("SAB.critFailMessage"),
-          });
-        }
 
-        if (roll.rolls[0].result == this.actor.system[atribute].value) {
-          this.actor.update({
-            "system.attributes.luck.value":
-              this.actor.system.attributes.luck.value + 1,
-          });
-          ChatMessage.create({
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-            content: game.i18n.localize("SAB.critMessage"),
-          });
-        }
-      }
+      return roll;
     }
   }
 
@@ -296,7 +326,7 @@ export class SabActorSheet extends ActorSheet {
     for (let i = 0; i < 3; i++) {
       let roll = await new Roll("2d6+3").toMessage({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        flavor: game.i18n.localize("SAB.rollNewChar"),
+        flavor: game.i18n.localize("SAB.rollNewChar")
       });
       rolls.push(roll.rolls[0]);
     }
@@ -306,7 +336,7 @@ export class SabActorSheet extends ActorSheet {
     const body = rolls[2].total;
     const hpRoll = await new Roll("1d6").toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-      flavor: game.i18n.localize("SAB.HP.long"),
+      flavor: game.i18n.localize("SAB.HP.long")
     });
     this.actor.update({
       "system.attributes.luck.value": luck,
@@ -315,47 +345,49 @@ export class SabActorSheet extends ActorSheet {
       "system.body.value": body,
       "system.body.max": body,
       "system.health.value": hpRoll.rolls[0].total,
-      "system.health.max": hpRoll.rolls[0].total,
-      "system.attributes.level.value": 1,
+      "system.health.max": hpRoll.rolls[0].total
     });
     ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-      content: game.i18n.localize("SAB.charRollMsg"),
+      content: game.i18n.localize("SAB.charRollMsg")
     });
   }
 
   async _levelUp() {
     ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-      content: game.i18n.localize("SAB.levelUp.msg"),
+      content: game.i18n.localize("SAB.levelUp.msg")
     });
     const messages = [
       "SAB.Ability.Body.long",
       "SAB.Ability.Mind.long",
-      "SAB.Ability.Luck.long",
+      "SAB.Ability.Luck.long"
     ];
     let body = 0;
     let mind = 0;
     let luck = 0;
     let notLeveled = true;
+
     if (this.actor.system.body.max < 18) {
       let roll = await new Roll("d20").toMessage({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        flavor: game.i18n.localize(messages[0]),
+        flavor: game.i18n.localize(messages[0])
       });
       body = roll.rolls[0].total;
     }
+
     if (this.actor.system.mind.max < 18) {
       let roll = await new Roll("d20").toMessage({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        flavor: game.i18n.localize(messages[1]),
+        flavor: game.i18n.localize(messages[1])
       });
       mind = roll.rolls[0].total;
     }
+
     if (this.actor.system.attributes.luck.value < 18) {
       let roll = await new Roll("d20").toMessage({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        flavor: game.i18n.localize(messages[2]),
+        flavor: game.i18n.localize(messages[2])
       });
       luck = roll.rolls[0].total;
     }
@@ -364,66 +396,56 @@ export class SabActorSheet extends ActorSheet {
       notLeveled = false;
       this.actor.update({
         "system.body.value": this.actor.system.body.value + 1,
-        "system.body.max": this.actor.system.body.max + 1,
+        "system.body.max": this.actor.system.body.max + 1
       });
       ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        content: game.i18n.localize("SAB.levelUp.body"),
+        content: game.i18n.localize("SAB.levelUp.body")
       });
     }
+
     if (mind > this.actor.system.mind.max) {
       notLeveled = false;
       this.actor.update({
         "system.mind.value": this.actor.system.mind.value + 1,
-        "system.mind.max": this.actor.system.mind.max + 1,
+        "system.mind.max": this.actor.system.mind.max + 1
       });
       ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        content: game.i18n.localize("SAB.levelUp.mind"),
+        content: game.i18n.localize("SAB.levelUp.mind")
       });
     }
+
     if (luck > this.actor.system.attributes.luck.value) {
       notLeveled = false;
       this.actor.update({
-        "system.attributes.luck.value":
-          this.actor.system.attributes.luck.value + 1,
+        "system.attributes.luck.value": Math.floor(this.actor.system.attributes.luck.value + 1)
       });
       ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        content: game.i18n.localize("SAB.levelUp.luck"),
+        content: game.i18n.localize("SAB.levelUp.luck")
       });
     }
+
     if (notLeveled) {
       ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        content: game.i18n.localize("SAB.levelUp.nothing"),
+        content: game.i18n.localize("SAB.levelUp.nothing")
       });
     }
+
     this.actor.update({
-      "system.attributes.level.value":
-        this.actor.system.attributes.level.value + 1,
       "system.health.value": this.actor.system.health.value + 1,
-      "system.health.max": this.actor.system.health.max + 1,
+      "system.health.max": this.actor.system.health.max + 1
     });
   }
 
+  // TODO: Fix gold change bug
   async _onGoldChange(ev) {
     let currentGold = parseInt(ev.target.value, 10);
-    if (currentGold < 100) return;
-    const goldData = {
-      name: `100 ${game.i18n.localize("SAB.gold.long")}`,
-      type: "item",
-      system: {
-        weight: 1,
-        description: `100 ${game.i18n.localize("SAB.gold.long")}`,
-      },
-    };
 
-    const goldItemsToCreate = Math.floor(currentGold / 100);
-    currentGold = currentGold % 100;
-
-    for (let i = 0; i < goldItemsToCreate; i++) {
-      await Item.create(goldData, { parent: this.actor });
+    if (isNaN(currentGold)) {
+      currentGold = 0;
     }
 
     await this.actor.update({ "system.attributes.gold.value": currentGold });
@@ -435,93 +457,88 @@ export class SabActorSheet extends ActorSheet {
     if (powerLevel <= 0) {
       return ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        content: game.i18n.localize("SAB.Item.Spell.noSlots")
+        content: game.i18n.localize("SAB.item.spell.no-slots")
       });
     }
-    let roll = await new Roll(powerLevel + "d6").toMessage({
+    let roll = await new Roll(`${powerLevel}d6`).toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
       flavor: `[${spell.type}] ${spell.name}: ${spell.system.description}`,
-      rollMode: game.settings.get("core", "rollMode"),
+      rollMode: game.settings.get("core", "rollMode")
     });
-    let rollDice = roll.rolls[0].dice[0].results.map((result) => result.result);
+    let rollDice = roll.rolls[0].dice[0].results.map(result => result.result);
     let uniqueRolls = new Set(rollDice);
     if (uniqueRolls.size < rollDice.length) {
       let total=roll.rolls[0].total;
-      if(total>21){total=21;}
+      if (total>21) {total=21;}
       ChatMessage.create({
         flavor: game.i18n.localize("SAB.Spellburn.flavor"),
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        content: game.i18n.localize("SAB.Spellburn."+total),
+        content: game.i18n.localize(`SAB.Spellburn.${total}`)
       });
     }
     await this._checkFatigue(rollDice);
   }
 
   async _getPowerLevel(maxBasePower) {
-    let powerLevel = await new Promise((resolve) => {
+    let powerLevel = await new Promise(resolve => {
       const div = document.createElement("div");
+      div.classList.add("sheet-modal");
+
+      const powerLevelContainer = document.createElement("div");
+      powerLevelContainer.classList.add("power-level-container");
 
       const label = document.createElement("label");
       label.setAttribute("for", "powerLevel");
-      label.textContent = game.i18n.localize("SAB.Item.Spell.powerLVL") + ": ";
-      div.appendChild(label);
+      label.textContent = `${game.i18n.localize("SAB.item.spell.power-level")}: `;
+      powerLevelContainer.appendChild(label);
 
-      const input = document.createElement("input");
-      input.type = "number";
-      input.id = "powerLevel";
-      input.name = "powerLevel";
-      input.required = true;
-      div.appendChild(input);
+      const select = document.createElement("select");
+      select.id = "powerLevel";
+      select.name = "powerLevel";
+      select.required = true;
 
-      const rollModifierLabel = document.createElement("label");
-      rollModifierLabel.setAttribute("for", "rollModifier");
-      rollModifierLabel.textContent = game.i18n.localize("SAB.Item.Spell.rollModifier") + ": ";
-      div.appendChild(rollModifierLabel);
+      const items = this.actor.items.filter(item => item.type === "item");
+      const totalWeight = items.reduce((sum, item) => sum + (item.system.weight || 0), 0);
+      let availableSlots = this.actor.system.attributes.invSlots.value - totalWeight;
+      availableSlots = Math.min(availableSlots, 5);
 
-      const rollModifierInput = document.createElement("input");
-      rollModifierInput.type = "number";
-      rollModifierInput.id = "rollModifier";
-      rollModifierInput.name = "rollModifier";
-      div.appendChild(rollModifierInput);
+      if (availableSlots === 0) {
+        select.disabled = true;
+        const option = document.createElement("option");
+        option.value = 0;
+        option.textContent = game.i18n.localize("SAB.item.spell.no-slots");
+        select.appendChild(option);
+      } else {
+        for (let i = 1; i <= availableSlots; i++) {
+          const option = document.createElement("option");
+          option.value = i;
+          option.textContent = i;
+          select.appendChild(option);
+        }
+      }
+
+      powerLevelContainer.appendChild(select);
+      div.appendChild(powerLevelContainer);
 
       const divContainer = document.createElement("div");
       divContainer.appendChild(div);
       const content = divContainer.innerHTML;
 
       new Dialog({
-        title: game.i18n.localize("SAB.Item.Spell.pLVLdialog"),
+        title: game.i18n.localize("SAB.item.spell.pl-dialog"),
         content: content,
         buttons: {
           ok: {
-            label: "OK",
-            callback: (html) => {
-              const input = html.find("#powerLevel")[0];
-              const modifier = html.find("#rollModifier")[0];
-              // treat the input value
-              if (isNaN(parseInt(input.value))) {
-                input.value = 1;
-              }
-              if (parseInt(input.value) < 1) {
-                input.value = 1;
-              }
-              if (parseInt(input.value) > maxBasePower) {
-                input.value = maxBasePower;
-              }
-              if (isNaN(parseInt(modifier.value))) {
-                modifier.value = 0;
-              }
-              if (parseInt(modifier.value) < 0) {
-                modifier.value = 0;
-              }
-              let power = parseInt(input.value) + parseInt(modifier.value);
-              if (power > 5){
-                power = 5;
-              }
+            label: game.i18n.localize("SAB.actions.cast-spell"),
+            callback: html => {
+              const select = html.find("#powerLevel")[0];
+              const power = parseInt(select.value);
+
               resolve(power);
-            },
-          },
+            }
+          }
         },
-        default: "ok",
+        default: "ok"
       }).render(true);
     });
     return powerLevel;
@@ -530,12 +547,12 @@ export class SabActorSheet extends ActorSheet {
   async _checkFatigue(rollDice) {
     let totalFatigue = 0;
     const fatigueData = {
-      name: game.i18n.localize("SAB.Item.Fatigue.name"),
+      name: game.i18n.localize("SAB.item.fatigue.name"),
       type: "item",
       system: {
-        description: game.i18n.localize("SAB.Item.Fatigue.name"),
-        weight: 1,
-      },
+        description: game.i18n.localize("SAB.item.fatigue.name"),
+        weight: 1
+      }
     };
 
     rollDice.sort((a, b) => b - a);
@@ -549,40 +566,132 @@ export class SabActorSheet extends ActorSheet {
       ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
         content:
-          game.i18n.localize("SAB.Item.Fatigue.msg") + " " + totalFatigue,
+          `${game.i18n.localize("SAB.item.fatigue.msg")} ${totalFatigue}`
       });
       this._checkInvSlots();
     }
   }
+
   async _onAddInventorySlot() {
     await this.actor.update({"system.attributes.invSlots.value": this.actor.system.attributes.invSlots.value + 1});
   }
-  async _onRemoveInventorySlot(){
+
+  async _onRemoveInventorySlot() {
     await this.actor.update({"system.attributes.invSlots.value": this.actor.system.attributes.invSlots.value - 1});
   }
 
   _onHealthChange(ev) {
     let currentHealth = parseInt(ev.target.value, 10);
-    if (currentHealth == 0) {
+    if (currentHealth === 0) {
       let oldHealth = this.actor.system.health.old;
       ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        content: game.i18n.localize("SAB.Battlescar." + oldHealth + ".message"),
-        flavor: game.i18n.localize("SAB.Battlescar." + oldHealth + ".flavor"),
+        content: game.i18n.localize(`SAB.Battlescar.${oldHealth}.message`),
+        flavor: game.i18n.localize(`SAB.Battlescar.${oldHealth}.flavor`)
       });
     }
   }
+
   _checkInvSlots() {
     let currentSlots = this.actor.system.attributes.invSlots.value;
-    let items = this.actor.items.filter((item) => item.type == "item");
+    let items = this.actor.items.filter(item => item.type === "item");
     let totalWeight = items.reduce((sum, item) => sum + (item.system.weight || 0), 0);
     if (totalWeight >= currentSlots) {
       ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        content: game.i18n.localize("SAB.Encumbrance.overburdened"),
+        content: game.i18n.localize("SAB.encumbrance.overburdened")
       });
       this.actor.update({"system.health.value": 0 });
     }
     return currentSlots-totalWeight;
   }
+
+  _onArchetypeConfig(event) {
+    event.preventDefault();
+    const archetype = this.actor.system.attributes.archetype;
+
+    new Dialog({
+      title: game.i18n.localize("SAB.character.archetype"),
+      content: `
+        <form class="sheet-modal">
+          <div>
+            <label>${game.i18n.localize("SAB.character.sheet.archetype.label")}</label>
+            <input type="text" name="name" value="${archetype.name}" placeholder="${game.i18n.localize("SAB.character.sheet.archetype.placeholder")}">
+          </div>
+          <div>
+            <label>${game.i18n.localize("SAB.character.sheet.trigger.label")}</label>
+            <input type="text" name="trigger" value="${archetype.trigger}" placeholder="${game.i18n.localize("SAB.character.sheet.trigger.placeholder")}">
+          </div>
+        </form>
+      `,
+      buttons: {
+        save: {
+          icon: '<i class="fas fa-save"></i>',
+          label: game.i18n.localize("SAB.actions.save"),
+          callback: html => {
+            const form = html.find("form")[0];
+            this.actor.update({
+              "system.attributes.archetype.name": form.name.value,
+              "system.attributes.archetype.trigger": form.trigger.value
+            });
+          }
+        }
+      },
+      default: "save"
+    }).render(true);
+  }
+
+  _onOriginConfig(event) {
+    event.preventDefault();
+    const origin = this.actor.system.attributes.origin;
+
+    new Dialog({
+      title: game.i18n.localize("SAB.character.origin"),
+      content: `
+        <form class="sheet-modal">
+          <div>
+            <label>${game.i18n.localize("SAB.character.sheet.origin.label")}</label>
+            <input type="text" name="question" value="${origin.question}" placeholder="${game.i18n.localize("SAB.character.sheet.origin.question-placeholder")}">
+          </div>
+          <div>
+            <label>${game.i18n.localize("SAB.character.sheet.origin.answer-title")}</label>
+            <input type="text" name="answerTitle" value="${origin.answer.title}" placeholder="${game.i18n.localize("SAB.character.sheet.origin.answer-title-placeholder")}">
+          </div>
+          <div>
+            <label>${game.i18n.localize("SAB.character.sheet.origin.answer-description")}</label>
+            <textarea name="answerDescription" placeholder="${game.i18n.localize("SAB.character.sheet.origin.answer-description-placeholder")}">${origin.answer.description}</textarea>
+          </div>
+        </form>
+      `,
+      buttons: {
+        save: {
+          icon: '<i class="fas fa-save"></i>',
+          label: game.i18n.localize("SAB.actions.save"),
+          callback: html => {
+            const form = html.find("form")[0];
+            this.actor.update({
+              "system.attributes.origin.question": form.question.value,
+              "system.attributes.origin.answer.title": form.answerTitle.value,
+              "system.attributes.origin.answer.description": form.answerDescription.value
+            });
+          }
+        }
+      },
+      default: "save"
+    }).render(true);
+  }
+
+  /**
+   * Toggles the deprived status of the character.
+   * @param {Event} event The triggering click event.
+   * @returns {Promise} A promise that resolves when the actor update is complete.
+   * @private
+   */
+  _onToggleDeprived(event) {
+    event.preventDefault();
+
+    const isCurrentlyDeprived = this.actor.system.attributes.isDeprived;
+    return this.actor.update({ "system.attributes.isDeprived": !isCurrentlyDeprived });
+  }
 }
+

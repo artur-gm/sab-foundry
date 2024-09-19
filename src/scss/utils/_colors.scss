@@ -5,3 +5,24 @@ $c-dark: #191813;
 $c-faint: #c9c7b8;
 $c-beige: #b5b3a4;
 $c-tan: #444;
+
+$c-sheet-background: rgba(0, 0, 0, 0.1);
+
+// Success and Failure Color Palette (Blue Success Variant, Green Critical Success)
+$c-success: #3498db;         // Bright Blue
+$c-failure: #e67e22;         // Carrot Orange
+$c-critical-success: #27ae60; // Nephritis Green (kept from previous)
+$c-critical-failure: #c0392b; // Pomegranate Red
+
+// Lighter variants for backgrounds or highlights
+$c-success-light: #d4e6f1;
+$c-failure-light: #f8d9b5;
+$c-critical-success-light: #c1f0d4;
+$c-critical-failure-light: #f8c9c4;
+$c-light-gray: lighten($c-faint, 15%);
+
+// Darker variants for text or borders
+$c-success-dark: #1f618d;
+$c-failure-dark: #9c640c;
+$c-critical-success-dark: #196f3d;
+$c-critical-failure-dark: #7b241c;

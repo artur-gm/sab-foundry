@@ -1,99 +1,79 @@
-<form class='{{cssClass}}' autocomplete='off'>
-  <header class='sheet-header'>
-    <img
-      class='profile-img'
-      src='{{item.img}}'
-      data-edit='img'
-      title='{{item.name}}'
-    />
-    <div class='header-fields'>
-      <h1 class='charname'><input
-          name='name'
-          type='text'
-          value='{{item.name}}'
-          placeholder='Name'
-        /></h1>
-      <div class='grid grid-2col'>
-        <div class='resource'>
-          <label class='resource-label'>Quantity</label>
-          <input
-            type='text'
-            name='system.quantity'
-            value='{{system.quantity}}'
-            data-dtype='Number'
-          />
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <div class="header-fields">
+      <h1 class="charname">
+        <input
+          name="name"
+          type="text"
+          value="{{item.name}}"
+          placeholder="{{localize "SAB.item.sheet.name-placeholder"}}"
+        />
+      </h1>
+
+        <input
+            type="hidden"
+            name="system.roll.diceNum"
+            value="1"
+            data-dtype="Number"
+            readonly
+        />
+
+      <div>
+        <div class="resource item-info">
+            <div>
+                <label>{{localize "SAB.item.sheet.quantity"}}</label>
+                <input
+                    type="text"
+                    name="system.quantity"
+                    value="{{system.quantity}}"
+                    data-dtype="Number"
+                />
+            </div>
+
+            <div>
+                <label>{{localize "SAB.item.sheet.weight"}}</label>
+                <select name="system.weight" data-dtype="Number">
+                    <option value="0" {{#if (eq system.weight 0)}}selected{{/if}}>0</option>
+                    <option value="1" {{#if (eq system.weight 1)}}selected{{/if}}>1</option>
+                    <option value="2" {{#if (eq system.weight 2)}}selected{{/if}}>2</option>
+                </select>
+            </div>
         </div>
-        <div class='resource'>
-          <label class='resource-label'>Weight</label>
-          <input
-            type='text'
-            name='system.weight'
-            value='{{system.weight}}'
-            data-dtype='Number'
-          />
+
+        <div class="resource item-info">
+            <div>
+                <label>{{localize "SAB.item.sheet.die-size"}}</label>
+                <select name="system.roll.diceSize" data-dtype="String">
+                    <option value="" {{#if (eq system.roll.diceSize "")}}selected{{/if}}>
+                        {{localize "SAB.item.sheet.die-size-placeholder"}}
+                    </option>
+                    <option value="d4" {{#if (eq system.roll.diceSize "d4")}}selected{{/if}}>d4</option>
+                    <option value="d6" {{#if (eq system.roll.diceSize "d6")}}selected{{/if}}>d6</option>
+                    <option value="d8" {{#if (eq system.roll.diceSize "d8")}}selected{{/if}}>d8</option>
+                    <option value="d10" {{#if (eq system.roll.diceSize "d10")}}selected{{/if}}>d10</option>
+                    <option value="d12" {{#if (eq system.roll.diceSize "d12")}}selected{{/if}}>d12</option>
+                </select>
+            </div>
+
+            <div>
+                <label>{{localize "SAB.item.sheet.roll-modifier"}}</label>
+                <input
+                    type="text"
+                    name="system.roll.diceBonus"
+                    value="{{#if system.roll.diceSize}}{{system.roll.diceBonus}}{{/if}}"
+                    data-dtype="String"
+                    {{#unless system.roll.diceSize}}
+                        disabled
+                    {{/unless}}
+                />
+            </div>
         </div>
       </div>
     </div>
   </header>
 
-  {{! Sheet Tab Navigation }}
-  <nav class='sheet-tabs tabs' data-group='primary'>
-    <a class='item' data-tab='description'>Description</a>
-    <a class='item' data-tab='attributes'>Attributes</a>
-  </nav>
-
-  {{! Sheet Body }}
-  <section class='sheet-body'>
-
-    {{! Description Tab }}
-    <div class='tab' data-group='primary' data-tab='description'>
-      {{! Editors must receive enriched text data from getData to properly handle rolls }}
-      {{editor
-        enrichedDescription
-        target='system.description'
-        engine='prosemirror'
-        button=true
-        editable=editable
-      }}
-    </div>
-
-    {{! Attributes Tab }}
-    <div class='tab attributes' data-group='primary' data-tab='attributes'>
-      {{! As you add new fields, add them in here! }}
-      <div class='resource'>
-        <label class='resource-label'>Roll Formula:</label>
-        <span>{{system.formula}}</span>
-        <div class='grid grid-4col'>
-          <div class='grid-span-1'>
-            <label class='resource-label'>Number of Dice</label>
-            <input
-              type='text'
-              name='system.roll.diceNum'
-              value='{{system.roll.diceNum}}'
-              data-dtype='Number'
-            />
-          </div>
-          <div class='grid-span-1'>
-            <label class='resource-label'>Die Size</label>
-            <input
-              type='text'
-              name='system.roll.diceSize'
-              value='{{system.roll.diceSize}}'
-              data-dtype='String'
-            />
-          </div>
-          <div class='grid-span-2'>
-            <label class='resource-label'>Roll Modifier</label>
-            <input
-              type='text'
-              name='system.roll.diceBonus'
-              value='{{system.roll.diceBonus}}'
-              data-dtype='String'
-            />
-          </div>
-        </div>
-
-      </div>
-    </div>
+  {{!-- Sheet Body --}}
+  <section class="sheet-body">
+    <textarea name="system.description" rows="10" placeholder="{{localize "SAB.item.sheet.description-placeholder"}}">{{system.description}}</textarea>
   </section>
 </form>

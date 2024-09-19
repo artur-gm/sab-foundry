@@ -1,13 +1,50 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alegreya:wght@500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Suez+One&display=swap");
 /* Global styles */
 .window-app {
-  font-family: "Roboto", sans-serif;
+  font-family: "Alegreya", serif;
+  font-weight: 500;
+  font-size: 1rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.rollable:hover, .rollable:focus {
+.rollable:hover, .rollable:focus, .attribute-save-roll:hover, .attribute-save-roll:focus {
   color: #000;
   text-shadow: 0 0 10px red;
   cursor: pointer;
+}
+
+.sheet-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 0 32px;
+}
+.sheet-modal div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.sheet-modal div label {
+  font-family: "Suez One", serif;
+}
+.sheet-modal div input, .sheet-modal div textarea {
+  width: 100%;
+  height: 32px;
+  padding: 8px;
+  border: 2px groove #eeede0;
+  box-sizing: border-box;
+  color: #191813;
+  font-family: "Alegreya", serif;
+  font-size: 1rem;
+}
+.sheet-modal div input::placeholder, .sheet-modal div textarea::placeholder {
+  color: #6a6a6a;
+}
+.sheet-modal div textarea {
+  resize: none;
+  height: 100px;
 }
 
 .grid,
@@ -203,51 +240,360 @@
   text-align: center;
 }
 
+.brand-font {
+  font-family: "Suez One", serif;
+}
+
+.sab-chat-attribute-save, .sab-chat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border-radius: 4px;
+  font-family: "Alegreya", serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  padding: 4px;
+  text-align: center;
+  width: 100%;
+  background-color: #eae9e3;
+}
+.sab-chat-attribute-save.critical-failure, .sab-chat-attribute-save.deprived, .sab-chat.critical-failure, .sab-chat.deprived {
+  color: #7b241c;
+  background-color: #f8c9c4;
+}
+.sab-chat-attribute-save.critical-success, .sab-chat.critical-success {
+  color: #196f3d;
+  background-color: #c1f0d4;
+}
+.sab-chat-attribute-save.success, .sab-chat-attribute-save.short-rest, .sab-chat.success, .sab-chat.short-rest {
+  color: #1f618d;
+  background-color: #d4e6f1;
+}
+.sab-chat-attribute-save.failure, .sab-chat.failure {
+  color: #9c640c;
+  background-color: #f8d9b5;
+}
+
 /* Styles limited to spellburn-and-battlescars sheets */
-.spellburn-and-battlescars .item-form {
-  font-family: "Roboto", sans-serif;
+.spellburn-and-battlescars nav.sheet-tabs {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  font-family: "Suez One", serif;
+  font-size: 1rem;
+  flex: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  padding: 0;
+  margin: 16px 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-top: 2px groove #eeede0;
+  border-bottom: 2px groove #eeede0;
+}
+.spellburn-and-battlescars .tab {
+  height: 100%;
+}
+.spellburn-and-battlescars .tab .editor {
+  height: 100%;
+}
+.spellburn-and-battlescars .section-label {
+  border-top: 2px solid #5d142b;
+  display: block;
+  margin: 0;
+  padding: 4px 0;
+  width: 100%;
+}
+.spellburn-and-battlescars .section-input {
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  font-family: "Suez One", serif;
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.spellburn-and-battlescars .section-input:hover, .spellburn-and-battlescars .section-input:focus {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}
+.spellburn-and-battlescars .vertical-divider {
+  border-right: 2px groove #eeede0;
+  align-self: stretch;
+  margin: 0;
+  padding: 4px;
+}
+.spellburn-and-battlescars .deprived-active, .spellburn-and-battlescars .danger-active {
+  animation: pulsate 5s ease-in-out infinite;
+  background-color: rgba(255, 0, 0, 0.1);
+}
+@keyframes pulsate {
+  0% {
+    background-color: rgba(255, 0, 0, 0.1);
+  }
+  50% {
+    background-color: rgba(255, 0, 0, 0.3);
+  }
+  100% {
+    background-color: rgba(255, 0, 0, 0.1);
+  }
+}
+.spellburn-and-battlescars .attribute.deprived-active .vertical-divider, .spellburn-and-battlescars .attribute.danger-active .vertical-divider {
+  border-right: 2px groove rgba(255, 192, 192, 0.78);
 }
 .spellburn-and-battlescars .sheet-header {
-  flex: 0 auto;
-  overflow: hidden;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+.spellburn-and-battlescars .sheet-header > section {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 16px;
+}
+.spellburn-and-battlescars .sheet-header button {
+  height: 100%;
+  width: 100%;
+  line-height: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.spellburn-and-battlescars .sheet-header button i {
+  margin-right: 4px;
+  font-size: 1rem;
+}
+.spellburn-and-battlescars .sheet-header .image {
+  align-self: start;
+  border: 2px groove #eeede0;
+  height: 100%;
+  line-height: 0;
+  padding: 2px;
+}
+.spellburn-and-battlescars .sheet-header .image img {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  min-height: 200px;
+  max-height: 100%;
+  margin: 0;
+  object-fit: cover;
+}
+.spellburn-and-battlescars .sheet-header .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.spellburn-and-battlescars .sheet-header .container main {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+.spellburn-and-battlescars .sheet-header .container main .name-section {
+  display: flex;
+  flex-direction: column;
+}
+.spellburn-and-battlescars .sheet-header .container main .name-section input {
+  font-size: 1.5rem;
+}
+.spellburn-and-battlescars .sheet-header .container main .details-section {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+.spellburn-and-battlescars .sheet-header .container main .details-section > div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.spellburn-and-battlescars .sheet-header .container main .attributes-section {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  text-align: center;
+}
+.spellburn-and-battlescars .sheet-header .container main .attributes-section > article {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+}
+.spellburn-and-battlescars .sheet-header .container main .attributes-section > article, .spellburn-and-battlescars .sheet-header .container main .attributes-section article > * {
+  flex: 1;
+}
+.spellburn-and-battlescars .sheet-header .container main .attributes-section .attribute {
+  height: 92px;
+  max-height: 92px;
+  width: 100%;
+  min-width: 100px;
+  border: 2px groove #eeede0;
+  padding: 4px;
+}
+.spellburn-and-battlescars .sheet-header .container main .attributes-section .attribute .attribute-header h3 {
+  border-bottom: 2px solid #5d142b;
+  font-family: "Suez One", serif;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+.spellburn-and-battlescars .sheet-header .container main .attributes-section .attribute .attribute-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.spellburn-and-battlescars .sheet-header .container main .attributes-section .attribute .attribute-content input {
+  font-size: 1.5rem;
+}
+.spellburn-and-battlescars .sheet-header .container main .attributes-section .attribute .attribute-content label {
+  font-size: 0.625rem;
+  padding-top: 4px;
+}
+.spellburn-and-battlescars .sheet-header .container main .attributes-section .character-armor {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border: 2px groove #eeede0;
+  padding: 4px;
+  width: 100%;
+}
+.spellburn-and-battlescars .sheet-header .container main .attributes-section .character-armor label {
+  border-bottom: 2px solid #5d142b;
+  width: 100%;
+}
+.spellburn-and-battlescars .sheet-header .container main .attributes-section .character-armor > span {
+  flex: 1;
+}
+.spellburn-and-battlescars .sheet-header .container main .attributes-section .character-armor input {
+  font-size: 1.5rem;
+  min-width: 50px;
+  padding-bottom: 6px;
+}
+.spellburn-and-battlescars .sheet-header .container .character-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+.spellburn-and-battlescars .sheet-body {
+  margin: 8px 2%;
+  width: 96%;
+}
+.spellburn-and-battlescars .sheet-body textarea {
+  width: 100%;
+  min-height: 90px;
+  resize: none;
+  border: 2px groove #eeede0;
+}
+.spellburn-and-battlescars .resource {
+  margin: 8px 2%;
+  width: 96%;
+}
+.spellburn-and-battlescars .resource.item-info {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+.spellburn-and-battlescars .resource.item-info > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+.spellburn-and-battlescars .resource.item-info > div label {
+  font-family: "Suez One", serif;
+  font-size: 1rem;
+}
+.spellburn-and-battlescars .character-origin {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  margin-bottom: 10px;
+  gap: 8px;
+  cursor: pointer;
 }
-.spellburn-and-battlescars .sheet-header .profile-img {
-  flex: 0 0 100px;
-  height: 100px;
-  margin-right: 10px;
-}
-.spellburn-and-battlescars .sheet-header .header-fields {
+.spellburn-and-battlescars .character-origin > span {
   flex: 1;
 }
-.spellburn-and-battlescars .sheet-header h1.charname {
-  height: 50px;
-  padding: 0px;
-  margin: 5px 0;
-  border-bottom: 0;
+.spellburn-and-battlescars .character-origin .origin-answer-title {
+  max-width: 35%;
 }
-.spellburn-and-battlescars .sheet-header h1.charname input {
+.spellburn-and-battlescars .character-origin .origin-answer-description {
+  flex: 0 1 100%;
+  padding: 8px;
+  text-align: center;
+  background-color: #eae9e3;
+  border-radius: 4px;
+}
+.spellburn-and-battlescars .abilities-container {
+  padding: 16px 0px;
+}
+.spellburn-and-battlescars .inventory-container {
+  padding: 16px 0px;
+}
+.spellburn-and-battlescars .spells-container {
+  padding-bottom: 16px;
+}
+.spellburn-and-battlescars .new-ability-container, .spellburn-and-battlescars .new-item-container {
+  margin-top: 32px;
+}
+.spellburn-and-battlescars .gold-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.spellburn-and-battlescars .character-encumbrance {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+.spellburn-and-battlescars .character-gold, .spellburn-and-battlescars .character-encumbrance {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 4px;
+  border: 2px groove #eeede0;
+  padding: 4px;
+  text-align: center;
+}
+.spellburn-and-battlescars .character-gold label, .spellburn-and-battlescars .character-encumbrance label {
+  border-bottom: 2px solid #5d142b;
   width: 100%;
-  height: 100%;
-  margin: 0;
+  flex: 1;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
-.spellburn-and-battlescars .sheet-tabs {
-  flex: 0;
+.spellburn-and-battlescars .character-gold label span, .spellburn-and-battlescars .character-encumbrance label span {
+  min-width: 12px;
 }
-.spellburn-and-battlescars .sheet-body,
-.spellburn-and-battlescars .sheet-body .tab,
-.spellburn-and-battlescars .sheet-body .tab .editor {
-  height: 100%;
+.spellburn-and-battlescars .character-gold label a, .spellburn-and-battlescars .character-encumbrance label a {
+  font-size: 0.75rem;
 }
-.spellburn-and-battlescars .tox .tox-editor-container {
-  background: #fff;
+.spellburn-and-battlescars .character-gold > span, .spellburn-and-battlescars .character-encumbrance > span {
+  flex-shrink: 0;
 }
-.spellburn-and-battlescars .tox .tox-edit-area {
-  padding: 0 8px;
+.spellburn-and-battlescars .character-gold input, .spellburn-and-battlescars .character-encumbrance input {
+  font-size: 1.5rem;
+  width: 100%;
+  max-width: 100px;
+  padding-bottom: 6px;
+}
+.spellburn-and-battlescars .item-create:disabled {
+  cursor: not-allowed;
 }
 .spellburn-and-battlescars .resource-label {
   font-weight: bold;
@@ -304,23 +650,42 @@
   padding: 0;
 }
 .spellburn-and-battlescars .items-list .item-name {
-  flex: 2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
   margin: 0;
   overflow: hidden;
-  font-size: 13px;
+  font-size: 0.875rem;
+  font-family: "Suez One", serif;
   text-align: left;
-  align-items: center;
-  display: flex;
+  width: 20%;
 }
 .spellburn-and-battlescars .items-list .item-name h3, .spellburn-and-battlescars .items-list .item-name h4 {
   margin: 0;
-  white-space: nowrap;
+  padding-right: 8px;
   overflow-x: hidden;
+}
+.spellburn-and-battlescars .items-list .item-name h3 span, .spellburn-and-battlescars .items-list .item-name h4 span {
+  font-family: "Alegreya", serif;
+}
+.spellburn-and-battlescars .items-list .item-description {
+  flex: 1;
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.spellburn-and-battlescars .items-list .item-description p {
+  margin: 0;
 }
 .spellburn-and-battlescars .items-list .item-controls {
   display: flex;
   flex: 0 0 100px;
   justify-content: flex-end;
+  width: 10%;
 }
 .spellburn-and-battlescars .items-list .item-controls a {
   font-size: 12px;
@@ -328,9 +693,13 @@
   margin: 0 6px;
 }
 .spellburn-and-battlescars .items-list .item {
-  align-items: center;
-  padding: 0 2px;
-  border-bottom: 1px solid #c9c7b8;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: start;
+  gap: 8px;
+  padding: 8px 2px;
+  border-bottom: 2px groove #eeede0;
 }
 .spellburn-and-battlescars .items-list .item:last-child {
   border-bottom: none;
@@ -346,10 +715,12 @@
   margin-right: 5px;
 }
 .spellburn-and-battlescars .items-list .item-prop {
-  text-align: center;
-  border-left: 1px solid #c9c7b8;
-  border-right: 1px solid #c9c7b8;
-  font-size: 12px;
+  text-align: left;
+  border-right: 2px groove #eeede0;
+  font-size: 1rem;
+  width: fit-content;
+  padding-right: 8px;
+  flex-shrink: 0;
 }
 .spellburn-and-battlescars .items-list .items-header {
   height: 28px;
@@ -368,10 +739,6 @@
   padding-left: 5px;
   text-align: left;
 }
-.spellburn-and-battlescars .item-formula {
-  flex: 0 0 200px;
-  padding: 0 8px;
-}
 .spellburn-and-battlescars .effects .item .effect-source,
 .spellburn-and-battlescars .effects .item .effect-duration,
 .spellburn-and-battlescars .effects .item .effect-controls {
@@ -382,6 +749,18 @@
 }
 .spellburn-and-battlescars .effects .item .effect-controls {
   border: none;
+}
+
+.spellburn-and-battlescars.sheet {
+  min-width: 600px;
+  max-width: 800px;
+  min-height: 400px;
+}
+
+.spellburn-and-battlescars.sheet.item {
+  min-width: 400px;
+  max-width: 600px;
+  min-height: 200px;
 }
 
 /*# sourceMappingURL=spellburn-and-battlescars.css.map */

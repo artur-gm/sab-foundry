@@ -1,16 +1,13 @@
 import SabActorBase from "./base-actor.mjs";
 
 export default class SabCharacter extends SabActorBase {
-
   static defineSchema() {
     const fields = foundry.data.fields;
     const requiredInteger = { required: true, nullable: false, integer: true };
+    const requiredString = { required: true, blank: true };
     const schema = super.defineSchema();
 
     schema.attributes = new fields.SchemaField({
-      level: new fields.SchemaField({
-        value: new fields.NumberField({ ...requiredInteger, initial: 0 })
-      }),
       gold: new fields.SchemaField({
         value: new fields.NumberField({ ...requiredInteger, initial: 10 })
       }),
@@ -20,12 +17,25 @@ export default class SabCharacter extends SabActorBase {
       invSlots: new fields.SchemaField({
         value: new fields.NumberField({ ...requiredInteger, initial: 10 })
       }),
+      background: new fields.StringField({ ...requiredString }),
+      archetype: new fields.SchemaField({
+        name: new fields.StringField({ ...requiredString }),
+        trigger: new fields.StringField({ ...requiredString })
+      }),
+      origin: new fields.SchemaField({
+        question: new fields.StringField({ ...requiredString }),
+        answer: new fields.SchemaField({
+          title: new fields.StringField({ ...requiredString }),
+          description: new fields.StringField({ ...requiredString })
+        })
+      }),
+      isDeprived: new fields.BooleanField({ required: true, initial: false })
     });
 
     // Iterate over ability names and create a new SchemaField for each.
     schema.abilities = new fields.SchemaField(Object.keys(CONFIG.SAB.abilities).reduce((obj, ability) => {
       obj[ability] = new fields.SchemaField({
-        value: new fields.NumberField({ ...requiredInteger, initial: 10, min: 0 }),
+        value: new fields.NumberField({ ...requiredInteger, initial: 10, min: 0 })
       });
       return obj;
     }, {}));
@@ -47,13 +57,11 @@ export default class SabCharacter extends SabActorBase {
     // Copy the ability scores to the top level, so that rolls can use
     // formulas like `@str.mod + 4`.
     if (this.abilities) {
-      for (let [k,v] of Object.entries(this.abilities)) {
+      for (let [k, v] of Object.entries(this.abilities)) {
         data[k] = foundry.utils.deepClone(v);
       }
     }
 
-    data.lvl = this.attributes.level.value;
-
-    return data
+    return data;
   }
 }
