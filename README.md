@@ -6,7 +6,7 @@
 
 
 <div align="center">
-  <img src="https://img.shields.io/badge/foundry-v11-green" alt="Foundry v11"/>
+  <img src="https://img.shields.io/badge/foundry-v12-green" alt="Foundry v12"/>
   <img src="https://img.shields.io/github/v/release/artur-gm/sab-foundry" alt="GitHub Release"/>
   <img src="https://img.shields.io/github/downloads/artur-gm/sab-foundry/latest/system.zip" alt="Latest Release Download Count"/>
 </div>
