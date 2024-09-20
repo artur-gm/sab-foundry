@@ -113,12 +113,12 @@
       "21": "You have become Elemental. Create a True Name for yourself. Magical energies surround you at all times, and mundane attacks against you are Impaired. If someone learns your True Name, they can control you. Other Elementals will come for you."
     },
     "levelUp": {
-      "levelUp": "Advance Level",
-      "levelUpMsg": "Leveled Up!",
+      "levelUp": "Advance",
+      "levelUpMsg": "Advanced!",
       "body": "Body increased",
       "mind": "Mind increased",
       "luck": "Luck increased",
-      "msg": "is leveling up",
+      "msg": "is advancing.",
       "nothing": "No attribute increased. Choose one to increase by 1."
     },
     "SheetLabels": {

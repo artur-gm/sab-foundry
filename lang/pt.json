@@ -113,12 +113,12 @@
       "21": "Você se transforma em um Elemental. Crie um Nome Verdadeiro para você. Energias mágicas te cercam o tempo todo, e ataques mundanos contra você são prejudicados. Se alguém descobrir seu Nome Verdadeiro, ele pode te controlar. Outros Elementais virão atrás de você."
     },
       "levelUp": {
-      "levelUp": "Avançar Nível",
-      "levelUpMsg": "Avançou de nível!",
+      "levelUp": "Avançar",
+      "levelUpMsg": "Avançou!",
       "body": "Corpo aprimorado",
       "mind": "Mente aprimorada",
       "luck": "Sorte aprimorada",
-      "msg": "está subindo de nível",
+      "msg": "está avançando",
       "nothing": "Nenhum atributo aprimorado. Escolha um para subir em 1."
     },
     "SheetLabels": {
