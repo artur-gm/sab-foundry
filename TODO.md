@@ -11,4 +11,5 @@
 - ~~Detailed mishaps message~~
 - ~~Reduce HP if inventory is full~~
 - ~~Automatically create coins in inventory~~
-- V12 compatibility
+- V13 compatibility
+- Dark Theme
