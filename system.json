@@ -33,9 +33,9 @@
       "path": "lang/en.json"
     },
     {
-      "lang": "pt",
-      "name": "Portuguese",
-      "path": "lang/pt.json"
+      "lang": "pt-BR",
+      "name": "Português (Brasil)",
+      "path": "lang/pt-BR.json"
     }
   ],
   "packs": [],
