@@ -11,5 +11,5 @@
 - ~~Detailed mishaps message~~
 - ~~Reduce HP if inventory is full~~
 - ~~Automatically create coins in inventory~~
-- V13 compatibility
-- Dark Theme
+- ~~V13 compatibility~~
+- Foundry Application V2
