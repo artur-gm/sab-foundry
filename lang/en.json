@@ -14,7 +14,7 @@
       "name": "Encumbrance",
       "add": "Add inventory slot",
       "remove": "Remove inventory slot",
-      "overburdened": "Overburdened: HP reduced to 0"
+      "overburdened": "Exposed: HP reduced to 0"
     },
     "Spellburn": {
       "flavor": "Mishap: Something has gone very wrong.",
