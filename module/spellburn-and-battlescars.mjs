@@ -58,13 +58,13 @@ Hooks.once('init', function () {
   CONFIG.ActiveEffect.legacyTransferral = false;
 
   // Register sheet application classes
-  Actors.unregisterSheet('core', ActorSheet);
-  Actors.registerSheet('spellburn-and-battlescars', SabActorSheet, {
+  foundry.documents.collections.Actors.unregisterSheet('core', foundry.applications.sheets.ActorSheetV2);
+  foundry.documents.collections.Actors.registerSheet('spellburn-and-battlescars', SabActorSheet, {
     makeDefault: true,
     label: 'SAB.SheetLabels.Actor',
   });
-  Items.unregisterSheet('core', ItemSheet);
-  Items.registerSheet('spellburn-and-battlescars', SabItemSheet, {
+  foundry.documents.collections.Items.unregisterSheet('core', foundry.appv1.sheets.ItemSheet);
+  foundry.documents.collections.Items.registerSheet('spellburn-and-battlescars', SabItemSheet, {
     makeDefault: true,
     label: 'SAB.SheetLabels.Item',
   });
