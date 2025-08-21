@@ -12,4 +12,5 @@
 - ~~Reduce HP if inventory is full~~
 - ~~Automatically create coins in inventory~~
 - ~~V13 compatibility~~
+- Spellburn and Battlescars 2.0 rule changes
 - Foundry Application V2
