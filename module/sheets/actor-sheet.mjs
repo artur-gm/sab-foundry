@@ -409,7 +409,7 @@ export class SabActorSheet extends foundry.appv1.sheets.ActorSheet {
 
   async _onGoldChange(ev) {
     let currentGold = parseInt(ev.target.value, 10);
-    if (currentGold < 100) return;
+    if (currentGold <= 100) return;
     const goldData = {
       name: `100 ${game.i18n.localize("SAB.gold.long")}`,
       type: "item",
