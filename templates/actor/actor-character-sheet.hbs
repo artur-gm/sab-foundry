@@ -86,7 +86,6 @@
     <a class="item" data-tab="description">{{localize 'TYPES.Item.description'}}</a>
     <a class="item" data-tab="items">{{localize 'TYPES.Item.item'}}</a>
     <a class="item" data-tab="spells">{{localize 'TYPES.Item.spell'}}</a>
-    <a class="item" data-tab="effects">{{localize 'TYPES.Item.effect'}}</a>
   </nav>
 
   {{!-- Sheet Body --}}
@@ -111,11 +110,6 @@
     {{!-- Owned Spells Tab --}}
     <div class="tab spells" data-group="primary" data-tab="spells">
       {{> "systems/spellburn-and-battlescars/templates/actor/parts/actor-spells.hbs"}}
-    </div>
-
-    {{!-- Active Effects Tab --}}
-    <div class="tab effects flexcol" data-group="primary" data-tab="effects">
-      {{> "systems/spellburn-and-battlescars/templates/actor/parts/actor-effects.hbs"}}
     </div>
 
   </section>

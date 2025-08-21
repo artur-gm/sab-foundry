@@ -56,7 +56,6 @@
     {{!-- Default tab is specified in actor-sheet.mjs --}}
     <a class="item" data-tab="description">{{localize 'TYPES.Item.description'}}</a>
     <a class="item" data-tab="items">{{localize 'TYPES.Item.item'}}</a>
-    <a class="item" data-tab="effects">{{localize 'TYPES.Item.effect'}}</a>
   </nav>
 
   {{!-- Sheet Body --}}
@@ -71,11 +70,6 @@
     {{!-- Owned Items Tab --}}
     <div class="tab items" data-group="primary" data-tab="items">
        {{> "systems/spellburn-and-battlescars/templates/actor/parts/actor-items.hbs"}}
-    </div>
-
-    {{!-- Active Effects Tab --}}
-    <div class="tab effects flexcol" data-group="primary" data-tab="effects">
-      {{> "systems/spellburn-and-battlescars/templates/actor/parts/actor-effects.hbs"}}
     </div>
 
   </section>
