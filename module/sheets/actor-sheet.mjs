@@ -399,11 +399,12 @@ export class SabActorSheet extends foundry.appv1.sheets.ActorSheet {
         content: game.i18n.localize("SAB.levelUp.nothing"),
       });
     }
-    if(this.actor.health.max<=18){
-      this.actor.update({
-        "system.health.value": this.actor.system.health.value + 1,
-        "system.health.max": this.actor.system.health.max + 1,
+    if(this.actor.system.health.max<=18){
+      ChatMessage.create({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        content: game.i18n.localize("SAB.levelUp.hp"),
       });
+
     }
   }
 

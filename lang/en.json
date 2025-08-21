@@ -46,7 +46,8 @@
       "mind": "Mind increased",
       "luck": "Luck increased",
       "msg": "is advancing",
-      "nothing": "No attribute increased. Choose one to increase by 1."
+      "nothing": "No attribute increased. Choose one to increase by 1.",
+      "hp": "Increase your max HP by 1 if you learned a new ability"
     },
     "Ability": {
       "Body": { "long": "Body", "abbr": "BDY", "max": "Max BDY" },

@@ -46,7 +46,8 @@
       "mind": "Mente aprimorada",
       "luck": "Sorte aprimorada",
       "msg": "está avançando",
-      "nothing": "Nenhum atributo aprimorado. Escolha um para subir em 1."
+      "nothing": "Nenhum atributo aprimorado. Escolha um para subir em 1.",
+      "hp": "Aumente seu PG máximo em 1 se você aprendeu uma nova habilidade"
     },
     "Ability": {
       "Body": { "long": "Corpo", "abbr": "CRP" },
