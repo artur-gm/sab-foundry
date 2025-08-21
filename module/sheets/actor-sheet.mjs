@@ -399,12 +399,12 @@ export class SabActorSheet extends foundry.appv1.sheets.ActorSheet {
         content: game.i18n.localize("SAB.levelUp.nothing"),
       });
     }
-    this.actor.update({
-      "system.attributes.level.value":
-        this.actor.system.attributes.level.value + 1,
-      "system.health.value": this.actor.system.health.value + 1,
-      "system.health.max": this.actor.system.health.max + 1,
-    });
+    if(this.actor.health.max<=18){
+      this.actor.update({
+        "system.health.value": this.actor.system.health.value + 1,
+        "system.health.max": this.actor.system.health.max + 1,
+      });
+    }
   }
 
   async _onGoldChange(ev) {
