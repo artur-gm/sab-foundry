@@ -21,8 +21,8 @@
   ],
   "version": "#{VERSION}#",
   "compatibility": {
-    "minimum": 11,
-    "verified": 12
+    "minimum": 13,
+    "verified": 13.347
   },
   "esmodules": ["module/spellburn-and-battlescars.mjs"],
   "styles": ["css/spellburn-and-battlescars.css"],
